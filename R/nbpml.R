@@ -133,8 +133,8 @@ nbpml <- function(dependent_variable,
 
   # Discarding unusable observations ----------------------------------------
   d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(!!sym(distance) > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(!!sym(distance))))
+    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
+    filter_at(vars(!!sym(distance)), any_vars(is.finite(.)))
 
   # Transforming data, logging distances ---------------------------------------
   d <- d %>%

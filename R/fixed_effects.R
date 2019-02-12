@@ -165,10 +165,10 @@ fixed_effects <- function(dependent_variable,
 
   # Discarding unusable observations ----------------------------------------
   d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(!!sym(distance) > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(!!sym(distance)))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(!!sym(dependent_variable) > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(!!sym(dependent_variable))))
+    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
+    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
+    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
+    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
 
   # Transforming data, logging flows and distances --------------------------
   d <- data %>%

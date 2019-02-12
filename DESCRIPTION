@@ -11,21 +11,23 @@ Authors@R: c(
 Description: A wrapper of different standard estimation methods for gravity models. 
   This package provides estimation methods for log-log models and multiplicative models.
 URL: http://pacha.hk/gravity
-Imports: lmtest,
-  sandwich,
-  glm2,
-  MASS,
-  stats,
-  censReg,
-  survival,
-  multiwayvcov,
-  tibble,
-  magrittr,
-  dplyr,
-  tidyr,
-  purrr,
-  rlang,
-  Rdpack
+Imports: 
+    lmtest,
+    sandwich,
+    glm2,
+    MASS,
+    stats,
+    censReg,
+    survival,
+    multiwayvcov,
+    tibble,
+    magrittr,
+    dplyr,
+    tidyr,
+    purrr,
+    rlang,
+    Rdpack,
+    utils
 RdMacros: Rdpack
 Depends: R(>= 3.4.0)
 License: GPL-3

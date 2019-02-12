@@ -160,10 +160,10 @@ tetrads <- function(dependent_variable,
 
   # Discarding unusable observations ----------------------------------------
   d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(!!sym(distance) > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(!!sym(distance)))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(!!sym(dependent_variable) > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(!!sym(dependent_variable))))
+    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
+    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
+    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
+    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
 
   # Transforming data, logging distances ---------------------------------------
   d <- d %>%
@@ -179,28 +179,28 @@ tetrads <- function(dependent_variable,
 
   # Truncating dataset to reference importer and exporter partners -------------
   d2_filter_d <- d %>%
-    filter_at(vars(!!sym(code_destination)), any_vars(!!sym(code_destination) == filter_destination)) %>%
+    filter_at(vars(!!sym(code_destination)), any_vars(. == filter_destination)) %>%
     select(!!sym(code_origin)) %>%
     distinct() %>%
     as_vector()
 
   d2 <- d %>%
-    filter_at(vars(!!sym(code_origin)), any_vars(!!sym(code_origin) %in% d2_filter_d))
+    filter_at(vars(!!sym(code_origin)), any_vars(. %in% d2_filter_d))
 
   d2_filter_o <- d2 %>%
-    filter_at(vars(!!sym(code_origin)), any_vars(!!sym(code_origin) == filter_origin)) %>%
+    filter_at(vars(!!sym(code_origin)), any_vars(. == filter_origin)) %>%
     select(!!sym(code_destination)) %>%
     distinct() %>%
     as_vector()
 
   d2 <- d2 %>%
-    filter_at(vars(!!sym(code_destination)), any_vars(!!sym(code_destination) %in% d2_filter_o))
+    filter_at(vars(!!sym(code_destination)), any_vars(. %in% d2_filter_o))
 
   # Taking ratios, ratk --------------------------------------------------------
   d2 <- left_join(
     d2,
     d2 %>%
-      filter_at(vars(!!sym(code_destination)), any_vars(!!sym(code_destination) == filter_destination)) %>%
+      filter_at(vars(!!sym(code_destination)), any_vars(. == filter_destination)) %>%
       select(!!sym(code_origin), y_log_tetrads_d = !!sym("y_log_tetrads"), dist_log_d = !!sym("dist_log")),
     by = code_origin
   ) %>%
@@ -216,7 +216,7 @@ tetrads <- function(dependent_variable,
     gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
     left_join(
       d2 %>%
-        filter_at(vars(!!sym(code_destination)), any_vars(!!sym(code_destination) == filter_destination)) %>%
+        filter_at(vars(!!sym(code_destination)), any_vars(. == filter_destination)) %>%
         select(c(!!sym(code_origin), !!sym(distance), !!!syms(additional_regressors))) %>%
         gather(!!sym("key"), !!sym("value"), -!!sym(code_origin)),
       by = c(code_origin, "key")
@@ -230,7 +230,7 @@ tetrads <- function(dependent_variable,
   d2 <- left_join(
     d2,
     d2 %>%
-      filter_at(vars(!!sym(code_origin)), any_vars(!!sym(code_origin) == filter_origin)) %>%
+      filter_at(vars(!!sym(code_origin)), any_vars(. == filter_origin)) %>%
       select(!!sym(code_destination), lXinratk_o = !!sym("lXinratk"), ldistratk_o = !!sym("ldistratk")),
     by = code_destination
   ) %>%
@@ -246,7 +246,7 @@ tetrads <- function(dependent_variable,
     gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
     left_join(
       d2 %>%
-        filter_at(vars(!!sym(code_origin)), any_vars(!!sym(code_origin) == filter_origin)) %>%
+        filter_at(vars(!!sym(code_origin)), any_vars(. == filter_origin)) %>%
         select(c(!!sym(code_destination), additional_regressors)) %>%
         gather(!!sym("key"), !!sym("value"), -!!sym(code_destination)),
       by = c(code_destination, "key")

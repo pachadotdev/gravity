@@ -30,20 +30,12 @@ knitr::opts_chunk$set(eval = FALSE)
 #  gravity_zeros <- data06 %>%
 #    drop_na()
 #  
-#  # 5: Divide GDPs by 1,000,000 for scaling purposes
-#  
-#  gravity_zeros <- gravity_zeros %>%
-#    mutate(
-#      gdp_o = gdp_o / 1000000,
-#      gdp_d = gdp_d / 1000000
-#    )
-#  
-#  # 6: Exclusion of trade flows equal to 0
+#  # 5: Exclusion of trade flows equal to 0
 #  
 #  gravity_no_zeros <- gravity_zeros %>%
 #    filter(flow > 0)
 #  
-#  # 7: Export the data
+#  # 6: Export the data
 #  
 #  save(gravity_zeros, file = "gravity_zeros.rdata", compress = "xz")
 #  save(gravity_no_zeros, file = "gravity_no_zeros.rdata", compress = "xz")

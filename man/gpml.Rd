@@ -8,14 +8,14 @@ gpml(dependent_variable, distance, additional_regressors, robust = FALSE,
   data, ...)
 }
 \arguments{
-\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as 
+\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as
 the dependent variable in the estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable 
+\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.}
 
 \item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
-variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first. Interaction terms can be added.
 
 Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.}
@@ -36,7 +36,7 @@ multiplicative form via Gamma Pseudo Maximum Likelihood.
 }
 \details{
 \code{gpml} is an estimation method for gravity models
-belonging to generalized linear models. It is described in \insertCite{Santos2006;textual}{gravity} and the model 
+belonging to generalized linear models. It is described in \insertCite{Santos2006;textual}{gravity} and the model
 is estimated via \code{\link[glm2]{glm2}} using the gamma distribution and a log-link.
 
 For similar functions, utilizing the multiplicative form via the log-link,
@@ -91,7 +91,6 @@ fit <- gpml(
   additional_regressors = c("rta", "iso_o", "iso_d"),
   data = grav_small
 )
-
 }
 \references{
 For more information on gravity models, theoretical foundations and

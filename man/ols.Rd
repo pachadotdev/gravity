@@ -18,11 +18,11 @@ If \code{uie=FALSE} the dependent variable is logged directly. The transformed v
 the dependent variable and the logged income variables are used as independent variables in the
 estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable 
+\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.}
 
 \item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
-variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first. Interaction terms can be added.
 
 Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.}
@@ -31,10 +31,10 @@ Write this argument as \code{c(contiguity, common currency, ...)}. By default th
 
 \item{income_destination}{(Type: character) destination income variable (e.g. GDP) in the dataset.}
 
-\item{code_origin}{(Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+\item{code_origin}{(Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 using this parameter.}
 
-\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 grouped using this parameter.}
 
 \item{uie}{(Type: logical) Dtermines whether the
@@ -123,7 +123,6 @@ fit <- ols(
   robust = FALSE,
   data = grav_small
 )
-
 }
 \references{
 For more information on gravity models, theoretical foundations and

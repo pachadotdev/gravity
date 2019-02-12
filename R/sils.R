@@ -20,15 +20,15 @@
 #' the estimation of a gravity equation by \code{sils} using panel data,
 #' and we do not recommend to apply this method in this case.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This dependent variable is 
-#' divided by the product of unilateral incomes such (i.e. \code{income_origin} and \code{income_destination}) 
+#' @param dependent_variable (Type: character) name of the dependent variable. This dependent variable is
+#' divided by the product of unilateral incomes such (i.e. \code{income_origin} and \code{income_destination})
 #' and logged afterwards.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}. As country specific effects are subdued due to demeaning, no further unilateral variables apart from incomes can be added.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
@@ -37,10 +37,10 @@
 #'
 #' @param income_destination (Type: character) destination income variable (e.g. GDP) in the dataset.
 #'
-#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 #' using this parameter.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param maxloop (Type: numeric) maximum number of outer loop iterations.
@@ -73,7 +73,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -118,7 +118,6 @@
 #'   verbose = FALSE,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object. It furthermore returns the resulting coefficients for each
@@ -158,26 +157,19 @@ sils <- function(dependent_variable,
 
   valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
-  
+
   stopifnot(is.character(code_origin), code_origin %in% colnames(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
-  
+
   stopifnot(maxloop > 0)
 
   stopifnot(decimal_places >= 1)
 
   # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Setting starting values for the first iteration ----------------------------
   d <- d %>%
@@ -287,7 +279,7 @@ sils <- function(dependent_variable,
     } else {
       vars <- "dist_log"
     }
-    
+
     form <- stats::as.formula(paste("y_log_sils", "~", vars))
 
     if (robust == TRUE) {

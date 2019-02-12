@@ -8,16 +8,16 @@ et_tobit(dependent_variable, distance, additional_regressors = NULL,
   data, ...)
 }
 \arguments{
-\item{dependent_variable}{(Type: character) name of the dependent variable. Following 
+\item{dependent_variable}{(Type: character) name of the dependent variable. Following
 \insertCite{Carson2007;textual}{gravity}, the smallest positive flow value is used as an estimate of the threshold, this value is is added to the \code{dependent_variable},
 the result is logged and taken as the dependent variable in the Tobit estimation with
 lower bound equal to the log of the smallest possible flow value.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable 
+\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.}
 
 \item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
-variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 \code{income_origin} and \code{income_destination}.
 
 Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.}
@@ -36,8 +36,8 @@ by conducting a left-censored regression.
 }
 \details{
 \code{et_tobit} represents the \insertCite{Eaton1995;textual}{gravity} Tobit model
-which is often used when several gravity models are compared, instead of adding number \code{1} to the dependent 
-variable as done in \code{\link[gravity]{tobit}}, the constant added to the data is estimated and interpreted as a 
+which is often used when several gravity models are compared, instead of adding number \code{1} to the dependent
+variable as done in \code{\link[gravity]{tobit}}, the constant added to the data is estimated and interpreted as a
 threshold.
 
 When taking the log of the gravity equation flows equal to zero constitute a problem as their
@@ -103,7 +103,6 @@ fit <- et_tobit(
   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
   data = grav_small
 )
-
 }
 \references{
 For more information on gravity models, theoretical foundations and

@@ -5,11 +5,11 @@ test_that("Stata summary returns a valid output", {
   # Executable in < 5 sec
   library(dplyr)
   data("gravity_no_zeros")
-  
+
   # Choose 5 countries for testing
   countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
   grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-  
+
   # Using OLS for testing
   fit <- ols(
     dependent_variable = "flow",
@@ -23,7 +23,7 @@ test_that("Stata summary returns a valid output", {
     robust = FALSE,
     data = grav_small
   )
-  
+
   fit2 <- hm_summary(fit, robust = FALSE)
 
   expect_is(fit2, "summary.lm")

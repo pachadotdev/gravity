@@ -8,22 +8,22 @@ fixed_effects(dependent_variable, distance, additional_regressors = NULL,
   code_origin, code_destination, robust = FALSE, data, ...)
 }
 \arguments{
-\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as 
+\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as
 the dependent variable in the estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable 
+\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.}
 
 \item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
-variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first.
 
 Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.}
 
-\item{code_origin}{(Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+\item{code_origin}{(Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 using this parameter.}
 
-\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 grouped using this parameter.}
 
 \item{robust}{(Type: logical) whether robust fitting should be used. By default this is set to \code{FALSE}.}
@@ -41,7 +41,7 @@ The function returns the summary of the estimated gravity model as an
 OLS and fixed effects for the countries of origin and destination.
 }
 \details{
-To account for MR terms, \insertCite{Feenstra2002;textual}{gravity} and 
+To account for MR terms, \insertCite{Feenstra2002;textual}{gravity} and
 \insertCite{Feenstra2004;textual}{gravity} propose to use
 importer and exporter fixed effects. Due to the use of these effects, all
 unilateral influences such as GDPs can no longer be estimated.
@@ -108,7 +108,6 @@ fit <- fixed_effects(
   robust = FALSE,
   data = grav_small
 )
-
 }
 \references{
 For more information on gravity models, theoretical foundations and

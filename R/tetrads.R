@@ -35,22 +35,22 @@
 #'
 #' For applying \code{tetrads} to panel data see \insertCite{Head2010;textual}{gravity}.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as 
+#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
-#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 #' using this parameter.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param filter_origin (Type: character) Reference exporting country.
@@ -61,7 +61,7 @@
 #' \code{\link[multiwayvcov]{cluster.vcov}} function is used for estimation following
 #' \insertCite{Cameron2011;textual}{gravity} multi-way clustering of
 #' variance-covariance matrices. The default value is set to \code{TRUE}.
-#' 
+#'
 #' @param data (Type: data.frame) the dataset to be used.
 #'
 #' @param ... Additional arguments to be passed to the function.
@@ -79,7 +79,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -120,7 +120,6 @@
 #'   filter_destination = countries_chosen[2],
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.
@@ -154,22 +153,15 @@ tetrads <- function(dependent_variable,
 
   valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
-  
+
   stopifnot(is.character(filter_origin), filter_origin %in% valid_origin, length(filter_origin) == 1)
   stopifnot(is.character(filter_destination), filter_destination %in% valid_destination, length(filter_destination) == 1)
 
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   d <- d %>%
@@ -179,7 +171,10 @@ tetrads <- function(dependent_variable,
 
   # Truncating dataset to reference importer and exporter partners -------------
   d2_filter_d <- d %>%
-    filter_at(vars(!!sym(code_destination)), any_vars(. == filter_destination)) %>%
+    filter_at(
+      vars(!!sym(code_destination)),
+      any_vars(. == filter_destination)
+    ) %>%
     select(!!sym(code_origin)) %>%
     distinct() %>%
     as_vector()
@@ -200,12 +195,18 @@ tetrads <- function(dependent_variable,
   d2 <- left_join(
     d2,
     d2 %>%
-      filter_at(vars(!!sym(code_destination)), any_vars(. == filter_destination)) %>%
-      select(!!sym(code_origin), y_log_tetrads_d = !!sym("y_log_tetrads"), dist_log_d = !!sym("dist_log")),
+      filter_at(
+        vars(!!sym(code_destination)),
+        any_vars(. == filter_destination)
+      ) %>%
+      select(
+        !!sym(code_origin),
+        y_log_tetrads_d = !!sym("y_log_tetrads"), dist_log_d = !!sym("dist_log")
+      ),
     by = code_origin
   ) %>%
     mutate(
-      lXinratk = !!sym("y_log_tetrads") - !!sym("y_log_tetrads_d"),
+      lxinratk = !!sym("y_log_tetrads") - !!sym("y_log_tetrads_d"),
       ldistratk = !!sym("dist_log") - !!sym("dist_log_d")
     ) %>%
     select(-!!sym("y_log_tetrads_d"), -!!sym("dist_log_d"))
@@ -231,14 +232,14 @@ tetrads <- function(dependent_variable,
     d2,
     d2 %>%
       filter_at(vars(!!sym(code_origin)), any_vars(. == filter_origin)) %>%
-      select(!!sym(code_destination), lXinratk_o = !!sym("lXinratk"), ldistratk_o = !!sym("ldistratk")),
+      select(!!sym(code_destination), lxinratk_o = !!sym("lxinratk"), ldistratk_o = !!sym("ldistratk")),
     by = code_destination
   ) %>%
     mutate(
-      y_log_rat = !!sym("lXinratk") - !!sym("lXinratk_o"),
+      y_log_rat = !!sym("lxinratk") - !!sym("lxinratk_o"),
       dist_log_rat = !!sym("ldistratk") - !!sym("ldistratk_o")
     ) %>%
-    select(-!!sym("lXinratk_o"), -!!sym("ldistratk_o"))
+    select(-!!sym("lxinratk_o"), -!!sym("ldistratk_o"))
 
   # Taking the ratio of ratios, rat, for the other independent variables -------
   d2 <- d2 %>%
@@ -267,13 +268,13 @@ tetrads <- function(dependent_variable,
   } else {
     vars <- "dist_log_rat"
   }
-  
+
   form <- stats::as.formula(
     sprintf("y_log_rat ~ %s", vars)
   )
-  
+
   form2 <- as.formula(sprintf("~ %s + %s", code_origin, code_destination))
-  
+
   model_tetrads <- stats::lm(form, data = d2)
 
   # Multiway Variance-Covariance -----------------------------------------------
@@ -283,13 +284,13 @@ tetrads <- function(dependent_variable,
       vcov = sandwich::vcovHC(model_tetrads, "HC1")
     )
   }
-  
+
   # Return ---------------------------------------------------------------------
   if (multiway == FALSE) {
     model_tetrads$call <- form
     return(model_tetrads)
   } else {
-    #model_tetrads_multiway$call <- form
+    # model_tetrads_multiway$call <- form
     return(model_tetrads_multiway)
   }
 }

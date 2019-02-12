@@ -1,9 +1,9 @@
 #' @title Head and Mayer consistent summary statistics
 #'
-#' @description Summary of estimates function that, if is used with default options, provides estimation results are 
-#' consistent with the Stata methods used in \insertCite{Head2014;textual}{gravity}. This function is adapted from the work of 
+#' @description Summary of estimates function that, if is used with default options, provides estimation results are
+#' consistent with the Stata methods used in \insertCite{Head2014;textual}{gravity}. This function is adapted from the work of
 #' \href{https://github.com/IsidoreBeautrelet/}{Isidore Beautrelet}.
-#' 
+#'
 #' @param model (Type: lm) Regression object obtained by using the estimation methods from this package
 #' or a generic method such as \code{lm} or \code{glm}.
 #' Some particular classes (\code{gpml}, \code{nbpml}, \code{negbin} and \code{nls}) don't return R squared and
@@ -16,7 +16,7 @@
 #' Stata code provided at the website
 #' \href{https://sites.google.com/site/hiegravity/}{Gravity Equations: Workhorse, Toolkit, and Cookbook}
 #' when choosing robust estimation.
-#' 
+#'
 #' @param ... additional arguments to be passed to \code{tobit}.
 #'
 #' @examples
@@ -44,7 +44,6 @@
 #' )
 #' 
 #' fit2 <- hm_summary(fit, robust = FALSE)
-#'
 #' @return Summary \code{lm} object.
 #'
 #' @export

@@ -31,20 +31,20 @@
 #' The function is designed for cross-sectional data, but can be extended to panel data using the
 #' \code{\link[survival]{survreg}} function.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as the 
-#' dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left 
+#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as the
+#' dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left
 #' open interval with the logged minimum trade flow of the respective importing country as right border.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param robust (Type: logical) whether robust fitting should be used. By default this is set to \code{FALSE}.
@@ -52,7 +52,7 @@
 #' @param data (Type: data.frame) the dataset to be used.
 #'
 #' @param ... Additional arguments to be passed to the function.
-#' 
+#'
 #' @references
 #' For more information on gravity models, theoretical foundations and
 #' estimation methods in general see
@@ -66,7 +66,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -86,7 +86,7 @@
 #' \insertRef{Gomez-Herrera2013}{gravity}
 #'
 #' and the references therein.
-#' 
+#'
 #' @examples
 #' # Example for CRAN checks:
 #' # Executable in < 5 sec
@@ -101,7 +101,7 @@
 #'   mutate(
 #'     flow = ifelse(flow < 5, 0, flow), # cutoff for testing purposes
 #'     lgdp_o = log(gdp_o),
-#'    lgdp_d = log(gdp_d)
+#'     lgdp_d = log(gdp_d)
 #'   )
 #' 
 #' fit <- ek_tobit(
@@ -112,7 +112,6 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as a
 #' \code{\link[survival]{survreg}}-object.
@@ -140,24 +139,22 @@ ek_tobit <- function(dependent_variable,
   }
 
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
-  
+
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
-  
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.)))
+
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, distance)
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   d <- d %>%
     mutate(
-      y_log_ek = ifelse(!!sym(dependent_variable) > 0, log(!!sym(dependent_variable)), NA)
+      y_log_ek = ifelse(
+        !!sym(dependent_variable) > 0,
+        log(!!sym(dependent_variable)), NA
+      )
     )
 
   # Minimum flows -----------------------------------------------------------
@@ -189,16 +186,16 @@ ek_tobit <- function(dependent_variable,
   } else {
     vars <- "dist_log"
   }
-  
+
   form <- stats::as.formula(paste("y_cens_log_ek", "~", vars))
-  
+
   model_ek_tobit <- survival::survreg(
-    form, 
-    data = d, 
-    dist = "gaussian", 
+    form,
+    data = d,
+    dist = "gaussian",
     robust = robust
   )
-  
+
   model_ek_tobit$call <- form
   return(model_ek_tobit)
 }

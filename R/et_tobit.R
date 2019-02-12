@@ -4,8 +4,8 @@
 #' by conducting a left-censored regression.
 #'
 #' @details \code{et_tobit} represents the \insertCite{Eaton1995;textual}{gravity} Tobit model
-#' which is often used when several gravity models are compared, instead of adding number \code{1} to the dependent 
-#' variable as done in \code{\link[gravity]{tobit}}, the constant added to the data is estimated and interpreted as a 
+#' which is often used when several gravity models are compared, instead of adding number \code{1} to the dependent
+#' variable as done in \code{\link[gravity]{tobit}}, the constant added to the data is estimated and interpreted as a
 #' threshold.
 #'
 #' When taking the log of the gravity equation flows equal to zero constitute a problem as their
@@ -48,16 +48,16 @@
 #' as the \code{\link[censReg]{censReg}} function is not
 #' compatible with the \code{\link[sandwich]{vcovHC}} function.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. Following 
+#' @param dependent_variable (Type: character) name of the dependent variable. Following
 #' \insertCite{Carson2007;textual}{gravity}, the smallest positive flow value is used as an estimate of the threshold, this value is is added to the \code{dependent_variable},
 #' the result is logged and taken as the dependent variable in the Tobit estimation with
 #' lower bound equal to the log of the smallest possible flow value.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
@@ -65,7 +65,7 @@
 #' @param data (Type: data.frame) the dataset to be used.
 #'
 #' @param ... Additional arguments to be passed to the function.
-#' 
+#'
 #' @references
 #' For more information on gravity models, theoretical foundations and
 #' estimation methods in general see
@@ -79,7 +79,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -123,7 +123,6 @@
 #'   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as a
 #' \code{\link[censReg]{censReg}}-object.
@@ -147,23 +146,21 @@ et_tobit <- function(dependent_variable,
     stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
   }
 
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.)))
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, distance)
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   flow_min_log <- filter_at(d, vars(!!sym(dependent_variable)), any_vars(. > 0))
 
   d <- d %>%
     mutate(
-      y_log_et = ifelse(!!sym(dependent_variable) > 0, log(!!sym(dependent_variable)), NA)
+      y_log_et = ifelse(
+        !!sym(dependent_variable) > 0,
+        log(!!sym(dependent_variable)), NA
+      )
     )
 
   # Transforming data, logging flows, distances --------------------------------
@@ -187,9 +184,9 @@ et_tobit <- function(dependent_variable,
   } else {
     vars <- "dist_log"
   }
-  
+
   form <- stats::as.formula(paste("y_cens_log_et", "~", vars))
-  
+
   model_et_tobit <- censReg::censReg(
     formula = form,
     left = y2min_log,
@@ -198,7 +195,7 @@ et_tobit <- function(dependent_variable,
     start = rep(0, 3 + length(additional_regressors)),
     method = "BHHH"
   )
-  
+
   model_et_tobit$call <- form
   return(model_et_tobit)
 }

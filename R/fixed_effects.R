@@ -3,7 +3,7 @@
 #' @description \code{fixed_effects} estimates gravity models via
 #' OLS and fixed effects for the countries of origin and destination.
 #'
-#' @details To account for MR terms, \insertCite{Feenstra2002;textual}{gravity} and 
+#' @details To account for MR terms, \insertCite{Feenstra2002;textual}{gravity} and
 #' \insertCite{Feenstra2004;textual}{gravity} propose to use
 #' importer and exporter fixed effects. Due to the use of these effects, all
 #' unilateral influences such as GDPs can no longer be estimated.
@@ -51,22 +51,22 @@
 #' see \insertCite{Egger2003;textual}{gravity}, \insertCite{Gomez-Herrera2013;textual}{gravity} and
 #' \insertCite{Head2010;textual}{gravity} as well as the references therein.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as 
+#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
-#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 #' using this parameter.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param robust (Type: logical) whether robust fitting should be used. By default this is set to \code{FALSE}.
@@ -88,7 +88,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -128,7 +128,6 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.
@@ -159,23 +158,16 @@ fixed_effects <- function(dependent_variable,
 
   valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
-  
+
   stopifnot(is.character(code_origin), code_origin %in% colnames(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
 
   # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
-  # Transforming data, logging flows and distances --------------------------
-  d <- data %>%
-    mutate(
-      dist_log = log(!!sym(distance)),
-      y_log_fe = log(!!sym(dependent_variable))
-    )
+  # Transforming data, logging distance and flow ----------------------------
+  d <- log_distance(d, distance) %>%
+    mutate(y_log_fe = log(!!sym(dependent_variable)))
 
   # Model -------------------------------------------------------------------
   if (!is.null(additional_regressors)) {
@@ -183,7 +175,7 @@ fixed_effects <- function(dependent_variable,
   } else {
     vars <- "dist_log"
   }
-  
+
   form <- stats::as.formula(paste("y_log_fe", "~", vars))
 
   if (robust == TRUE) {
@@ -191,7 +183,7 @@ fixed_effects <- function(dependent_variable,
   } else {
     model_fe <- stats::lm(form, data = d)
   }
-  
+
   model_fe$call <- form
   return(model_fe)
 }

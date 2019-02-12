@@ -4,7 +4,7 @@
 #' multiplicative form via Nonlinear Least Squares.
 #'
 #' @details \code{nls} is an estimation method for gravity models
-#' belonging to generalized linear models. It is estimated via \code{\link[stats]{glm}} using the gaussian 
+#' belonging to generalized linear models. It is estimated via \code{\link[stats]{glm}} using the gaussian
 #' distribution and a log-link.
 #'
 #' As the method may not lead to convergence when poor
@@ -43,16 +43,16 @@
 #' see \insertCite{Egger2003;textual}{gravity}, \insertCite{Gomez-Herrera2013;textual}{gravity} and
 #' \insertCite{Head2010;textual}{gravity} as well as the references therein.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as 
+#' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
-#' 
+#'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
 #' @param data (Type: data.frame) the dataset to be used.
@@ -72,7 +72,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -115,7 +115,6 @@
 #'   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model similar to a
 #' \code{\link[stats]{glm}}-object.
@@ -141,19 +140,17 @@ nls <- function(dependent_variable,
   }
 
   # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
-  # Transforming data, logging distances ---------------------------------------
+  # Transforming data, logging distances ------------------------------------
+  d <- log_distance(d, distance)
+
+  # Transforming data, selecting variables ----------------------------------
   d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    ) %>%
     select(
-      !!sym("dependent_variable"), !!sym("dist_log"), !!sym("additional_regressors")
+      !!sym("dependent_variable"),
+      !!sym("dist_log"),
+      !!sym("additional_regressors")
     )
 
   # Model ----------------------------------------------------------------------

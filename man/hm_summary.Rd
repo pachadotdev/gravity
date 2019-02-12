@@ -26,8 +26,8 @@ when choosing robust estimation.}
 Summary \code{lm} object.
 }
 \description{
-Summary of estimates function that, if is used with default options, provides estimation results are 
-consistent with the Stata methods used in \insertCite{Head2014;textual}{gravity}. This function is adapted from the work of 
+Summary of estimates function that, if is used with default options, provides estimation results are
+consistent with the Stata methods used in \insertCite{Head2014;textual}{gravity}. This function is adapted from the work of
 \href{https://github.com/IsidoreBeautrelet/}{Isidore Beautrelet}.
 }
 \examples{
@@ -55,5 +55,4 @@ fit <- ols(
 )
 
 fit2 <- hm_summary(fit, robust = FALSE)
-
 }

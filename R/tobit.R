@@ -46,16 +46,16 @@
 #' bound equal to the minimum positive trade level of the respective
 #' importing country.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. The number \code{1} is added and the 
+#' @param dependent_variable (Type: character) name of the dependent variable. The number \code{1} is added and the
 #' transformed variable is logged and taken as the dependent variable in the tobit estimation with lower bound
 #' equal to \code{0} as \code{log(1) = 0} represents the smallest flows
 #' in the transformed variable.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
@@ -84,7 +84,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -128,7 +128,6 @@
 #'   added_constant = 1,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as a
 #' \code{\link[censReg]{censReg}}-object.
@@ -155,21 +154,24 @@ tobit <- function(dependent_variable,
 
   stopifnot(is.numeric(added_constant), length(added_constant) == 1)
 
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.)))
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, distance)
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   d <- d %>%
     rowwise() %>%
-    mutate(y_cens_log_tobit = log(sum(!!sym(dependent_variable), added_constant, na.rm = TRUE))) %>%
+    mutate(
+      y_cens_log_tobit = log(
+        sum(
+          !!sym(dependent_variable),
+          added_constant,
+          na.rm = TRUE
+        )
+      )
+    ) %>%
     ungroup()
 
   ypc_log_min <- min(d %>% select(!!sym("y_cens_log_tobit")), na.rm = TRUE)
@@ -180,9 +182,9 @@ tobit <- function(dependent_variable,
   } else {
     vars <- "dist_log"
   }
-  
+
   form <- stats::as.formula(paste("y_cens_log_tobit", "~", vars))
-  
+
   model_tobit <- censReg::censReg(
     formula = form,
     left = ypc_log_min,

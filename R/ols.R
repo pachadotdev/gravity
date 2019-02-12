@@ -57,23 +57,23 @@
 #' the dependent variable and the logged income variables are used as independent variables in the
 #' estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be 
+#' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
-#' 
+#'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
 #' @param income_origin (Type: character) origin income variable (e.g. GDP) in the dataset.
 #'
 #' @param income_destination (Type: character) destination income variable (e.g. GDP) in the dataset.
 #'
-#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 #' using this parameter.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param uie (Type: logical) Dtermines whether the
@@ -99,7 +99,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -142,7 +142,6 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.
@@ -177,25 +176,18 @@ ols <- function(dependent_variable,
 
   stopifnot(is.character(income_origin), income_origin %in% colnames(data), length(income_origin) == 1)
   stopifnot(is.character(income_destination), income_destination %in% colnames(data), length(income_destination) == 1)
-  
+
   valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
-  
+
   stopifnot(is.character(code_origin), code_origin %in% colnames(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
 
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Income elasticities --------------------------------------------------------
   if (uie == TRUE) {
@@ -231,9 +223,9 @@ ols <- function(dependent_variable,
   } else {
     vars <- paste(c("dist_log", "inc_o_log", "inc_d_log"), collapse = " + ")
   }
-  
+
   form <- stats::as.formula(paste("y_log_ols", "~", vars))
-  
+
   if (robust == TRUE) {
     model_ols <- MASS::rlm(form, data = d)
   } else {

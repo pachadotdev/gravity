@@ -19,23 +19,23 @@
 #' the estimation of a gravity equation by \code{ddm} using panel data,
 #' we do not recommend to apply this method in this case.
 #'
-#' @param dependent_variable (Type: character) name of the dependent variable. This dependent variable is 
-#' divided by the product of unilateral incomes such (i.e. \code{income_origin} and \code{income_destination}) 
+#' @param dependent_variable (Type: character) name of the dependent variable. This dependent variable is
+#' divided by the product of unilateral incomes such (i.e. \code{income_origin} and \code{income_destination})
 #' and logged afterwards.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable 
+#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
 #' in the estimation. The distance is logged automatically when the function is executed.
 #'
 #' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
-#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+#' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}. As country specific effects are subdued due to demeaning, no further unilateral variables apart from incomes can be added.
 #'
 #' Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.
 #'
-#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped 
+#' @param code_origin (Type: character) country of origin variable (e.g. ISO-3 country codes). The variables are grouped
 #' using this parameter.
 #'
-#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+#' @param code_destination (Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 #' grouped using this parameter.
 #'
 #' @param robust (Type: logical) whether robust fitting should be used. By default this is set to \code{FALSE}.
@@ -43,7 +43,7 @@
 #' @param data (Type: data.frame) the dataset to be used.
 #'
 #' @param ... Additional arguments to be passed to the function.
-#' 
+#'
 #' @references
 #' For more information on gravity models, theoretical foundations and
 #' estimation methods in general see
@@ -57,7 +57,7 @@
 #' \insertRef{Baier2009}{gravity}
 #'
 #' \insertRef{Baier2010}{gravity}
-#' 
+#'
 #' \insertRef{Feenstra2002}{gravity}
 #'
 #' \insertRef{Head2010}{gravity}
@@ -97,7 +97,6 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
-#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.
@@ -129,24 +128,14 @@ ddm <- function(dependent_variable,
   stopifnot(is.character(code_origin), code_origin %in% names(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% names(data), length(code_destination) == 1)
 
-  # Discarding unusable observations ----------------------------------------
-  d <- data %>%
-    filter_at(vars(!!sym(distance)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(distance)), any_vars(is.finite(.))) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(. > 0)) %>%
-    filter_at(vars(!!sym(dependent_variable)), any_vars(is.finite(.)))
+  # Discarding unusable observations -------------------------------------------
+  d <- discard_unusable(data, c(distance, dependent_variable))
 
   # Transforming data, logging distances ---------------------------------------
-  d <- d %>%
-    mutate(
-      dist_log = log(!!sym(distance))
-    )
+  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
-  d <- d %>%
-    mutate(
-      y_log = log(!!sym(dependent_variable))
-    )
+  d <- mutate(d, y_log = log(!!sym(dependent_variable)))
 
   # Substracting the means -----------------------------------------------------
   d <- d %>%
@@ -198,22 +187,22 @@ ddm <- function(dependent_variable,
   if (!is.null(additional_regressors)) {
     d <- left_join(d, d2, by = c(code_origin, code_destination)) %>%
       select(!!sym("y_log_ddm"), ends_with("_ddm"))
-    
+
     vars <- paste(c("dist_log_ddm", paste0(additional_regressors, "_ddm"), 0), collapse = " + ")
   } else {
     d <- select(d, !!sym("y_log_ddm,"), ends_with("_ddm"))
-    
+
     vars <- paste(c("dist_log_ddm", 0), collapse = " + ")
   }
-  
+
   form <- stats::as.formula(paste("y_log_ddm", "~", vars))
-  
+
   if (robust == TRUE) {
     model_ddm <- MASS::rlm(form, data = d)
   } else {
     model_ddm <- stats::lm(form, data = d)
   }
-  
+
   model_ddm$call <- form
   return(model_ddm)
 }

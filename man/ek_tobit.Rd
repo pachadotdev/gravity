@@ -8,20 +8,20 @@ ek_tobit(dependent_variable, distance, additional_regressors = NULL,
   code_destination, robust = FALSE, data, ...)
 }
 \arguments{
-\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as the 
-dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left 
+\item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as the
+dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left
 open interval with the logged minimum trade flow of the respective importing country as right border.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable 
+\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.}
 
 \item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
-variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments 
+variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 \code{income_origin} and \code{income_destination}.
 
 Write this argument as \code{c(contiguity, common currency, ...)}. By default this is set to \code{NULL}.}
 
-\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are 
+\item{code_destination}{(Type: character) country of destination variable (e.g. country ISO-3 codes). The variables are
 grouped using this parameter.}
 
 \item{robust}{(Type: logical) whether robust fitting should be used. By default this is set to \code{FALSE}.}
@@ -81,7 +81,7 @@ grav_small <- grav_small \%>\%
   mutate(
     flow = ifelse(flow < 5, 0, flow), # cutoff for testing purposes
     lgdp_o = log(gdp_o),
-   lgdp_d = log(gdp_d)
+    lgdp_d = log(gdp_d)
   )
 
 fit <- ek_tobit(
@@ -92,7 +92,6 @@ fit <- ek_tobit(
   robust = FALSE,
   data = grav_small
 )
-
 }
 \references{
 For more information on gravity models, theoretical foundations and

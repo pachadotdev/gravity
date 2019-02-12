@@ -171,8 +171,8 @@ bvu <- function(dependent_variable,
   # Multilateral Resistance (MR) for the other independent variables -----------
   if (!is.null(additional_regressors)) {
     d2 <- d %>%
-      select(!!sym(code_origin), !!sym(code_destination), !!sym(distance), !!!syms(additional_regressors)) %>%
-      gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
+      select(one_of(c(code_origin, code_destination, distance, additional_regressors))) %>%
+      gather("key", "value", -one_of(c(code_origin, code_destination))) %>%
       group_by(!!sym(code_origin), !!sym("key")) %>%
       mutate(mean_dist_log_1 = mean(!!sym("value"), na.rm = TRUE)) %>%
       group_by(!!sym(code_destination), !!sym("key")) %>%

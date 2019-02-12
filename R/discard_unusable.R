@@ -26,6 +26,6 @@
 
 discard_unusable <- function(data, columns) {
   data %>%
-    filter_at(vars(!!!syms(columns)), all_vars(. > 0)) %>%
-    filter_at(vars(!!!syms(columns)), all_vars(is.finite(.)))
+    filter_at(columns, all_vars(. > 0)) %>%
+    filter_at(columns, all_vars(is.finite(.)))
 }

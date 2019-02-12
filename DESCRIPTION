@@ -1,13 +1,14 @@
 Package: gravity
 Type: Package
 Title: Estimation Methods for Gravity Models
-Version: 0.9.5
+Version: 0.9.6
 Authors@R: c(
   person("Anna-Lena", "Woelwer", role = c("aut"), email = "woelwer@uni-trier.de"),
   person("Jan Pablo", "Burgard", role = c("aut"), email = "burgardj@uni-trier.de"),
   person("Joshua", "Kunst", role = c("aut"), email = "jbkunst@gmail.com"),
   person("Mauricio", "Vargas", role = c("aut", "cre"), email = "mvargas@dcc.uchile.cl"),
-  person("Romain", "Francois", role = c("ctb"), email = "romain@purrple.cat")
+  person("Romain", "Francois", role = c("ctb"), email = "romain@purrple.cat"),
+  person("Lionel", "Henry", role = c("ctb"), email = "lionel@rstudio.com")
   )
 Description: A wrapper of different standard estimation methods for gravity models. 
   This package provides estimation methods for log-log models and multiplicative models.

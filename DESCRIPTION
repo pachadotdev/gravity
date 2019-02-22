@@ -1,7 +1,7 @@
 Package: gravity
 Type: Package
 Title: Estimation Methods for Gravity Models
-Version: 0.9.6
+Version: 0.9.7
 Authors@R: c(
   person("Anna-Lena", "Woelwer", role = c("aut"), email = "woelwer@uni-trier.de"),
   person("Jan Pablo", "Burgard", role = c("aut"), email = "burgardj@uni-trier.de"),

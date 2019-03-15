@@ -7,7 +7,7 @@ bibliography: inst/REFERENCES.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# gravity <img src="http://pacha.hk/gravity/apple.svg" width=150 align="right" alt="sticker"/>
+# gravity <img src="https://pacha.hk/gravity/apple.svg" width=150 align="right" alt="sticker"/>
 
 [![Travis-CI Build Status](https://travis-ci.org/pachamaltese/gravity.svg?branch=master)](https://travis-ci.org/pachamaltese/gravity)
 [![cran checks](https://cranchecks.info/badges/summary/gravity)](https://cran.r-project.org/web/checks/check_results_gravity.html)

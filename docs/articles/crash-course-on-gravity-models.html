@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       <h1>A crash course on gravity models</h1>
                         <h4 class="author">Mauricio Vargas</h4>
             
-            <h4 class="date">2019-02-12</h4>
+            <h4 class="date">2019-03-15</h4>
       
       
       <div class="hidden name"><code>crash-course-on-gravity-models.Rmd</code></div>
@@ -203,13 +203,13 @@ fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ddm.htm
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/broom/topics/reexports">glance</a></span>(fit)</code></pre></div>
 <pre><code>## # A tibble: 1 x 11
 ##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+## *     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1     0.254         0.254  2.32     1455.       0     4 -38611. 77232.
-## # … with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+## # ... with 3 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/broom/topics/reexports">augment</a></span>(fit)</code></pre></div>
 <pre><code>## # A tibble: 17,088 x 12
 ##    y_log_ddm dist_log_ddm rta_ddm comcur_ddm contig_ddm  .fitted .se.fit
-##        &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+##  *     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
 ##  1  -0.710         0.540   0.0175    0.0562    -0.0435  -0.885   0.0205 
 ##  2   0.00279      -0.0201  0.0318    0.0501    -0.00474  0.0616  0.00754
 ##  3  -0.373         0.154  -0.197    -0.00870   -0.0502  -0.456   0.0126 
@@ -220,8 +220,8 @@ fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ddm.htm
 ##  8  -1.43         -0.0245 -0.127     0.0562    -0.0319  -0.0845  0.0135 
 ##  9   3.10         -0.0260 -0.0195    0.0562    -0.0426  -0.00683 0.0104 
 ## 10  -3.88          0.622  -0.0227    0.0562    -0.0486  -1.05    0.0217 
-## # … with 17,078 more rows, and 5 more variables: .resid &lt;dbl&gt;, .hat &lt;dbl&gt;,
-## #   .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
+## # ... with 17,078 more rows, and 5 more variables: .resid &lt;dbl&gt;,
+## #   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
 </div>
 <div id="bonus-vetus" class="section level2">
 <h2 class="hasAnchor">

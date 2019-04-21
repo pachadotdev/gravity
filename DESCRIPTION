@@ -4,13 +4,13 @@ Title: Estimation Methods for Gravity Models
 Version: 0.9.7
 Authors@R: c(
   person("Anna-Lena", "Woelwer",
-    role = "aut",
+    role = c("aut", "cph"),
     email = "woelwer@uni-trier.de"),
   person("Jan Pablo", "Burgard",
-    role = "aut",
+    role = c("aut", "cph"),
     email = "burgardj@uni-trier.de"),
   person("Joshua", "Kunst", 
-    role = "aut",
+    role = c("aut", "cph"),
     email = "jbkunst@gmail.com"),
   person("Mauricio", "Vargas", 
     role = c("aut","cre","cph"), 
@@ -27,7 +27,7 @@ Authors@R: c(
   )
 Description: A wrapper of different standard estimation methods for gravity models. 
   This package provides estimation methods for log-log models and multiplicative models.
-URL: http://pacha.hk/gravity
+URL: http://pachamaltese.github.io/gravity
 Imports: 
     lmtest,
     sandwich,

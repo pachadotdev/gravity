@@ -5,13 +5,13 @@ knitr::opts_chunk$set(eval = TRUE, message = FALSE, warning = FALSE)
 library(gravity)
 
 fit <- ddm(
-  dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "comcur", "contig"),
-  code_origin = "iso_o",
-  code_destination = "iso_d",
-  data = gravity_no_zeros
-)
+    dependent_variable = "flow",
+    distance = "distw",
+    additional_regressors = c("rta", "comcur", "contig"),
+    code_origin = "iso_o",
+    code_destination = "iso_d",
+    data = gravity_no_zeros
+  )
 
 summary(fit)
 
@@ -24,50 +24,50 @@ augment(fit)
 
 ## ----bvu-----------------------------------------------------------------
 fit2 <- bvu(
-  dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "contig", "comcur"),
-  income_origin = "gdp_o",
-  income_destination = "gdp_d",
-  code_origin = "iso_o",
-  code_destination = "iso_d",
-  data = gravity_no_zeros
-)
+    dependent_variable = "flow",
+    distance = "distw",
+    additional_regressors = c("rta", "contig", "comcur"),
+    income_origin = "gdp_o",
+    income_destination = "gdp_d",
+    code_origin = "iso_o",
+    code_destination = "iso_d",
+    data = gravity_no_zeros
+  )
 
 tidy(fit2)
 
 ## ----bvw-----------------------------------------------------------------
 fit3 <- bvw(
-  dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "comcur", "contig"),
-  income_origin = "gdp_o",
-  income_destination = "gdp_d",
-  code_origin = "iso_o",
-  code_destination = "iso_d",
-  data = gravity_no_zeros
-)
+    dependent_variable = "flow",
+    distance = "distw",
+    additional_regressors = c("rta", "comcur", "contig"),
+    income_origin = "gdp_o",
+    income_destination = "gdp_d",
+    code_origin = "iso_o",
+    code_destination = "iso_d",
+    data = gravity_no_zeros
+  )
 
 tidy(fit3)
 
 ## ----ppml----------------------------------------------------------------
 fit4 <- ppml(
-  dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "comcur", "contig"),
-  data = gravity_no_zeros
-)
+    dependent_variable = "flow",
+    distance = "distw",
+    additional_regressors = c("rta", "comcur", "contig"),
+    data = gravity_no_zeros
+  )
 
 tidy(fit4)
 
 ## ----ppmlr---------------------------------------------------------------
 fit4 <- ppml(
-  dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "comcur", "contig"),
-  robust = TRUE,
-  data = gravity_no_zeros
-)
+    dependent_variable = "flow",
+    distance = "distw",
+    additional_regressors = c("rta", "comcur", "contig"),
+    robust = TRUE,
+    data = gravity_no_zeros
+  )
 
 tidy(fit4)
 
@@ -121,3 +121,4 @@ fit8 <- tetrads(
 )
 
 tidy(fit8)
+

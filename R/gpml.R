@@ -40,7 +40,7 @@
 #' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
 #'
@@ -136,12 +136,8 @@ gpml <- function(dependent_variable,
   d <- rename(d, y_gpml = !!sym(dependent_variable))
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", regressors), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
-
+  vars <- paste(regressors, collapse = " + ")
+  
   form <- stats::as.formula(paste("y_gpml", "~", vars))
 
   model_gpml <- glm2::glm2(form,

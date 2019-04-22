@@ -35,7 +35,7 @@
 #' dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left
 #' open interval with the logged minimum trade flow of the respective importing country as right border.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -136,7 +136,7 @@ ek_tobit <- function(dependent_variable,
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
 
   # Transforming data, logging flows -------------------------------------------
-  d <- d %>%
+  d <- data %>%
     mutate(
       y_log_ek = ifelse(
         !!sym(dependent_variable) > 0,
@@ -168,12 +168,8 @@ ek_tobit <- function(dependent_variable,
   y_cens_log_ek <- survival::Surv(f1, f2, type = "interval2") %>% as_vector()
 
   # Model -------------------------------------------------------------------
-  if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", regressors), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
-
+  vars <- paste(regressors, collapse = " + ")
+  
   form <- stats::as.formula(paste("y_cens_log_ek", "~", vars))
 
   model_ek_tobit <- survival::survreg(

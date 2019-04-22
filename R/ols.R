@@ -57,7 +57,7 @@
 #' the dependent variable and the logged income variables are used as independent variables in the
 #' estimation.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
 #'
@@ -189,7 +189,7 @@ ols <- function(dependent_variable,
         )
       ) %>%
       select(
-        !!sym("y_log_ols"), !!sym("dist_log"), !!sym("regressors")
+        !!sym("y_log_ols"), !!sym("regressors")
       )
   }
 
@@ -202,16 +202,16 @@ ols <- function(dependent_variable,
         inc_d_log = log(!!sym(income_destination))
       ) %>%
       select(
-        !!sym("y_log_ols"), !!sym("inc_o_log"), !!sym("inc_d_log"), !!sym("dist_log"), !!sym("regressors")
+        !!sym("y_log_ols"), !!sym("inc_o_log"), !!sym("inc_d_log"), !!sym("regressors")
       )
   }
 
 
   # Model -------------------------------------------------------------------
   if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", "inc_o_log", "inc_d_log", regressors), collapse = " + ")
+    vars <- paste(c("inc_o_log", "inc_d_log", regressors), collapse = " + ")
   } else {
-    vars <- paste(c("dist_log", "inc_o_log", "inc_d_log"), collapse = " + ")
+    vars <- paste(c("inc_o_log", "inc_d_log"), collapse = " + ")
   }
 
   form <- stats::as.formula(paste("y_log_ols", "~", vars))

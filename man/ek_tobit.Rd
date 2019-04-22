@@ -4,18 +4,15 @@
 \alias{ek_tobit}
 \title{\insertCite{Eaton2001;textual}{gravity} Tobit model (EK Tobit)}
 \usage{
-ek_tobit(dependent_variable, distance, additional_regressors = NULL,
-  code_destination, robust = FALSE, data, ...)
+ek_tobit(dependent_variable, regressors = NULL, code_destination,
+  robust = FALSE, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as the
 dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left
 open interval with the logged minimum trade flow of the respective importing country as right border.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 \code{income_origin} and \code{income_destination}.
 
@@ -86,8 +83,7 @@ grav_small <- grav_small \%>\%
 
 fit <- ek_tobit(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("distw", "rta", "lgdp_o", "lgdp_d"),
+  regressors = c("distw", "rta", "lgdp_o", "lgdp_d"),
   code_destination = "iso_d",
   robust = FALSE,
   data = grav_small

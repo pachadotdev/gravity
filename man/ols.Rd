@@ -4,9 +4,9 @@
 \alias{ols}
 \title{Ordinary Least Squares (OLS)}
 \usage{
-ols(dependent_variable, distance, additional_regressors = NULL,
-  income_origin, income_destination, code_origin, code_destination,
-  uie = FALSE, robust = FALSE, data, ...)
+ols(dependent_variable, regressors = NULL, income_origin,
+  income_destination, code_origin, code_destination, uie = FALSE,
+  robust = FALSE, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable.
@@ -18,10 +18,7 @@ If \code{uie=FALSE} the dependent variable is logged directly. The transformed v
 the dependent variable and the logged income variables are used as independent variables in the
 estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first. Interaction terms can be added.
 
@@ -113,8 +110,7 @@ grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 fit <- ols(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "contig", "comcur"),
+  regressors = c("rta", "contig", "comcur"),
   income_origin = "gdp_o",
   income_destination = "gdp_d",
   code_origin = "iso_o",

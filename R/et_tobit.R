@@ -53,7 +53,7 @@
 #' the result is logged and taken as the dependent variable in the Tobit estimation with
 #' lower bound equal to the log of the smallest possible flow value.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -140,9 +140,9 @@ et_tobit <- function(dependent_variable,
   }
 
   # Transforming data, logging flows -------------------------------------------
-  flow_min_log <- filter_at(d, vars(!!sym(dependent_variable)), any_vars(. > 0))
+  flow_min_log <- filter_at(data, vars(!!sym(dependent_variable)), any_vars(. > 0))
 
-  d <- d %>%
+  d <- data %>%
     mutate(
       y_log_et = ifelse(
         !!sym(dependent_variable) > 0,
@@ -166,11 +166,7 @@ et_tobit <- function(dependent_variable,
     ungroup()
 
   # Model -------------------------------------------------------------------
-  if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", regressors), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
+  vars <- paste(regressors, collapse = " + ")
 
   form <- stats::as.formula(paste("y_cens_log_et", "~", vars))
 
@@ -179,7 +175,7 @@ et_tobit <- function(dependent_variable,
     left = y2min_log,
     right = Inf,
     data = d,
-    start = rep(0, 3 + length(regressors)),
+    start = rep(0, 2 + length(regressors)),
     method = "BHHH"
   )
 

@@ -51,7 +51,7 @@
 #' equal to \code{0} as \code{log(1) = 0} represents the smallest flows
 #' in the transformed variable.
 #'
-#' @param regression (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -120,7 +120,7 @@
 #' 
 #' fit <- tobit(
 #'   dependent_variable = "flow",
-#'   regression = c("rta", "lgdp_o", "lgdp_d"),
+#'   regressors = c("rta", "lgdp_o", "lgdp_d"),
 #'   added_constant = 1,
 #'   data = grav_small
 #' )
@@ -133,7 +133,7 @@
 #' @export
 
 tobit <- function(dependent_variable,
-                  regression = NULL,
+                  regressors = NULL,
                   added_constant = 1,
                   data, ...) {
   # Checks ------------------------------------------------------------------
@@ -141,14 +141,14 @@ tobit <- function(dependent_variable,
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  if (!is.null(regression)) {
-    stopifnot(is.character(regression), all(regression %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
 
   stopifnot(is.numeric(added_constant), length(added_constant) == 1)
 
   # Transforming data, logging flows -------------------------------------------
-  d <- d %>%
+  d <- data %>%
     rowwise() %>%
     mutate(
       y_cens_log_tobit = log(
@@ -164,12 +164,8 @@ tobit <- function(dependent_variable,
   ypc_log_min <- min(d %>% select(!!sym("y_cens_log_tobit")), na.rm = TRUE)
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(regression)) {
-    vars <- paste(c("dist_log", regression), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
-
+  vars <- paste(regressors, collapse = " + ")
+  
   form <- stats::as.formula(paste("y_cens_log_tobit", "~", vars))
 
   model_tobit <- censReg::censReg(
@@ -177,7 +173,7 @@ tobit <- function(dependent_variable,
     left = ypc_log_min,
     right = Inf,
     data = d,
-    start = rep(0, 3 + length(regression)),
+    start = rep(0, 2 + length(regressors)),
     method = "BHHH"
   )
 

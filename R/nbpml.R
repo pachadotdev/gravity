@@ -40,7 +40,7 @@
 #' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
 #'
@@ -124,15 +124,11 @@ nbpml <- function(dependent_variable,
   }
 
   # Transforming data, renaming dependent variable -----------------------------
-  d <- rename(d, y_nbpml = !!sym(dependent_variable))
+  d <- rename(data, y_nbpml = !!sym(dependent_variable))
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", regressors), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
-
+  vars <- paste(regressors, collapse = " + ")
+  
   form <- stats::as.formula(paste("y_nbpml", "~", vars))
 
   # provided we are fitting a Negative Binomial we start assuming

@@ -4,17 +4,13 @@
 \alias{nbpml}
 \title{Negative Binomial Pseudo Maximum Likelihood (NBPML)}
 \usage{
-nbpml(dependent_variable, distance, additional_regressors,
-  robust = FALSE, data, ...)
+nbpml(dependent_variable, regressors, robust = FALSE, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as
 the dependent variable in the estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first. Interaction terms can be added.
 
@@ -81,8 +77,7 @@ grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 fit <- nbpml(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "iso_o", "iso_d"),
+  regressors = c("rta", "iso_o", "iso_d"),
   data = grav_small
 )
 }

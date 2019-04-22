@@ -4,17 +4,13 @@
 \alias{nls}
 \title{Non-linear Least Squares (NLS)}
 \usage{
-nls(dependent_variable, distance, additional_regressors = NULL, data,
-  ...)
+nls(dependent_variable, regressors = NULL, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as
 the dependent variable in the estimation.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 logged first. Interaction terms can be added.
 
@@ -91,8 +87,7 @@ grav_small <- grav_small \%>\%
 
 fit <- nls(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+  regressors = c("rta", "lgdp_o", "lgdp_d"),
   data = grav_small
 )
 }

@@ -4,8 +4,8 @@
 \alias{tobit}
 \title{Left-censored Tobit model with known threshold}
 \usage{
-tobit(dependent_variable, distance, additional_regressors = NULL,
-  added_constant = 1, data, ...)
+tobit(dependent_variable, regressors = NULL, added_constant = 1, data,
+  ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. The number \code{1} is added and the
@@ -13,10 +13,7 @@ transformed variable is logged and taken as the dependent variable in the tobit 
 equal to \code{0} as \code{log(1) = 0} represents the smallest flows
 in the transformed variable.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 \code{income_origin} and \code{income_destination}.
 
@@ -103,8 +100,7 @@ grav_small <- grav_small \%>\%
 
 fit <- tobit(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+  regressors = c("rta", "lgdp_o", "lgdp_d"),
   added_constant = 1,
   data = grav_small
 )

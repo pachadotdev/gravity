@@ -4,8 +4,7 @@
 \alias{et_tobit}
 \title{\insertCite{Eaton1995;textual}{gravity} threshold Tobit model (ET Tobit)}
 \usage{
-et_tobit(dependent_variable, distance, additional_regressors = NULL,
-  data, ...)
+et_tobit(dependent_variable, regressors = NULL, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. Following
@@ -13,10 +12,7 @@ et_tobit(dependent_variable, distance, additional_regressors = NULL,
 the result is logged and taken as the dependent variable in the Tobit estimation with
 lower bound equal to the log of the smallest possible flow value.}
 
-\item{distance}{(Type: character) name of the distance variable that should be taken as the key independent variable
-in the estimation. The distance is logged automatically when the function is executed.}
-
-\item{additional_regressors}{(Type: character) names of the additional regressors to include in the model (e.g. a dummy
+\item{regressors}{(Type: character) names of the regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 \code{income_origin} and \code{income_destination}.
 
@@ -99,8 +95,7 @@ grav_small <- grav_small \%>\%
 
 fit <- et_tobit(
   dependent_variable = "flow",
-  distance = "distw",
-  additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+  regressors = c("rta", "lgdp_o", "lgdp_d"),
   data = grav_small
 )
 }

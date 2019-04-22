@@ -54,7 +54,7 @@
 #' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first.
 #'
@@ -163,12 +163,8 @@ fixed_effects <- function(dependent_variable,
     mutate(y_log_fe = log(!!sym(dependent_variable)))
 
   # Model -------------------------------------------------------------------
-  if (!is.null(regressors)) {
-    vars <- paste(c("dist_log", regressors, code_origin, code_destination), collapse = " + ")
-  } else {
-    vars <- "dist_log"
-  }
-
+  vars <- paste(c(regressors, code_origin, code_destination), collapse = " + ")
+  
   form <- stats::as.formula(paste("y_log_fe", "~", vars))
 
   if (robust == TRUE) {

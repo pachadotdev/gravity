@@ -46,10 +46,7 @@
 #' @param dependent_variable (Type: character) name of the dependent variable. This variable is logged and then used as
 #' the dependent variable in the estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
 #'
@@ -111,8 +108,7 @@
 #' 
 #' fit <- nls(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+#'   regressors = c("rta", "lgdp_o", "lgdp_d"),
 #'   data = grav_small
 #' )
 #' @return
@@ -125,37 +121,30 @@
 #' @export
 
 nls <- function(dependent_variable,
-                distance,
-                additional_regressors = NULL,
+                regressors = NULL,
                 data, ...) {
   # Checks ------------------------------------------------------------------
   stopifnot(is.data.frame(data))
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
 
   # Discarding unusable observations ----------------------------------------
-  d <- discard_unusable(data, c(distance, dependent_variable))
-
-  # Transforming data, logging distances ------------------------------------
-  d <- log_distance(d, distance)
+  d <- discard_unusable(data, dependent_variable)
 
   # Transforming data, selecting variables ----------------------------------
   d <- d %>%
     select(
       !!sym("dependent_variable"),
-      !!sym("dist_log"),
-      !!sym("additional_regressors")
+      !!sym("regressors")
     )
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
-    vars <- paste(c("dist_log", additional_regressors), collapse = " + ")
+  if (!is.null(regressors)) {
+    vars <- paste(c("dist_log", regressors), collapse = " + ")
   } else {
     vars <- "dist_log"
   }

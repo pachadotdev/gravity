@@ -53,10 +53,7 @@
 #' the result is logged and taken as the dependent variable in the Tobit estimation with
 #' lower bound equal to the log of the smallest possible flow value.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -119,8 +116,7 @@
 #' 
 #' fit <- et_tobit(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+#'   regressors = c("rta", "lgdp_o", "lgdp_d"),
 #'   data = grav_small
 #' )
 #' @return
@@ -132,25 +128,16 @@
 #' @export
 
 et_tobit <- function(dependent_variable,
-                     distance,
-                     additional_regressors = NULL,
+                     regressors = NULL,
                      data, ...) {
   # Checks ------------------------------------------------------------------
   stopifnot(is.data.frame(data))
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
-
-  # Discarding unusable observations -------------------------------------------
-  d <- discard_unusable(data, distance)
-
-  # Transforming data, logging distances ---------------------------------------
-  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   flow_min_log <- filter_at(d, vars(!!sym(dependent_variable)), any_vars(. > 0))
@@ -163,7 +150,7 @@ et_tobit <- function(dependent_variable,
       )
     )
 
-  # Transforming data, logging flows, distances --------------------------------
+  # Transforming data, logging flows ----------------------------------------
   d <- d %>%
     mutate(
       y2 = ifelse(!!sym(dependent_variable) > 0, !!sym(dependent_variable), NA),
@@ -179,8 +166,8 @@ et_tobit <- function(dependent_variable,
     ungroup()
 
   # Model -------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
-    vars <- paste(c("dist_log", additional_regressors), collapse = " + ")
+  if (!is.null(regressors)) {
+    vars <- paste(c("dist_log", regressors), collapse = " + ")
   } else {
     vars <- "dist_log"
   }
@@ -192,7 +179,7 @@ et_tobit <- function(dependent_variable,
     left = y2min_log,
     right = Inf,
     data = d,
-    start = rep(0, 3 + length(additional_regressors)),
+    start = rep(0, 3 + length(regressors)),
     method = "BHHH"
   )
 

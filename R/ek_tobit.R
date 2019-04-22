@@ -35,10 +35,7 @@
 #' dependent variable in the estimation. As the log of zero is not defined, all flows equal to zero are replaced by a left
 #' open interval with the logged minimum trade flow of the respective importing country as right border.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -106,8 +103,7 @@
 #' 
 #' fit <- ek_tobit(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("distw", "rta", "lgdp_o", "lgdp_d"),
+#'   regressors = c("distw", "rta", "lgdp_o", "lgdp_d"),
 #'   code_destination = "iso_d",
 #'   robust = FALSE,
 #'   data = grav_small
@@ -121,8 +117,7 @@
 #' @export
 
 ek_tobit <- function(dependent_variable,
-                     distance,
-                     additional_regressors = NULL,
+                     regressors = NULL,
                      code_destination,
                      robust = FALSE,
                      data, ...) {
@@ -132,21 +127,13 @@ ek_tobit <- function(dependent_variable,
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
 
   valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
 
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
-
-  # Discarding unusable observations -------------------------------------------
-  d <- discard_unusable(data, distance)
-
-  # Transforming data, logging distances ---------------------------------------
-  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   d <- d %>%
@@ -181,8 +168,8 @@ ek_tobit <- function(dependent_variable,
   y_cens_log_ek <- survival::Surv(f1, f2, type = "interval2") %>% as_vector()
 
   # Model -------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
-    vars <- paste(c("dist_log", additional_regressors), collapse = " + ")
+  if (!is.null(regressors)) {
+    vars <- paste(c("dist_log", regressors), collapse = " + ")
   } else {
     vars <- "dist_log"
   }

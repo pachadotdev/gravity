@@ -23,10 +23,7 @@
 #' divided by the product of unilateral incomes such (i.e. \code{income_origin} and \code{income_destination})
 #' and logged afterwards.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}. As country specific effects are subdued due to demeaning, no further unilateral variables apart from incomes can be added.
 #'
@@ -90,8 +87,7 @@
 #' 
 #' fit <- ddm(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("rta", "comcur", "contig"),
+#'   regressors = c("rta", "comcur", "contig"),
 #'   code_origin = "iso_o",
 #'   code_destination = "iso_d",
 #'   robust = FALSE,
@@ -107,8 +103,7 @@
 #' @export
 
 ddm <- function(dependent_variable,
-                distance,
-                additional_regressors = NULL,
+                regressors = NULL,
                 code_origin,
                 code_destination,
                 robust = FALSE,
@@ -119,20 +114,15 @@ ddm <- function(dependent_variable,
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
 
   stopifnot(is.character(code_origin), code_origin %in% names(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% names(data), length(code_destination) == 1)
 
   # Discarding unusable observations -------------------------------------------
-  d <- discard_unusable(data, c(distance, dependent_variable))
-
-  # Transforming data, logging distances ---------------------------------------
-  d <- log_distance(d, distance)
+  d <- discard_unusable(data, dependent_variable)
 
   # Transforming data, logging flows -------------------------------------------
   d <- mutate(d, y_log = log(!!sym(dependent_variable)))
@@ -171,7 +161,7 @@ ddm <- function(dependent_variable,
 
   # Substracting the means for the other independent variables -----------------
   d2 <- d %>%
-    select(!!sym(code_origin), !!sym(code_destination), !!!syms(additional_regressors)) %>%
+    select(!!sym(code_origin), !!sym(code_destination), !!!syms(regressors)) %>%
     gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
     mutate(key = paste0(!!sym("key"), "_ddm")) %>%
     group_by(!!sym(code_origin), !!sym("key"), add = FALSE) %>%
@@ -184,11 +174,11 @@ ddm <- function(dependent_variable,
     spread(!!sym("key"), !!sym("value"))
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
+  if (!is.null(regressors)) {
     d <- left_join(d, d2, by = c(code_origin, code_destination)) %>%
       select(!!sym("y_log_ddm"), ends_with("_ddm"))
 
-    vars <- paste(c("dist_log_ddm", paste0(additional_regressors, "_ddm"), 0), collapse = " + ")
+    vars <- paste(c("dist_log_ddm", paste0(regressors, "_ddm"), 0), collapse = " + ")
   } else {
     d <- select(d, !!sym("y_log_ddm,"), ends_with("_ddm"))
 

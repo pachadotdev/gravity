@@ -57,10 +57,7 @@
 #' the dependent variable and the logged income variables are used as independent variables in the
 #' estimation.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDPs can be added but those variables have to be
 #' logged first. Interaction terms can be added.
 #'
@@ -132,8 +129,7 @@
 #' 
 #' fit <- ols(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("rta", "contig", "comcur"),
+#'   regressors = c("rta", "contig", "comcur"),
 #'   income_origin = "gdp_o",
 #'   income_destination = "gdp_d",
 #'   code_origin = "iso_o",
@@ -152,8 +148,7 @@
 #' @export
 
 ols <- function(dependent_variable,
-                distance,
-                additional_regressors = NULL,
+                regressors = NULL,
                 income_origin,
                 income_destination,
                 code_origin,
@@ -168,10 +163,8 @@ ols <- function(dependent_variable,
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regressors)) {
+    stopifnot(is.character(regressors), all(regressors %in% colnames(data)))
   }
 
   stopifnot(is.character(income_origin), income_origin %in% colnames(data), length(income_origin) == 1)
@@ -184,10 +177,7 @@ ols <- function(dependent_variable,
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
 
   # Discarding unusable observations -------------------------------------------
-  d <- discard_unusable(data, c(distance, dependent_variable))
-
-  # Transforming data, logging distances ---------------------------------------
-  d <- log_distance(d, distance)
+  d <- discard_unusable(data, dependent_variable)
 
   # Income elasticities --------------------------------------------------------
   if (uie == TRUE) {
@@ -199,7 +189,7 @@ ols <- function(dependent_variable,
         )
       ) %>%
       select(
-        !!sym("y_log_ols"), !!sym("dist_log"), !!sym("additional_regressors")
+        !!sym("y_log_ols"), !!sym("dist_log"), !!sym("regressors")
       )
   }
 
@@ -212,14 +202,14 @@ ols <- function(dependent_variable,
         inc_d_log = log(!!sym(income_destination))
       ) %>%
       select(
-        !!sym("y_log_ols"), !!sym("inc_o_log"), !!sym("inc_d_log"), !!sym("dist_log"), !!sym("additional_regressors")
+        !!sym("y_log_ols"), !!sym("inc_o_log"), !!sym("inc_d_log"), !!sym("dist_log"), !!sym("regressors")
       )
   }
 
 
   # Model -------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
-    vars <- paste(c("dist_log", "inc_o_log", "inc_d_log", additional_regressors), collapse = " + ")
+  if (!is.null(regressors)) {
+    vars <- paste(c("dist_log", "inc_o_log", "inc_d_log", regressors), collapse = " + ")
   } else {
     vars <- paste(c("dist_log", "inc_o_log", "inc_d_log"), collapse = " + ")
   }

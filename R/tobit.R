@@ -51,10 +51,7 @@
 #' equal to \code{0} as \code{log(1) = 0} represents the smallest flows
 #' in the transformed variable.
 #'
-#' @param distance (Type: character) name of the distance variable that should be taken as the key independent variable
-#' in the estimation. The distance is logged automatically when the function is executed.
-#'
-#' @param additional_regressors (Type: character) names of the additional regressors to include in the model (e.g. a dummy
+#' @param regression (Type: character) names of the additional regressors to include in the model (e.g. a dummy
 #' variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 #' \code{income_origin} and \code{income_destination}.
 #'
@@ -123,8 +120,7 @@
 #' 
 #' fit <- tobit(
 #'   dependent_variable = "flow",
-#'   distance = "distw",
-#'   additional_regressors = c("rta", "lgdp_o", "lgdp_d"),
+#'   regression = c("rta", "lgdp_o", "lgdp_d"),
 #'   added_constant = 1,
 #'   data = grav_small
 #' )
@@ -137,8 +133,7 @@
 #' @export
 
 tobit <- function(dependent_variable,
-                  distance,
-                  additional_regressors = NULL,
+                  regression = NULL,
                   added_constant = 1,
                   data, ...) {
   # Checks ------------------------------------------------------------------
@@ -146,19 +141,11 @@ tobit <- function(dependent_variable,
 
   stopifnot(is.character(dependent_variable), dependent_variable %in% colnames(data), length(dependent_variable) == 1)
 
-  stopifnot(is.character(distance), distance %in% colnames(data), length(distance) == 1)
-
-  if (!is.null(additional_regressors)) {
-    stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
+  if (!is.null(regression)) {
+    stopifnot(is.character(regression), all(regression %in% colnames(data)))
   }
 
   stopifnot(is.numeric(added_constant), length(added_constant) == 1)
-
-  # Discarding unusable observations -------------------------------------------
-  d <- discard_unusable(data, distance)
-
-  # Transforming data, logging distances ---------------------------------------
-  d <- log_distance(d, distance)
 
   # Transforming data, logging flows -------------------------------------------
   d <- d %>%
@@ -177,8 +164,8 @@ tobit <- function(dependent_variable,
   ypc_log_min <- min(d %>% select(!!sym("y_cens_log_tobit")), na.rm = TRUE)
 
   # Model ----------------------------------------------------------------------
-  if (!is.null(additional_regressors)) {
-    vars <- paste(c("dist_log", additional_regressors), collapse = " + ")
+  if (!is.null(regression)) {
+    vars <- paste(c("dist_log", regression), collapse = " + ")
   } else {
     vars <- "dist_log"
   }
@@ -190,7 +177,7 @@ tobit <- function(dependent_variable,
     left = ypc_log_min,
     right = Inf,
     data = d,
-    start = rep(0, 3 + length(additional_regressors)),
+    start = rep(0, 3 + length(regression)),
     method = "BHHH"
   )
 

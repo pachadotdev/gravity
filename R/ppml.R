@@ -157,10 +157,14 @@ ppml <- function(dependent_variable,
   )
 
   if (robust == TRUE) {
-    model_ppml_robust <- lmtest::coeftest(
+    model_ppml_robust <- model_ppml
+    
+    robust_coefficients <- lmtest::coeftest(
       model_ppml,
       vcov = sandwich::vcovHC(model_ppml, type = "HC1", ...)
     )
+    
+    model_ppml_robust$coefficients <- robust_coefficients[1:length(rownames(robust_coefficients)),]
   }
 
   if (robust == FALSE) {

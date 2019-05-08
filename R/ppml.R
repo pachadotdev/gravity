@@ -172,6 +172,7 @@ ppml <- function(dependent_variable,
     class(model_ppml) <- c(class(model_ppml), "gravity_ppml")
     return(model_ppml)
   } else {
+    model_ppml_robust$call <- form
     class(model_ppml_robust) <- c(class(model_ppml_robust), "gravity_ppml")
     return(model_ppml_robust)
   }

@@ -133,10 +133,10 @@ comments and advice on early versions of the package.
 From R console:
 
 ``` r
-# Install old version from CRAN
+# Install from CRAN
 install.packages("gravity")
 
-# Install new version from GitHub
+# Install from GitHub
 devtools::install_github("pachamaltese/gravity")
 ```
 

@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.8</span>
       </span>
     </div>
 
@@ -76,7 +76,7 @@
       <h1>A crash course on gravity models</h1>
                         <h4 class="author">Mauricio Vargas</h4>
             
-            <h4 class="date">2019-04-21</h4>
+            <h4 class="date">2019-06-08</h4>
       
       
       <div class="hidden name"><code>crash-course-on-gravity-models.Rmd</code></div>
@@ -307,14 +307,14 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <a class="sourceLine" id="cb15-7" data-line-number="7">  )</a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/broom/topics/reexports">tidy</a></span>(fit4)</a></code></pre></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic       p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
-## 1 (Intercept)   5.76       1.16      4.95  0.000000733  
-## 2 dist_log      0.0243     0.131     0.185 0.853        
-## 3 rta           1.27       0.228     5.55  0.0000000284 
-## 4 comcur        1.11       0.188     5.87  0.00000000435
-## 5 contig        1.76       0.323     5.44  0.0000000522</code></pre>
+<pre><code>## # A tibble: 5 x 4
+##   estimate std.error statistic  p.value
+##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1   5.76      0.772      7.47  8.54e-14
+## 2   0.0243    0.0873     0.278 7.81e- 1
+## 3   1.27      0.170      7.46  9.20e-14
+## 4   1.11      0.180      6.15  7.89e-10
+## 5   1.76      0.181      9.69  3.71e-22</code></pre>
 </div>
 <div id="gamma-pseudo-maximum-likelihood-gpml" class="section level2">
 <h2 class="hasAnchor">

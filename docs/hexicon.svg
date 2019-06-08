@@ -10,8 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.0"
-   width="162.03424"
-   height="178.08711"
+   width="166.03305"
+   height="192.11954"
    id="svg2811"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="hexicon.svg"
@@ -26,7 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -39,8 +39,8 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="732"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
      id="namedview15"
      showgrid="false"
      fit-margin-top="0"
@@ -48,12 +48,12 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:zoom="2.0763602"
-     inkscape:cx="2.8069763"
-     inkscape:cy="105.46862"
-     inkscape:window-x="1600"
-     inkscape:window-y="132"
+     inkscape:cx="-48.864571"
+     inkscape:cy="108.63403"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g4546"
+     inkscape:current-layer="g79"
      showguides="true"
      inkscape:guide-bbox="true" />
   <defs
@@ -88,7 +88,7 @@
     </clipPath>
   </defs>
   <g
-     transform="translate(2002.1262,-3018.6231)"
+     transform="translate(1996.6894,-3007.7561)"
      id="layer1">
     <g
        transform="translate(19.48863,19.49672)"

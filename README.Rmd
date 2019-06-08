@@ -71,10 +71,10 @@ Contributions, extensions and error corrections are very welcome. Please do not 
 From R console:
 
 ```{r, eval = FALSE}
-# Install old version from CRAN
+# Install from CRAN
 install.packages("gravity")
 
-# Install new version from GitHub
+# Install from GitHub
 devtools::install_github("pachamaltese/gravity")
 ```
 

@@ -1,10 +1,15 @@
 
 # gravity <img src="https://pachamaltese.github.io/gravity/hexicon.svg" width=150 align="right" alt="sticker"/>
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Travis-CI Build
 Status](https://travis-ci.org/pachamaltese/gravity.svg?branch=master)](https://travis-ci.org/pachamaltese/gravity)
-[![cran
-checks](https://cranchecks.info/badges/summary/gravity)](https://cran.r-project.org/web/checks/check_results_gravity.html)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/gravity)](https://cran.r-project.org/package=gravity)
 [![Coverage
 status](https://codecov.io/gh/pachamaltese/gravity/branch/master/graph/badge.svg)](https://codecov.io/github/pachamaltese/gravity?branch=master)
 [![JOSS](http://joss.theoj.org/papers/10.21105/joss.01038/status.svg)](https://doi.org/10.21105/joss.01038)

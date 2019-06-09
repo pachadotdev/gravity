@@ -11,3 +11,4 @@ _pkgdown.yml
 appveyor.yml
 codecov.yml
 LICENSE
+^codemeta\.json$

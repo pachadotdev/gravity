@@ -338,10 +338,12 @@
     }
   ],
   "readme": "https://github.com/pachamaltese/gravity/blob/master/README.md",
-  "fileSize": "673.287KB",
+  "fileSize": "675.282KB",
   "contIntegration": [
     "https://travis-ci.org/pachamaltese/gravity",
     "https://codecov.io/github/pachamaltese/gravity?branch=master"
   ],
-  "issueTracker": "https://github.com/pachamaltese/gravity/issues"
+  "issueTracker": "https://github.com/pachamaltese/gravity/issues",
+  "developmentStatus": ["https://www.repostatus.org/#active", "https://www.tidyverse.org/lifecycle/#stable"],
+  "relatedLink": "https://CRAN.R-project.org/package=gravity"
 }

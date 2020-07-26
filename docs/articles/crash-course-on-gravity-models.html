@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A crash course on gravity models • gravity</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="A crash course on gravity models">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="gravity">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -65,7 +65,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/pachamaltese/gravity/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -78,12 +85,12 @@
       </header><script src="crash-course-on-gravity-models_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>A crash course on gravity models</h1>
+      <h1 data-toc-skip>A crash course on gravity models</h1>
                         <h4 class="author">Mauricio Vargas</h4>
             
             <h4 class="date">2020-07-26</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/pachamaltese/gravity/blob/master/vignettes/crash-course-on-gravity-models.Rmd"><code>vignettes/crash-course-on-gravity-models.Rmd</code></a></small>
       <div class="hidden name"><code>crash-course-on-gravity-models.Rmd</code></div>
 
     </div>
@@ -161,18 +168,18 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 <p>One subtracts the mean value for the origin country and the mean value for the destination country and adds the overall mean value to the logged trade flows. This procedure is repeated for all dependent and independent variables. The transformed variables are then used for the estimation.</p>
 <p>DDM is easily applied, but, as shown in , its very sensitive to missing data.</p>
 <p>An example of how to apply the function ddm to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(gravity)</span>
-<span id="cb1-2"><a href="#cb1-2"></a></span>
-<span id="cb1-3"><a href="#cb1-3"></a>fit &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ddm.html">ddm</a></span>(</span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5"></a>    <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6"></a>    <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>    <span class="dt">code_origin =</span> <span class="st">"iso_o"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8"></a>    <span class="dt">code_destination =</span> <span class="st">"iso_d"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9"></a>    <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb1-10"><a href="#cb1-10"></a>  )</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">gravity</span>)
+
+<span class="no">fit</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ddm.html">ddm</a></span>(
+    <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+    <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+    <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+    <span class="kw">code_origin</span> <span class="kw">=</span> <span class="st">"iso_o"</span>,
+    <span class="kw">code_destination</span> <span class="kw">=</span> <span class="st">"iso_d"</span>,
+    <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+  )
+
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## 
 ## Call:
 ## y_log_ddm ~ dist_log_ddm + rta_ddm + comcur_ddm + contig_ddm + 
@@ -195,9 +202,9 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 ## Multiple R-squared:  0.2541, Adjusted R-squared:  0.254 
 ## F-statistic:  1455 on 4 and 17084 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The package returns lm or glm objects instead of summaries. Doing that allows to use our functions in conjunction with broom or other packages, for example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(broom)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">tidy</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 4 x 5
 ##   term         estimate std.error statistic  p.value
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -205,13 +212,13 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 ## 2 rta_ddm         0.797    0.0700     11.4  6.54e-30
 ## 3 comcur_ddm      0.174    0.146       1.19 2.34e- 1
 ## 4 contig_ddm      1.00     0.120       8.36 6.62e-17</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">glance</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">glance</a></span>(<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 1 x 11
 ##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC
 ##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
 ## 1     0.254         0.254  2.32     1455.       0     4 -38611. 77232. 77271.
-## # ... with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">augment</span>(fit)</span></code></pre></div>
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">augment</a></span>(<span class="no">fit</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 17,088 x 12
 ##    y_log_ddm dist_log_ddm rta_ddm comcur_ddm contig_ddm  .fitted .se.fit  .resid
 ##        &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
@@ -225,7 +232,7 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 ##  8  -1.43         -0.0245 -0.127     0.0562    -0.0319  -0.0845  0.0135  -1.35  
 ##  9   3.10         -0.0260 -0.0195    0.0562    -0.0426  -0.00683 0.0104   3.11  
 ## 10  -3.88          0.622  -0.0227    0.0562    -0.0486  -1.05    0.0217  -2.82  
-## # ... with 17,078 more rows, and 4 more variables: .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;,
+## # … with 17,078 more rows, and 4 more variables: .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;,
 ## #   .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
 </div>
 <div id="bonus-vetus" class="section level2">
@@ -240,18 +247,18 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 \]</span> with <span class="math inline">\(D_{ij}\)</span> denoting the bilateral distance, <span class="math inline">\(N\)</span> the number of countries and <span class="math inline">\((MWR)_{D_{ij}}\)</span> the transformed variable adjusted for multilateral resistances.</p>
 <p>When using weighted averages (BVW), the simple averages are replaced by GDP weights. The transformed variables are included as independent variables in the estimation. The resulting equation can be estimated by simple OLS.</p>
 <p>An example of how to apply the functions <code>bvu</code> and <code>bvw</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>fit2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bvu.html">bvu</a></span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>    <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>    <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>    <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span>),</span>
-<span id="cb9-5"><a href="#cb9-5"></a>    <span class="dt">income_origin =</span> <span class="st">"gdp_o"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>    <span class="dt">income_destination =</span> <span class="st">"gdp_d"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>    <span class="dt">code_origin =</span> <span class="st">"iso_o"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    <span class="dt">code_destination =</span> <span class="st">"iso_d"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9"></a>    <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb9-10"><a href="#cb9-10"></a>  )</span>
-<span id="cb9-11"><a href="#cb9-11"></a></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="kw">tidy</span>(fit2)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">fit2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span>(
+    <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+    <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+    <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span>),
+    <span class="kw">income_origin</span> <span class="kw">=</span> <span class="st">"gdp_o"</span>,
+    <span class="kw">income_destination</span> <span class="kw">=</span> <span class="st">"gdp_d"</span>,
+    <span class="kw">code_origin</span> <span class="kw">=</span> <span class="st">"iso_o"</span>,
+    <span class="kw">code_destination</span> <span class="kw">=</span> <span class="st">"iso_d"</span>,
+    <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+  )
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit2</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -260,18 +267,18 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 ## 3 rta_mr         0.582    0.0793      7.35 2.12e-13
 ## 4 contig_mr      1.00     0.131       7.62 2.75e-14
 ## 5 comcur_mr      0.191    0.167       1.14 2.53e- 1</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>fit3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/bvw.html">bvw</a></span>(</span>
-<span id="cb11-2"><a href="#cb11-2"></a>    <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="dt">income_origin =</span> <span class="st">"gdp_o"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    <span class="dt">income_destination =</span> <span class="st">"gdp_d"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="dt">code_origin =</span> <span class="st">"iso_o"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="dt">code_destination =</span> <span class="st">"iso_d"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb11-10"><a href="#cb11-10"></a>  )</span>
-<span id="cb11-11"><a href="#cb11-11"></a></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="kw">tidy</span>(fit3)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">fit3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span>(
+    <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+    <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+    <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+    <span class="kw">income_origin</span> <span class="kw">=</span> <span class="st">"gdp_o"</span>,
+    <span class="kw">income_destination</span> <span class="kw">=</span> <span class="st">"gdp_d"</span>,
+    <span class="kw">code_origin</span> <span class="kw">=</span> <span class="st">"iso_o"</span>,
+    <span class="kw">code_destination</span> <span class="kw">=</span> <span class="st">"iso_d"</span>,
+    <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+  )
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit3</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 5
 ##   term        estimate std.error statistic   p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -286,14 +293,14 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <a href="#poisson-pseudo-maximum-likelihood-ppml" class="anchor"></a>Poisson Pseudo Maximum Likelihood (PPML)</h2>
 <p><span class="citation">Silva and Tenreyro (2006)</span> argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form.</p>
 <p>An example of how to apply the function <code>ppml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>fit4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ppml.html">ppml</a></span>(</span>
-<span id="cb13-2"><a href="#cb13-2"></a>    <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb13-5"><a href="#cb13-5"></a>    <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb13-6"><a href="#cb13-6"></a>  )</span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="kw">tidy</span>(fit4)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
+    <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+    <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+    <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+    <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+  )
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit4</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -303,15 +310,15 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 ## 4 comcur        1.11      0.180      6.15  7.89e-10
 ## 5 contig        1.76      0.181      9.69  3.71e-22</code></pre>
 <p>In order to obtain robust standard errors (i.e. in a similar way to <code>vce(robust)</code> in <em>Stata</em>) you can include <code>robust = T</code> to the arguments:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>fit4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ppml.html">ppml</a></span>(</span>
-<span id="cb15-2"><a href="#cb15-2"></a>    <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb15-3"><a href="#cb15-3"></a>    <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb15-5"><a href="#cb15-5"></a>    <span class="dt">robust =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb15-6"><a href="#cb15-6"></a>    <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb15-7"><a href="#cb15-7"></a>  )</span>
-<span id="cb15-8"><a href="#cb15-8"></a></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="kw">tidy</span>(fit4)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
+    <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+    <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+    <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+    <span class="kw">robust</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+    <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+  )
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit4</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 4
 ##   estimate std.error statistic  p.value
 ##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -327,15 +334,15 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <p>The estimation method is similar to PPML, but utilizes the gamma instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
 <p><span class="citation">Silva and Tenreyro (2006)</span> argue in favor of PPML instead of GPML, especially in case of heteroscedasticity, <span class="citation">Head and Mayer (2014)</span> highlight that depending on data structure there exist cases where GPML is preferable to PPML.</p>
 <p>An example of how to apply the function <code>gpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>fit5 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gpml.html">gpml</a></span>(</span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb17-4"><a href="#cb17-4"></a>  <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb17-5"><a href="#cb17-5"></a>  <span class="dt">robust =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb17-7"><a href="#cb17-7"></a>)</span>
-<span id="cb17-8"><a href="#cb17-8"></a></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="kw">tidy</span>(fit5)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">fit5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gpml.html">gpml</a></span>(
+  <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+  <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+  <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+  <span class="kw">robust</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+)
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit5</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -350,15 +357,15 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <a href="#negative-binomial-pseudo-maximum-likelihood-nbpml" class="anchor"></a>Negative Binomial Pseudo Maximum Likelihood (NBPML)</h2>
 <p>The estimation method is similar to PPML, but utilizes the negative binomial instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
 <p>An example of how to apply the function <code>nbpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>fit6 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/nbpml.html">nbpml</a></span>(</span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">additional_regressors =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="dt">robust =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb19-7"><a href="#cb19-7"></a>)</span>
-<span id="cb19-8"><a href="#cb19-8"></a></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="kw">tidy</span>(fit6)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">fit6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/nbpml.html">nbpml</a></span>(
+  <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+  <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+  <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
+  <span class="kw">robust</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+)
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit6</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 5 x 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -374,18 +381,18 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <p>In order to use the fixed effects method with panel data, a huge number of dummy variables has to be included into the estimation. Thus, estimating these models can lead to significant computational difficulties.</p>
 <p><span class="citation">Head, Mayer, and Ries (2010)</span> present Tetrads as an estimation method circumventing this problem. They exploit the multiplicative form of the gravity equation to form the ratio of ratios. In doing so, both MR terms drop out of the equation.</p>
 <p>An example of how to apply the function <code>tetrads</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>fit8 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tetrads.html">tetrads</a></span>(</span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="dt">additional_regressors =</span> <span class="st">"rta"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="dt">code_origin =</span> <span class="st">"iso_o"</span>,</span>
-<span id="cb21-6"><a href="#cb21-6"></a>  <span class="dt">code_destination =</span> <span class="st">"iso_d"</span>,</span>
-<span id="cb21-7"><a href="#cb21-7"></a>  <span class="dt">filter_origin =</span> <span class="st">"CHN"</span>,</span>
-<span id="cb21-8"><a href="#cb21-8"></a>  <span class="dt">filter_destination =</span> <span class="st">"USA"</span>,</span>
-<span id="cb21-9"><a href="#cb21-9"></a>  <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb21-10"><a href="#cb21-10"></a>)</span>
-<span id="cb21-11"><a href="#cb21-11"></a></span>
-<span id="cb21-12"><a href="#cb21-12"></a><span class="kw">tidy</span>(fit8)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
+  <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+  <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+  <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="st">"rta"</span>,
+  <span class="kw">code_origin</span> <span class="kw">=</span> <span class="st">"iso_o"</span>,
+  <span class="kw">code_destination</span> <span class="kw">=</span> <span class="st">"iso_d"</span>,
+  <span class="kw">filter_origin</span> <span class="kw">=</span> <span class="st">"CHN"</span>,
+  <span class="kw">filter_destination</span> <span class="kw">=</span> <span class="st">"USA"</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+)
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 3 x 5
 ##   term         estimate std.error statistic  p.value
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -393,19 +400,19 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 ## 2 dist_log_rat   -1.32     0.0231     -57.4 0.      
 ## 3 rta_rat         0.883    0.0557      15.9 2.80e-56</code></pre>
 <p>In addition to robust standard errors as in the previous examples, in the case of <code>tetrads</code> you can also be interested in computing multiway variance-covariance, an it can be done by adding <code>multiway = T</code> to the arguments:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>fit8 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/tetrads.html">tetrads</a></span>(</span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="dt">dependent_variable =</span> <span class="st">"flow"</span>,</span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="dt">distance =</span> <span class="st">"distw"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="dt">additional_regressors =</span> <span class="st">"rta"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="dt">code_origin =</span> <span class="st">"iso_o"</span>,</span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="dt">code_destination =</span> <span class="st">"iso_d"</span>,</span>
-<span id="cb23-7"><a href="#cb23-7"></a>  <span class="dt">filter_origin =</span> <span class="st">"CHN"</span>,</span>
-<span id="cb23-8"><a href="#cb23-8"></a>  <span class="dt">filter_destination =</span> <span class="st">"USA"</span>,</span>
-<span id="cb23-9"><a href="#cb23-9"></a>  <span class="dt">multiway =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb23-10"><a href="#cb23-10"></a>  <span class="dt">data =</span> gravity_no_zeros</span>
-<span id="cb23-11"><a href="#cb23-11"></a>)</span>
-<span id="cb23-12"><a href="#cb23-12"></a></span>
-<span id="cb23-13"><a href="#cb23-13"></a><span class="kw">tidy</span>(fit8)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
+  <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
+  <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
+  <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="st">"rta"</span>,
+  <span class="kw">code_origin</span> <span class="kw">=</span> <span class="st">"iso_o"</span>,
+  <span class="kw">code_destination</span> <span class="kw">=</span> <span class="st">"iso_d"</span>,
+  <span class="kw">filter_origin</span> <span class="kw">=</span> <span class="st">"CHN"</span>,
+  <span class="kw">filter_destination</span> <span class="kw">=</span> <span class="st">"USA"</span>,
+  <span class="kw">multiway</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+  <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
+)
+
+<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
 <pre><code>## # A tibble: 3 x 5
 ##   term         estimate std.error statistic  p.value
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -441,29 +448,11 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#basic-model">Basic model</a></li>
-      <li><a href="#trade-barriers-model">Trade barriers model</a></li>
-      <li><a href="#model-estimation">Model estimation</a></li>
-      <li>
-<a href="#examples">Examples</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#double-demeaning">Double Demeaning</a></li>
-      <li><a href="#bonus-vetus">Bonus Vetus</a></li>
-      <li><a href="#poisson-pseudo-maximum-likelihood-ppml">Poisson Pseudo Maximum Likelihood (PPML)</a></li>
-      <li><a href="#gamma-pseudo-maximum-likelihood-gpml">Gamma Pseudo Maximum Likelihood (GPML)</a></li>
-      <li><a href="#negative-binomial-pseudo-maximum-likelihood-nbpml">Negative Binomial Pseudo Maximum Likelihood (NBPML)</a></li>
-      <li><a href="#tetrads">Tetrads</a></li>
-      </ul>
-</li>
-      <li><a href="#references">References</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -474,7 +463,7 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

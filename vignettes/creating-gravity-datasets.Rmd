@@ -26,8 +26,7 @@ In order to have a dataset suited for all functions, a cross-sectional dataset i
 
 As some of the functions in the package are capable of handling zero values in trade flows and some are not, two datasets, `gravity_zeros` and `gravity_no_zeros`, are provided. 
 
-The original dataset downloaded from [SciencesPo](http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip)
-was edited in the following way:
+The original dataset was downloaded from SciencesPo but the original link is not available anymore. It was edited in the following way:
 
 ```{r gravity_no_zeros}
 # 1: Import and read the dataset

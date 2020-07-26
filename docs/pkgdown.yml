@@ -1,7 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 1.4.1
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   crash-course-on-gravity-models: crash-course-on-gravity-models.html
   creating-gravity-datasets: creating-gravity-datasets.html
+last_built: 2020-07-26T23:12Z
 

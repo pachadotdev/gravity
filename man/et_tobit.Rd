@@ -4,8 +4,7 @@
 \alias{et_tobit}
 \title{\insertCite{Eaton1995;textual}{gravity} threshold Tobit model (ET Tobit)}
 \usage{
-et_tobit(dependent_variable, distance, additional_regressors = NULL,
-  data, ...)
+et_tobit(dependent_variable, distance, additional_regressors = NULL, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. Following

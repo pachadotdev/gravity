@@ -4,8 +4,7 @@
 \alias{nls}
 \title{Non-linear Least Squares (NLS)}
 \usage{
-nls(dependent_variable, distance, additional_regressors = NULL, data,
-  ...)
+nls(dependent_variable, distance, additional_regressors = NULL, data, ...)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as

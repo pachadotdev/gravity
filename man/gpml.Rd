@@ -4,8 +4,14 @@
 \alias{gpml}
 \title{Gamma Pseudo Maximum Likelihood (GPML)}
 \usage{
-gpml(dependent_variable, distance, additional_regressors, robust = FALSE,
-  data, ...)
+gpml(
+  dependent_variable,
+  distance,
+  additional_regressors,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as

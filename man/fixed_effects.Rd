@@ -4,8 +4,16 @@
 \alias{fixed_effects}
 \title{Fixed Effects}
 \usage{
-fixed_effects(dependent_variable, distance, additional_regressors = NULL,
-  code_origin, code_destination, robust = FALSE, data, ...)
+fixed_effects(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  code_origin,
+  code_destination,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as

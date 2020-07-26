@@ -89,11 +89,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- bvw(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -172,11 +172,11 @@ bvw <- function(dependent_variable,
 
   # Multilateral resistance (MR) for distance ----------------------------------
   d <- d %>%
-    group_by(!!sym(code_origin), add = FALSE) %>%
+    group_by(!!sym(code_origin), .add = FALSE) %>%
     mutate(
       mr_dist_1 = sum(!!sym("theta_j") * !!sym("dist_log"), na.rm = TRUE)
     ) %>%
-    group_by(!!sym(code_destination), add = FALSE) %>%
+    group_by(!!sym(code_destination), .add = FALSE) %>%
     mutate(
       mr_dist_2 = sum(!!sym("theta_i") * !!sym("dist_log"), na.rm = TRUE)
     ) %>%

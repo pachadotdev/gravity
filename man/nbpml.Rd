@@ -4,8 +4,14 @@
 \alias{nbpml}
 \title{Negative Binomial Pseudo Maximum Likelihood (NBPML)}
 \usage{
-nbpml(dependent_variable, distance, additional_regressors,
-  robust = FALSE, data, ...)
+nbpml(
+  dependent_variable,
+  distance,
+  additional_regressors,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as

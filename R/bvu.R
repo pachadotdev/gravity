@@ -87,11 +87,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- bvu(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -159,7 +159,7 @@ bvu <- function(dependent_variable,
   d <- d %>%
     group_by(!!sym(code_origin)) %>%
     mutate(mean_dist_log_1 = mean(!!sym("dist_log"), na.rm = TRUE)) %>%
-    group_by(!!sym(code_destination), add = FALSE) %>%
+    group_by(!!sym(code_destination), .add = FALSE) %>%
     mutate(mean_dist_log_2 = mean(!!sym("dist_log"), na.rm = TRUE)) %>%
     ungroup() %>%
     mutate(

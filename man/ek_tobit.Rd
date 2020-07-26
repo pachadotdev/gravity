@@ -4,8 +4,15 @@
 \alias{ek_tobit}
 \title{\insertCite{Eaton2001;textual}{gravity} Tobit model (EK Tobit)}
 \usage{
-ek_tobit(dependent_variable, distance, additional_regressors = NULL,
-  code_destination, robust = FALSE, data, ...)
+ek_tobit(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  code_destination,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as the

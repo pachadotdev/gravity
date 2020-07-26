@@ -4,9 +4,18 @@
 \alias{tetrads}
 \title{Tetrads}
 \usage{
-tetrads(dependent_variable, distance, additional_regressors, code_origin,
-  code_destination, filter_origin = NULL, filter_destination = NULL,
-  multiway = FALSE, data, ...)
+tetrads(
+  dependent_variable,
+  distance,
+  additional_regressors,
+  code_origin,
+  code_destination,
+  filter_origin = NULL,
+  filter_destination = NULL,
+  multiway = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This variable is logged and then used as

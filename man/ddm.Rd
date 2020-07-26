@@ -4,8 +4,16 @@
 \alias{ddm}
 \title{Double Demeaning (DDM)}
 \usage{
-ddm(dependent_variable, distance, additional_regressors = NULL,
-  code_origin, code_destination, robust = FALSE, data, ...)
+ddm(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  code_origin,
+  code_destination,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This dependent variable is

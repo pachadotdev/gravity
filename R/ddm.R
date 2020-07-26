@@ -83,11 +83,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- ddm(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -143,22 +143,22 @@ ddm <- function(dependent_variable,
       y_log_ddm = !!sym("y_log"),
       dist_log_ddm = !!sym("dist_log")
     ) %>%
-    group_by(!!sym(code_origin), add = FALSE) %>%
+    group_by(!!sym(code_origin), .add = FALSE) %>%
     mutate(
       ym1 = mean(!!sym("y_log_ddm"), na.rm = TRUE),
       dm1 = mean(!!sym("dist_log_ddm"), na.rm = TRUE)
     ) %>%
-    group_by(!!sym(code_destination), add = FALSE) %>%
+    group_by(!!sym(code_destination), .add = FALSE) %>%
     mutate(
       ym2 = mean(!!sym("y_log_ddm"), na.rm = TRUE),
       dm2 = mean(!!sym("dist_log_ddm"), na.rm = TRUE)
     ) %>%
-    group_by(!!sym(code_origin), add = FALSE) %>%
+    group_by(!!sym(code_origin), .add = FALSE) %>%
     mutate(
       y_log_ddm = !!sym("y_log_ddm") - !!sym("ym1"),
       dist_log_ddm = !!sym("dist_log_ddm") - !!sym("dm1")
     ) %>%
-    group_by(!!sym(code_destination), add = FALSE) %>%
+    group_by(!!sym(code_destination), .add = FALSE) %>%
     mutate(
       y_log_ddm = !!sym("y_log_ddm") - !!sym("ym2"),
       dist_log_ddm = !!sym("dist_log_ddm") - !!sym("dm2")
@@ -174,9 +174,9 @@ ddm <- function(dependent_variable,
     select(!!sym(code_origin), !!sym(code_destination), !!!syms(additional_regressors)) %>%
     gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
     mutate(key = paste0(!!sym("key"), "_ddm")) %>%
-    group_by(!!sym(code_origin), !!sym("key"), add = FALSE) %>%
+    group_by(!!sym(code_origin), !!sym("key"), .add = FALSE) %>%
     mutate(ddm = !!sym("value") - mean(!!sym("value"), na.rm = TRUE)) %>%
-    group_by(!!sym(code_destination), !!sym("key"), add = FALSE) %>%
+    group_by(!!sym(code_destination), !!sym("key"), .add = FALSE) %>%
     mutate(ddm = !!sym("ddm") - mean(!!sym("value"), na.rm = TRUE)) %>%
     ungroup() %>%
     mutate(value = !!sym("ddm") + mean(!!sym("value"), na.rm = TRUE)) %>%

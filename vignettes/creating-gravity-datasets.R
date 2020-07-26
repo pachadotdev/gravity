@@ -1,7 +1,7 @@
 ## ----setup, cache = FALSE, echo = FALSE, message = FALSE, warning = FALSE, tidy = FALSE----
 knitr::opts_chunk$set(eval = FALSE)
 
-## ----gravity_no_zeros----------------------------------------------------
+## ----gravity_no_zeros---------------------------------------------------------
 #  # 1: Import and read the dataset
 #  
 #  url <- "http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"

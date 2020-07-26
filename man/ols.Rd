@@ -4,9 +4,19 @@
 \alias{ols}
 \title{Ordinary Least Squares (OLS)}
 \usage{
-ols(dependent_variable, distance, additional_regressors = NULL,
-  income_origin, income_destination, code_origin, code_destination,
-  uie = FALSE, robust = FALSE, data, ...)
+ols(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  income_origin,
+  income_destination,
+  code_origin,
+  code_destination,
+  uie = FALSE,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable.

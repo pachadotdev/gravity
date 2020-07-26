@@ -4,8 +4,14 @@
 \alias{tobit}
 \title{Left-censored Tobit model with known threshold}
 \usage{
-tobit(dependent_variable, distance, additional_regressors = NULL,
-  added_constant = 1, data, ...)
+tobit(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  added_constant = 1,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. The number \code{1} is added and the

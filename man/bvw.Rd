@@ -4,9 +4,18 @@
 \alias{bvw}
 \title{Bonus vetus OLS (BVW)}
 \usage{
-bvw(dependent_variable, distance, additional_regressors = NULL,
-  income_origin, income_destination, code_origin, code_destination,
-  robust = FALSE, data, ...)
+bvw(
+  dependent_variable,
+  distance,
+  additional_regressors = NULL,
+  income_origin,
+  income_destination,
+  code_origin,
+  code_destination,
+  robust = FALSE,
+  data,
+  ...
+)
 }
 \arguments{
 \item{dependent_variable}{(Type: character) name of the dependent variable. This dependent variable is

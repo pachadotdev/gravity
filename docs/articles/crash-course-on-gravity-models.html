@@ -291,8 +291,7 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <div id="poisson-pseudo-maximum-likelihood-ppml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#poisson-pseudo-maximum-likelihood-ppml" class="anchor"></a>Poisson Pseudo Maximum Likelihood (PPML)</h2>
-<p><span class="citation">Silva and Tenreyro (2006)</span> argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form.</p>
-<p>An example of how to apply the function <code>ppml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
+<p><span class="citation">Silva and Tenreyro (2006)</span> argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form. An example of how to apply the function <code>ppml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
     <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
     <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,

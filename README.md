@@ -6,8 +6,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![Travis-CI Build
-Status](https://travis-ci.org/pachamaltese/gravity.svg?branch=master)](https://travis-ci.org/pachamaltese/gravity)
+[![GH-actions
+Windows](https://github.com/pachamaltese/gravity/workflows/check-windows/badge.svg)](https://github.com/pachamaltese/gravity/actions)
+[![GH-actions
+Linux](https://github.com/pachamaltese/gravity/workflows/check-linux/badge.svg)](https://github.com/pachamaltese/gravity/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/gravity)](https://cran.r-project.org/package=gravity)
 [![Coverage

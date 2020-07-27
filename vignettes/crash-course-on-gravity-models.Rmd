@@ -192,7 +192,6 @@ tidy(fit3)
 ## Poisson Pseudo Maximum Likelihood (PPML)
 
 @Santos2006 argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form. 
-
 An example of how to apply the function `ppml` to an example dataset in gravity and the resulting output is shown in the following:
 
 ```{r ppml}

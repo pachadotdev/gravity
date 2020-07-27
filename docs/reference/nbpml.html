@@ -290,8 +290,8 @@ ISSN 1435-8921, doi: <a href='https://doi.org/10.1007/s00181-012-0576-2'>10.1007
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"gravity_no_zeros"</span>)
 
-<span class='co'># Choose 5 countries for testing</span>
-<span class='no'>countries_chosen</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AUS"</span>, <span class='st'>"CHN"</span>, <span class='st'>"GBR"</span>, <span class='st'>"BRA"</span>, <span class='st'>"CAN"</span>)
+<span class='co'># Choose 3 countries for testing</span>
+<span class='no'>countries_chosen</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AUS"</span>, <span class='st'>"GBR"</span>, <span class='st'>"CAN"</span>)
 <span class='no'>grav_small</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>gravity_no_zeros</span>, <span class='no'>iso_o</span> <span class='kw'>%in%</span> <span class='no'>countries_chosen</span>)
 
 <span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>nbpml</span>(

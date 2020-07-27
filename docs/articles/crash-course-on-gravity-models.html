@@ -201,39 +201,7 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 ## Residual standard error: 2.318 on 17084 degrees of freedom
 ## Multiple R-squared:  0.2541, Adjusted R-squared:  0.254 
 ## F-statistic:  1455 on 4 and 17084 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The package returns lm or glm objects instead of summaries. Doing that allows to use our functions in conjunction with broom or other packages, for example:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
-
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 4 x 5
-##   term         estimate std.error statistic  p.value
-##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 dist_log_ddm   -1.60     0.0331    -48.4  0.      
-## 2 rta_ddm         0.797    0.0700     11.4  6.54e-30
-## 3 comcur_ddm      0.174    0.146       1.19 2.34e- 1
-## 4 contig_ddm      1.00     0.120       8.36 6.62e-17</code></pre>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">glance</a></span>(<span class="no">fit</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 1 x 11
-##   r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1     0.254         0.254  2.32     1455.       0     4 -38611. 77232. 77271.
-## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">augment</a></span>(<span class="no">fit</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 17,088 x 12
-##    y_log_ddm dist_log_ddm rta_ddm comcur_ddm contig_ddm  .fitted .se.fit  .resid
-##        &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1  -0.710         0.540   0.0175    0.0562    -0.0435  -0.885   0.0205   0.174 
-##  2   0.00279      -0.0201  0.0318    0.0501    -0.00474  0.0616  0.00754 -0.0588
-##  3  -0.373         0.154  -0.197    -0.00870   -0.0502  -0.456   0.0126   0.0828
-##  4  -3.85         -0.758  -0.0408    0.0562    -0.0533   1.14    0.0298  -4.99  
-##  5   0.301         0.223  -0.191    -0.00705   -0.0237  -0.534   0.0111   0.835 
-##  6  -3.45          0.599  -0.0747   -0.0747    -0.0762  -1.11    0.0176  -2.34  
-##  7   1.80         -0.861   0.0562    0.0562    -0.0152   1.42    0.0276   0.375 
-##  8  -1.43         -0.0245 -0.127     0.0562    -0.0319  -0.0845  0.0135  -1.35  
-##  9   3.10         -0.0260 -0.0195    0.0562    -0.0426  -0.00683 0.0104   3.11  
-## 10  -3.88          0.622  -0.0227    0.0562    -0.0486  -1.05    0.0217  -2.82  
-## # … with 17,078 more rows, and 4 more variables: .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;,
-## #   .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
+<p>The package returns lm or glm objects instead of summaries. Doing that allows to use our functions in conjunction with broom or other packages.</p>
 </div>
 <div id="bonus-vetus" class="section level2">
 <h2 class="hasAnchor">
@@ -247,7 +215,7 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 \]</span> with <span class="math inline">\(D_{ij}\)</span> denoting the bilateral distance, <span class="math inline">\(N\)</span> the number of countries and <span class="math inline">\((MWR)_{D_{ij}}\)</span> the transformed variable adjusted for multilateral resistances.</p>
 <p>When using weighted averages (BVW), the simple averages are replaced by GDP weights. The transformed variables are included as independent variables in the estimation. The resulting equation can be estimated by simple OLS.</p>
 <p>An example of how to apply the functions <code>bvu</code> and <code>bvw</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">fit2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span>(
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">fit2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span>(
     <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
     <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
     <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span>),
@@ -258,16 +226,29 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
     <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
   )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit2</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)  -20.2      0.0192  -1051.   0.      
-## 2 dist_log_mr   -1.69     0.0359    -47.0  0.      
-## 3 rta_mr         0.582    0.0793      7.35 2.12e-13
-## 4 contig_mr      1.00     0.131       7.62 2.75e-14
-## 5 comcur_mr      0.191    0.167       1.14 2.53e- 1</code></pre>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">fit3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span>(
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit2</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## y_log_bvu ~ dist_log_mr + rta_mr + contig_mr + comcur_mr
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -20.0642  -1.2305   0.2932   1.5810   9.6659 
+## 
+## Coefficients:
+##              Estimate Std. Error   t value Pr(&gt;|t|)    
+## (Intercept) -20.15771    0.01919 -1050.573  &lt; 2e-16 ***
+## dist_log_mr  -1.68697    0.03586   -47.048  &lt; 2e-16 ***
+## rta_mr        0.58230    0.07926     7.347 2.12e-13 ***
+## contig_mr     1.00135    0.13148     7.616 2.75e-14 ***
+## comcur_mr     0.19102    0.16727     1.142    0.253    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.508 on 17083 degrees of freedom
+## Multiple R-squared:  0.2294, Adjusted R-squared:  0.2292 
+## F-statistic:  1271 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">fit3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span>(
     <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
     <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
     <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
@@ -278,38 +259,68 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
     <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
   )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit3</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic   p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-## 1 (Intercept)  -20.4      0.0546   -373.   0.       
-## 2 dist_log_mr   -0.634    0.0257    -24.7  1.09e-132
-## 3 rta_mr         1.31     0.0670     19.5  4.07e- 84
-## 4 comcur_mr     -0.896    0.142      -6.31 2.86e- 10
-## 5 contig_mr      1.38     0.126      10.9  1.11e- 27</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit3</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## y_log_bvw ~ dist_log_mr + rta_mr + comcur_mr + contig_mr
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -19.1204  -1.3366   0.4068   1.7068  10.6927 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -20.37260    0.05458 -373.27  &lt; 2e-16 ***
+## dist_log_mr  -0.63445    0.02566  -24.73  &lt; 2e-16 ***
+## rta_mr        1.30989    0.06703   19.54  &lt; 2e-16 ***
+## comcur_mr    -0.89609    0.14201   -6.31 2.86e-10 ***
+## contig_mr     1.37696    0.12606   10.92  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.683 on 17083 degrees of freedom
+## Multiple R-squared:  0.1185, Adjusted R-squared:  0.1183 
+## F-statistic:   574 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div id="poisson-pseudo-maximum-likelihood-ppml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#poisson-pseudo-maximum-likelihood-ppml" class="anchor"></a>Poisson Pseudo Maximum Likelihood (PPML)</h2>
 <p><span class="citation">Silva and Tenreyro (2006)</span> argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form. An example of how to apply the function <code>ppml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
     <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
     <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
     <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
     <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
   )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit4</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   5.76      0.772      7.47  8.54e-14
-## 2 dist_log      0.0243    0.0873     0.278 7.81e- 1
-## 3 rta           1.27      0.170      7.46  9.20e-14
-## 4 comcur        1.11      0.180      6.15  7.89e-10
-## 5 contig        1.76      0.181      9.69  3.71e-22</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit4</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## y_ppml ~ dist_log + rta + comcur + contig
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -217.03   -28.10   -27.59   -23.42  1857.77  
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  5.76232    0.77160   7.468 8.54e-14 ***
+## dist_log     0.02428    0.08728   0.278    0.781    
+## rta          1.26582    0.16972   7.458 9.20e-14 ***
+## comcur       1.10604    0.17982   6.151 7.89e-10 ***
+## contig       1.75821    0.18141   9.692  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for quasipoisson family taken to be 42366.31)
+## 
+##     Null deviance: 78081855  on 17087  degrees of freedom
+## Residual deviance: 61989121  on 17083  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
 <p>In order to obtain robust standard errors (i.e. in a similar way to <code>vce(robust)</code> in <em>Stata</em>) you can include <code>robust = T</code> to the arguments:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">fit4</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">fit4r</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span>(
     <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
     <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
     <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
@@ -317,15 +328,32 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
     <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
   )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit4</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 4
-##   estimate std.error statistic  p.value
-##      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1   5.76      0.772      7.47  8.54e-14
-## 2   0.0243    0.0873     0.278 7.81e- 1
-## 3   1.27      0.170      7.46  9.20e-14
-## 4   1.11      0.180      6.15  7.89e-10
-## 5   1.76      0.181      9.69  3.71e-22</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit4r</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## y_ppml ~ dist_log + rta + comcur + contig
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -217.03   -28.10   -27.59   -23.42  1857.77  
+## 
+## Coefficients:
+##      Estimate Std. Error t value Pr(&gt;|t|)    
+## [1,]  5.76232    0.77160   7.468 8.54e-14 ***
+## [2,]  0.02428    0.08728   0.278    0.781    
+## [3,]  1.26582    0.16972   7.458 9.20e-14 ***
+## [4,]  1.10604    0.17982   6.151 7.89e-10 ***
+## [5,]  1.75821    0.18141   9.692  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for quasipoisson family taken to be 42366.31)
+## 
+##     Null deviance: 78081855  on 17087  degrees of freedom
+## Residual deviance: 61989121  on 17083  degrees of freedom
+## AIC: NA
+## 
+## Number of Fisher Scoring iterations: 8</code></pre>
 </div>
 <div id="gamma-pseudo-maximum-likelihood-gpml" class="section level2">
 <h2 class="hasAnchor">
@@ -333,7 +361,7 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <p>The estimation method is similar to PPML, but utilizes the gamma instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
 <p><span class="citation">Silva and Tenreyro (2006)</span> argue in favor of PPML instead of GPML, especially in case of heteroscedasticity, <span class="citation">Head and Mayer (2014)</span> highlight that depending on data structure there exist cases where GPML is preferable to PPML.</p>
 <p>An example of how to apply the function <code>gpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">fit5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gpml.html">gpml</a></span>(
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">fit5</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gpml.html">gpml</a></span>(
   <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
   <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
   <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
@@ -341,22 +369,21 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
 )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit5</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    7.40      1.03       7.20 5.81e-13
-## 2 dist_log      -0.161     0.118     -1.36 1.73e- 1
-## 3 rta            1.03      0.160      6.42 1.32e-10
-## 4 comcur         0.783     0.183      4.28 1.88e- 5
-## 5 contig         1.71      0.297      5.74 9.49e- 9</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit5</span>)</pre></body></html></div>
+<pre><code>##     Estimate         Std. Error        z value          Pr(&gt;|z|)        
+##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  
+##  1st Qu.: 0.7833   1st Qu.:0.1603   1st Qu.: 4.279   1st Qu.:0.000e+00  
+##  Median : 1.0295   Median :0.1831   Median : 5.740   Median :1.000e-08  
+##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.453e-02  
+##  3rd Qu.: 1.7065   3rd Qu.:0.2973   3rd Qu.: 6.424   3rd Qu.:1.879e-05  
+##  Max.   : 7.3963   Max.   :1.0266   Max.   : 7.205   Max.   :1.726e-01</code></pre>
 </div>
 <div id="negative-binomial-pseudo-maximum-likelihood-nbpml" class="section level2">
 <h2 class="hasAnchor">
 <a href="#negative-binomial-pseudo-maximum-likelihood-nbpml" class="anchor"></a>Negative Binomial Pseudo Maximum Likelihood (NBPML)</h2>
 <p>The estimation method is similar to PPML, but utilizes the negative binomial instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
 <p>An example of how to apply the function <code>nbpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">fit6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/nbpml.html">nbpml</a></span>(
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">fit6</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/nbpml.html">nbpml</a></span>(
   <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
   <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
   <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span>),
@@ -364,15 +391,14 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
 )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit6</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    7.40      1.03       7.20 5.81e-13
-## 2 dist_log      -0.161     0.118     -1.36 1.73e- 1
-## 3 rta            1.03      0.160      6.43 1.32e-10
-## 4 comcur         0.783     0.183      4.28 1.89e- 5
-## 5 contig         1.71      0.297      5.74 9.51e- 9</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit6</span>)</pre></body></html></div>
+<pre><code>##     Estimate         Std. Error        z value          Pr(&gt;|z|)        
+##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  
+##  1st Qu.: 0.7831   1st Qu.:0.1603   1st Qu.: 4.277   1st Qu.:0.000e+00  
+##  Median : 1.0297   Median :0.1831   Median : 5.739   Median :1.000e-08  
+##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.454e-02  
+##  3rd Qu.: 1.7064   3rd Qu.:0.2973   3rd Qu.: 6.425   3rd Qu.:1.893e-05  
+##  Max.   : 7.3961   Max.   :1.0266   Max.   : 7.205   Max.   :1.727e-01</code></pre>
 </div>
 <div id="tetrads" class="section level2">
 <h2 class="hasAnchor">
@@ -380,7 +406,7 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
 <p>In order to use the fixed effects method with panel data, a huge number of dummy variables has to be included into the estimation. Thus, estimating these models can lead to significant computational difficulties.</p>
 <p><span class="citation">Head, Mayer, and Ries (2010)</span> present Tetrads as an estimation method circumventing this problem. They exploit the multiplicative form of the gravity equation to form the ratio of ratios. In doing so, both MR terms drop out of the equation.</p>
 <p>An example of how to apply the function <code>tetrads</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
   <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
   <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
   <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="st">"rta"</span>,
@@ -391,15 +417,28 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
 )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    -0.400    0.0216     -18.5 1.47e-75
-## 2 dist_log_rat   -1.32     0.0231     -57.4 0.      
-## 3 rta_rat         0.883    0.0557      15.9 2.80e-56</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
+<pre><code>## 
+## Call:
+## y_log_rat ~ dist_log_rat + rta_rat
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -21.3989  -1.2542   0.3247   1.5871  10.3864 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.39969    0.02162  -18.49   &lt;2e-16 ***
+## dist_log_rat -1.32417    0.02307  -57.40   &lt;2e-16 ***
+## rta_rat       0.88305    0.05566   15.87   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.77 on 16710 degrees of freedom
+## Multiple R-squared:  0.2537, Adjusted R-squared:  0.2536 
+## F-statistic:  2840 on 2 and 16710 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>In addition to robust standard errors as in the previous examples, in the case of <code>tetrads</code> you can also be interested in computing multiway variance-covariance, an it can be done by adding <code>multiway = T</code> to the arguments:</p>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
+<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">fit8</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span>(
   <span class="kw">dependent_variable</span> <span class="kw">=</span> <span class="st">"flow"</span>,
   <span class="kw">distance</span> <span class="kw">=</span> <span class="st">"distw"</span>,
   <span class="kw">additional_regressors</span> <span class="kw">=</span> <span class="st">"rta"</span>,
@@ -411,13 +450,14 @@ MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\
   <span class="kw">data</span> <span class="kw">=</span> <span class="no">gravity_no_zeros</span>
 )
 
-<span class="fu"><a href="https://rdrr.io/pkg/broom/man/reexports.html">tidy</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
-<pre><code>## # A tibble: 3 x 5
-##   term         estimate std.error statistic  p.value
-##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    -0.400    0.0215     -18.6 3.05e-76
-## 2 dist_log_rat   -1.32     0.0247     -53.7 0.      
-## 3 rta_rat         0.883    0.0487      18.1 1.11e-72</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">fit8</span>)</pre></body></html></div>
+<pre><code>##     Estimate         Std. Error         t value            Pr(&gt;|t|)        
+##  Min.   :-1.3242   Min.   :0.02152   Min.   :-53.6833   Min.   :0.000e+00  
+##  1st Qu.:-0.8619   1st Qu.:0.02309   1st Qu.:-36.1287   1st Qu.:1.525e-76  
+##  Median :-0.3997   Median :0.02467   Median :-18.5741   Median :3.049e-76  
+##  Mean   :-0.2803   Mean   :0.03164   Mean   :-18.0460   Mean   :3.701e-73  
+##  3rd Qu.: 0.2417   3rd Qu.:0.03670   3rd Qu.: -0.2273   3rd Qu.:5.552e-73  
+##  Max.   : 0.8830   Max.   :0.04873   Max.   : 18.1195   Max.   :1.110e-72</code></pre>
 </div>
 </div>
 <div id="references" class="section level1">

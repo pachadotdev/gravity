@@ -170,18 +170,20 @@ ddm <- function(dependent_variable,
     )
 
   # Substracting the means for the other independent variables -----------------
-  d2 <- d %>%
-    select(!!sym(code_origin), !!sym(code_destination), !!!syms(additional_regressors)) %>%
-    gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
-    mutate(key = paste0(!!sym("key"), "_ddm")) %>%
-    group_by(!!sym(code_origin), !!sym("key"), .add = FALSE) %>%
-    mutate(ddm = !!sym("value") - mean(!!sym("value"), na.rm = TRUE)) %>%
-    group_by(!!sym(code_destination), !!sym("key"), .add = FALSE) %>%
-    mutate(ddm = !!sym("ddm") - mean(!!sym("value"), na.rm = TRUE)) %>%
-    ungroup() %>%
-    mutate(value = !!sym("ddm") + mean(!!sym("value"), na.rm = TRUE)) %>%
-    select(!!!syms(c(code_origin, code_destination, "key", "value"))) %>%
-    spread(!!sym("key"), !!sym("value"))
+  if (!is.null(additional_regressors)) {
+    d2 <- d %>%
+      select(!!sym(code_origin), !!sym(code_destination), !!!syms(additional_regressors)) %>%
+      gather(!!sym("key"), !!sym("value"), -!!sym(code_origin), -!!sym(code_destination)) %>%
+      mutate(key = paste0(!!sym("key"), "_ddm")) %>%
+      group_by(!!sym(code_origin), !!sym("key"), .add = FALSE) %>%
+      mutate(ddm = !!sym("value") - mean(!!sym("value"), na.rm = TRUE)) %>%
+      group_by(!!sym(code_destination), !!sym("key"), .add = FALSE) %>%
+      mutate(ddm = !!sym("ddm") - mean(!!sym("value"), na.rm = TRUE)) %>%
+      ungroup() %>%
+      mutate(value = !!sym("ddm") + mean(!!sym("value"), na.rm = TRUE)) %>%
+      select(!!!syms(c(code_origin, code_destination, "key", "value"))) %>%
+      spread(!!sym("key"), !!sym("value"))
+  }
 
   # Model ----------------------------------------------------------------------
   if (!is.null(additional_regressors)) {

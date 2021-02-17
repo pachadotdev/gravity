@@ -192,7 +192,7 @@ ddm <- function(dependent_variable,
 
     vars <- paste(c("dist_log_ddm", paste0(additional_regressors, "_ddm"), 0), collapse = " + ")
   } else {
-    d <- select(d, !!sym("y_log_ddm,"), ends_with("_ddm"))
+    d <- select(d, !!sym("y_log_ddm"), ends_with("_ddm"))
 
     vars <- paste(c("dist_log_ddm", 0), collapse = " + ")
   }

@@ -21,4 +21,15 @@ test_that("DDM returns a valid output", {
   )
 
   expect_is(fit, "lm")
+
+  fit2 <- ddm(
+    dependent_variable = "flow",
+    distance = "distw",
+    code_origin = "iso_o",
+    code_destination = "iso_d",
+    robust = FALSE,
+    data = grav_small
+  )
+
+  expect_is(fit2, "lm")
 })

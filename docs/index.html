@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -68,8 +64,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/pachamaltese/gravity/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/pachadotdev/gravity/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -85,14 +81,13 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="gravity-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#gravity-" class="anchor"></a>gravity <img src="https://pachamaltese.github.io/gravity/hexicon.svg" width="150" align="right" alt="sticker">
+<div class="section level1">
+<div class="page-header"><h1 id="gravity">gravity<a class="anchor" aria-label="anchor" href="#gravity"></a>
 </h1></div>
 
-<div id="about" class="section level2">
-<h2 class="hasAnchor">
-<a href="#about" class="anchor"></a>About</h2>
+<div class="section level2">
+<h2 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
+</h2>
 <p>Gravity models are used to explain bilateral flows related to the sizes of bilateral partners, a measure of distance between them and other influences on interaction costs.</p>
 <p>The underlying idea is rather simple. The greater the masses of two bodies and the smaller the distance between them, the stronger their attraction. This concept is applied to several research topics such as trade, migration or foreign direct investment. Even though their basic idea is rather simple, gravity models can become complex regarding the choice of models or estimation methods.</p>
 <p>As especially for gravity beginners it is difficult to get an overview of the different methods and implement them in R, the package provides a wrapper of different standard estimation methods for gravity models. By considering the descriptions and codes of the estimation methods, users get a comprehensive and application-oriented overview of the different methods, see which method may be suitable for a certain research question or type of data and extend the code available to their research projects.</p>
@@ -116,10 +111,10 @@
 <li>Nonlinear Least Squares (NLS)</li>
 </ul>
 <p>Multiplicative models are covered with a log-link and different families of distributions. These models are relatively easy to compute.</p>
-<p>All functions named estimate gravity models, but they differ in whether they estimate them in their additive or multiplicative form, their requirements and assumptions with respect to data, their handling of Multilateral Resistance terms as well as their possibilities concerning the inclusion of unilateral independent variables. Therefore, they normally lead to different estimation results. We refer the user to the <a href="https://sites.google.com/site/hiegravity/">Gravity Cookbook website</a> for more information on gravity models in general.</p>
+<p>All functions named estimate gravity models, but they differ in whether they estimate them in their additive or multiplicative form, their requirements and assumptions with respect to data, their handling of Multilateral Resistance terms as well as their possibilities concerning the inclusion of unilateral independent variables. Therefore, they normally lead to different estimation results. We refer the user to the <a href="https://sites.google.com/site/hiegravity/" class="external-link">Gravity Cookbook website</a> for more information on gravity models in general.</p>
 <p>Head and Mayer (2014) provide a comprehensive and accessible overview of the theoretical and empirical development of the gravity literature as well as the use of gravity models and the various estimation methods, especially their merits and potential problems regarding applicability as well as different datasets. In order to have a straightforward application of all methods, the package comes with two example datasets, one including and the other one excluding zero trade flows.</p>
 <p>Examples utilizing these dataset are included in the description of the methods. As the range of gravity models and their suitable estimation methods is huge and specific to data and research question at hand, the functions are kept simple such that researchers can utilize them as a starting point of their research and get familiar with them.</p>
-<p>On the <a href="https://sites.google.com/site/hiegravity/">Gravity Cookbook website</a>, Keith Head and Thierry Mayer provide Stata code for most methods. Where possible, the functions are tested to lead the same results as the Stata code when choosing the option of robust variance estimation. However, compared to the Stata code available, the functions presented in this package provide users with more flexibility regarding the type of estimation, the number and type of independent variables as well as the possible data.</p>
+<p>On the <a href="https://sites.google.com/site/hiegravity/" class="external-link">Gravity Cookbook website</a>, Keith Head and Thierry Mayer provide Stata code for most methods. Where possible, the functions are tested to lead the same results as the Stata code when choosing the option of robust variance estimation. However, compared to the Stata code available, the functions presented in this package provide users with more flexibility regarding the type of estimation, the number and type of independent variables as well as the possible data.</p>
 <p>Furthermore, additional functions are added. The functions of the package include distance as an independent variable. If a panel model is used time-invariant effects, such as geographical distance, may have to be excluded; see the respective descriptions. Therefore, it is up to the user to ensure that the functions can be applied to panel data.</p>
 <p>Depending on the panel dataset and the variables - specifically the type of fixed effects - included in the model, it may easily occur that the model is not computable.</p>
 <p>Depending on the specific model, the code of the respective function may has to be changed in order to exclude the distance variable from the estimation.</p>
@@ -127,40 +122,41 @@
 <p>At the very least, the user should take special care with respect to the meaning of the estimated coefficients and variances as well as the decision about which effects to include in the estimation. As, to our knowledge at the moment, there is no explicit literature covering the estimation of a gravity equation by Double Demeaning, Structural Iterated Least Squares or Bonus vetus OLS using panel data, we do not recommend to apply these methods in this case.</p>
 <p>Contributions, extensions and error corrections are very welcome. Please do not hesitate to contact us. We thank Martin Bresslein for valuable comments and advice on early versions of the package.</p>
 </div>
-<div id="how-to-install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-install" class="anchor"></a>How to install</h2>
+<div class="section level2">
+<h2 id="how-to-install">How to install<a class="anchor" aria-label="anchor" href="#how-to-install"></a>
+</h2>
 <p>From R console:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># Install from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"gravity"</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Install from CRAN</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gravity"</span><span class="op">)</span>
 
 <span class="co"># Install from GitHub</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"pachamaltese/gravity"</span>)</pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"pachadotdev/gravity"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="community-guidelines" class="section level2">
-<h2 class="hasAnchor">
-<a href="#community-guidelines" class="anchor"></a>Community guidelines</h2>
+<div class="section level2">
+<h2 id="community-guidelines">Community guidelines<a class="anchor" aria-label="anchor" href="#community-guidelines"></a>
+</h2>
 <p>If you want to contribute to the software, report issues or problems with the software, please fork the repo and send us a Pull Request or open an issue. We are happy to receive ideas and we would do our best to coordinate efforts and improve this package without reinventing the wheel.</p>
 <p>If you seek support or have questions you can start a thread on the issues section, or you can email us but we prefer open issues as probably more users have the same questions as you.</p>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Egger2003">
-<p>Egger, Peter, and Michael Pfaffermayr. 2003. “The Proper Panel Econometric Specification of the Gravity Equation: A Three-Way Model with Bilateral Interaction Effects.” <em>Empirical Economics</em> 28 (3): 571–80. <a href="https://doi.org/10.1007/s001810200146" class="uri">https://doi.org/10.1007/s001810200146</a>.</p>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Egger2003" class="csl-entry">
+Egger, Peter, and Michael Pfaffermayr. 2003. “The Proper Panel Econometric Specification of the Gravity Equation: A Three-Way Model with Bilateral Interaction Effects.” <em>Empirical Economics</em> 28 (3): 571–80. <a href="https://doi.org/10.1007/s001810200146" class="external-link uri">https://doi.org/10.1007/s001810200146</a>.
 </div>
-<div id="ref-Gomez-Herrera2013">
-<p>Gómez-Herrera, Estrella. 2013. “Comparing Alternative Methods to Estimate Gravity Models of Bilateral Trade.” <em>Empirical Economics</em> 44 (3): 1087–1111. <a href="https://doi.org/10.1007/s00181-012-0576-2" class="uri">https://doi.org/10.1007/s00181-012-0576-2</a>.</p>
+<div id="ref-Gomez-Herrera2013" class="csl-entry">
+Gómez-Herrera, Estrella. 2013. “Comparing Alternative Methods to Estimate Gravity Models of Bilateral Trade.” <em>Empirical Economics</em> 44 (3): 1087–1111. <a href="https://doi.org/10.1007/s00181-012-0576-2" class="external-link uri">https://doi.org/10.1007/s00181-012-0576-2</a>.
 </div>
-<div id="ref-Head2014">
-<p>Head, Keith, and Thierry Mayer. 2014. “Chapter 3 - Gravity Equations: Workhorse,Toolkit, and Cookbook.” In <em>Handbook of International Economics</em>, edited by Gita Gopinath, Elhanan Helpman, and Kenneth Rogoff, 4:131–95. Handbook of International Economics. Elsevier. <a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="uri">https://doi.org/10.1016/B978-0-444-54314-1.00003-3</a>.</p>
+<div id="ref-Head2014" class="csl-entry">
+Head, Keith, and Thierry Mayer. 2014. “Chapter 3 - Gravity Equations: Workhorse,toolkit, and Cookbook.” In <em>Handbook of International Economics</em>, edited by Gita Gopinath, Elhanan Helpman, and Kenneth Rogoff, 4:131–95. Handbook of International Economics. Elsevier. <a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="external-link uri">https://doi.org/10.1016/B978-0-444-54314-1.00003-3</a>.
 </div>
-<div id="ref-Head2010">
-<p>Head, Keith, Thierry Mayer, and John Ries. 2010. “The Erosion of Colonial Trade Linkages After Independence.” <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="uri">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.</p>
+<div id="ref-Head2010" class="csl-entry">
+Head, Keith, Thierry Mayer, and John Ries. 2010. “The Erosion of Colonial Trade Linkages After Independence.” <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link uri">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
 </div>
-<div id="ref-WoelwerBressleinBurgard2018">
-<p>Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018. “Gravity Models in R.” <em>Austrian Journal of Statistics</em> 47 (4): 16–35. <a href="https://doi.org/10.17713/ajs.v47i4.688" class="uri">https://doi.org/10.17713/ajs.v47i4.688</a>.</p>
+<div id="ref-WoelwerBressleinBurgard2018" class="csl-entry">
+Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018. “Gravity Models in r.” <em>Austrian Journal of Statistics</em> 47 (4): 16–35. <a href="https://doi.org/10.17713/ajs.v47i4.688" class="external-link uri">https://doi.org/10.17713/ajs.v47i4.688</a>.
 </div>
 </div>
 </div>
@@ -169,56 +165,67 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=gravity">https://​cloud.r-project.org/​package=gravity</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/pachamaltese/gravity/">https://​github.com/​pachamaltese/​gravity/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/pachamaltese/gravity/issues">https://​github.com/​pachamaltese/​gravity/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=gravity" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/pachadotdev/gravity/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/pachadotdev/gravity/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small>Apache License (&gt;= 2)</small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing gravity</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Anna-Lena Woelwer <br><small class="roles"> Author, copyright holder </small>  </li>
 <li>Jan Pablo Burgard <br><small class="roles"> Author, copyright holder </small>  </li>
 <li>Joshua Kunst <br><small class="roles"> Author, copyright holder </small>  </li>
-<li>Mauricio Vargas <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-1017-7574" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li>Mauricio Vargas <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-1017-7574" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://github.com/pachamaltese/gravity/actions"><img src="https://github.com/pachamaltese/gravity/workflows/check-windows/badge.svg" alt="GH-actions Windows"></a></li>
-<li><a href="https://github.com/pachamaltese/gravity/actions"><img src="https://github.com/pachamaltese/gravity/workflows/check-linux/badge.svg" alt="GH-actions Linux"></a></li>
-<li><a href="https://cran.r-project.org/package=gravity"><img src="https://www.r-pkg.org/badges/version/gravity" alt="CRAN status"></a></li>
-<li><a href="https://codecov.io/github/pachamaltese/gravity?branch=master"><img src="https://codecov.io/gh/pachamaltese/gravity/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://doi.org/10.21105/joss.01038"><img src="http://joss.theoj.org/papers/10.21105/joss.01038/status.svg" alt="JOSS"></a></li>
-<li><a href="https://doi.org/10.17713/ajs.v47i4.688"><img src="https://zenodo.org/badge/doi/10.17713/ajs.v47i4.688.svg" alt="Austrian Journal of Statistics"></a></li>
+<li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://github.com/pachadotdev/gravity/actions" class="external-link"><img src="https://github.com/pachadotdev/gravity/workflows/check-windows/badge.svg" alt="GH-actions Windows"></a></li>
+<li><a href="https://github.com/pachadotdev/gravity/actions" class="external-link"><img src="https://github.com/pachadotdev/gravity/workflows/check-linux/badge.svg" alt="GH-actions Linux"></a></li>
+<li><a href="https://cran.r-project.org/package=gravity" class="external-link"><img src="https://www.r-pkg.org/badges/version/gravity" alt="CRAN status"></a></li>
+<li><a href="https://codecov.io/github/pachadotdev/gravity?branch=master" class="external-link"><img src="https://codecov.io/gh/pachadotdev/gravity/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://doi.org/10.21105/joss.01038" class="external-link"><img src="http://joss.theoj.org/papers/10.21105/joss.01038/status.svg" alt="JOSS"></a></li>
+<li><a href="https://doi.org/10.17713/ajs.v47i4.688" class="external-link"><img src="https://zenodo.org/badge/doi/10.17713/ajs.v47i4.688.svg" alt="Austrian Journal of Statistics"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Anna-Lena Woelwer, Jan Pablo Burgard, Joshua Kunst, Mauricio Vargas.</p>
+  <p></p>
+<p>Developed by Anna-Lena Woelwer, Jan Pablo Burgard, Joshua Kunst, Mauricio Vargas.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer>
@@ -226,6 +233,8 @@
 
   
 
+
+  
 
   </body>
 </html>

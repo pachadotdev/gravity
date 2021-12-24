@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -67,8 +63,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/pachamaltese/gravity/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/pachadotdev/gravity/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,77 +78,78 @@
 
       
 
-      </header><script src="creating-gravity-datasets_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating gravity datasets</h1>
-                        <h4 class="author">Mauricio Vargas</h4>
+                        <h4 data-toc-skip class="author">Mauricio Vargas</h4>
             
-            <h4 class="date">2020-07-26</h4>
+            <h4 data-toc-skip class="date">2021-12-23</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/pachamaltese/gravity/blob/master/vignettes/creating-gravity-datasets.Rmd"><code>vignettes/creating-gravity-datasets.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/pachadotdev/gravity/blob/HEAD/vignettes/creating-gravity-datasets.Rmd" class="external-link"><code>vignettes/creating-gravity-datasets.Rmd</code></a></small>
       <div class="hidden name"><code>creating-gravity-datasets.Rmd</code></div>
 
     </div>
 
     
     
-<div id="description" class="section level1">
-<h1 class="hasAnchor">
-<a href="#description" class="anchor"></a>Description</h1>
+<div class="section level1">
+<h1 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+</h1>
 <p>Gravity dataset with zero trade flows is an edited version of the full gravity dataset that is used in <span class="citation">Head, Mayer, and Ries (2010)</span>.</p>
 <p>Dataset <code>gravity_no_zeros</code> corresponds to the dataset without zero trade flows, <code>gravity_zeros</code>, on the other hand, includes zero trade flows.</p>
 </div>
-<div id="details" class="section level1">
-<h1 class="hasAnchor">
-<a href="#details" class="anchor"></a>Details</h1>
+<div class="section level1">
+<h1 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+</h1>
 <p>In order to have a dataset suited for all functions, a cross-sectional dataset is chosen. All incomplete rows and observations with missing trade flows are therefore excluded from the dataset.</p>
 <p>As some of the functions in the package are capable of handling zero values in trade flows and some are not, two datasets, <code>gravity_zeros</code> and <code>gravity_no_zeros</code>, are provided.</p>
 <p>The original dataset was downloaded from SciencesPo but the original link is not available anymore. It was edited in the following way:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># 1: Import and read the dataset</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># 1: Import and read the dataset</span>
 
-<span class="no">url</span> <span class="kw">&lt;-</span> <span class="st">"http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"</span>
-<span class="no">zip</span> <span class="kw">&lt;-</span> <span class="st">"col_regfile09.zip"</span>
+<span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"</span>
+<span class="va">zip</span> <span class="op">&lt;-</span> <span class="st">"col_regfile09.zip"</span>
 
-<span class="kw">if</span> (!<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="no">zip</span>)) { <span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/download.file.html">download.file</a></span>(<span class="no">url</span>, <span class="no">zip</span>)) }
-<span class="fu"><a href="https://rdrr.io/r/base/try.html">try</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"7z e -aos col_regfile09.zip"</span>))
+<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span>
+<span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"7z e -aos col_regfile09.zip"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">haven</span>)
-<span class="no">col_regfile09</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_dta.html">read_dta</a></span>(<span class="st">"col_regfile09.dta"</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span>
+<span class="va">col_regfile09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span><span class="op">(</span><span class="st">"col_regfile09.dta"</span><span class="op">)</span>
 
 <span class="co"># 2: Isolation of one year</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="no">data06</span> <span class="kw">&lt;-</span> <span class="no">col_regfile09</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">year</span> <span class="kw">==</span> <span class="fl">2006</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">col_regfile09</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2006</span><span class="op">)</span>
 
 <span class="co"># 3: Choosing variables</span>
 
-<span class="no">data06</span> <span class="kw">&lt;-</span> <span class="no">data06</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">iso_o</span>, <span class="no">iso_d</span>, <span class="no">distw</span>, <span class="no">gdp_o</span>, <span class="no">gdp_d</span>, <span class="no">rta</span>, <span class="no">flow</span>, <span class="no">contig</span>, <span class="no">comlang_off</span>, <span class="no">comcur</span>)
+<span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">iso_o</span>, <span class="va">iso_d</span>, <span class="va">distw</span>, <span class="va">gdp_o</span>, <span class="va">gdp_d</span>, <span class="va">rta</span>, <span class="va">flow</span>, <span class="va">contig</span>, <span class="va">comlang_off</span>, <span class="va">comcur</span><span class="op">)</span>
 
 <span class="co"># 4: Isolation of complete cases</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyr</span>)
-<span class="no">gravity_zeros</span> <span class="kw">&lt;-</span> <span class="no">data06</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span>()
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="va">gravity_zeros</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># 5: Exclusion of trade flows equal to 0</span>
 
-<span class="no">gravity_no_zeros</span> <span class="kw">&lt;-</span> <span class="no">gravity_zeros</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">flow</span> <span class="kw">&gt;</span> <span class="fl">0</span>)
+<span class="va">gravity_no_zeros</span> <span class="op">&lt;-</span> <span class="va">gravity_zeros</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">flow</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>
 
 <span class="co"># 6: Export the data</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span>(<span class="no">gravity_zeros</span>, <span class="kw">file</span> <span class="kw">=</span> <span class="st">"gravity_zeros.rdata"</span>, <span class="kw">compress</span> <span class="kw">=</span> <span class="st">"xz"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span>(<span class="no">gravity_no_zeros</span>, <span class="kw">file</span> <span class="kw">=</span> <span class="st">"gravity_no_zeros.rdata"</span>, <span class="kw">compress</span> <span class="kw">=</span> <span class="st">"xz"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_no_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
-<div id="refs" class="references">
-<div id="ref-Head2010">
-<p>Head, Keith, Thierry Mayer, and John Ries. 2010. “The Erosion of Colonial Trade Linkages After Independence.” <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.</p>
+<div class="section level1 unnumbered">
+<h1 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Head2010" class="csl-entry">
+Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of Colonial Trade Linkages After Independence.”</span> <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
 </div>
 </div>
 </div>
@@ -169,11 +166,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Anna-Lena Woelwer, Jan Pablo Burgard, Joshua Kunst, Mauricio Vargas.</p>
+  <p></p>
+<p>Developed by Anna-Lena Woelwer, Jan Pablo Burgard, Joshua Kunst, Mauricio Vargas.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer>
@@ -181,6 +180,8 @@
 
   
 
+
+  
 
   </body>
 </html>

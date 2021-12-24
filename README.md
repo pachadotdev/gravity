@@ -1,5 +1,5 @@
 
-# gravity <img src="https://pachamaltese.github.io/gravity/hexicon.svg" width=150 align="right" alt="sticker"/>
+# gravity
 
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -7,13 +7,13 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![GH-actions
-Windows](https://github.com/pachamaltese/gravity/workflows/check-windows/badge.svg)](https://github.com/pachamaltese/gravity/actions)
+Windows](https://github.com/pachadotdev/gravity/workflows/check-windows/badge.svg)](https://github.com/pachadotdev/gravity/actions)
 [![GH-actions
-Linux](https://github.com/pachamaltese/gravity/workflows/check-linux/badge.svg)](https://github.com/pachamaltese/gravity/actions)
+Linux](https://github.com/pachadotdev/gravity/workflows/check-linux/badge.svg)](https://github.com/pachadotdev/gravity/actions)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/gravity)](https://cran.r-project.org/package=gravity)
 [![Coverage
-status](https://codecov.io/gh/pachamaltese/gravity/branch/master/graph/badge.svg)](https://codecov.io/github/pachamaltese/gravity?branch=master)
+status](https://codecov.io/gh/pachadotdev/gravity/branch/master/graph/badge.svg)](https://codecov.io/github/pachadotdev/gravity?branch=master)
 [![JOSS](http://joss.theoj.org/papers/10.21105/joss.01038/status.svg)](https://doi.org/10.21105/joss.01038)
 [![Austrian Journal of
 Statistics](https://zenodo.org/badge/doi/10.17713/ajs.v47i4.688.svg)](https://doi.org/10.17713/ajs.v47i4.688)
@@ -45,14 +45,14 @@ multiplicative models.
 
 Log-log estimation covers:
 
-  - Ordinary Least Squares (OLS)
-  - Fixed Effects
-  - Double Demeaning (DDM)
-  - Bonus vetus OLS with simple averages (BVU) and with GDP-weights
+-   Ordinary Least Squares (OLS)
+-   Fixed Effects
+-   Double Demeaning (DDM)
+-   Bonus vetus OLS with simple averages (BVU) and with GDP-weights
     (BVW)
-  - Structural Iterated Least Squares (SILS)
-  - Tetrads
-  - Different Tobit models (Tobit, ET-Tobit, EK-Tobit)
+-   Structural Iterated Least Squares (SILS)
+-   Tetrads
+-   Different Tobit models (Tobit, ET-Tobit, EK-Tobit)
 
 Log-log models are partly complex to understand and program and thus a
 comparison of them is not straightforward, wherefore the package aims at
@@ -61,10 +61,10 @@ application.
 
 Multiplicative estimation covers:
 
-  - Poisson Pseudo Maximum Likelihood (PPML)
-  - Gamma Pseudo Maximum Likelihood (GPML)
-  - Negative Binomial Pseudo Maximum Likelihood (NBPML)
-  - Nonlinear Least Squares (NLS)
+-   Poisson Pseudo Maximum Likelihood (PPML)
+-   Gamma Pseudo Maximum Likelihood (GPML)
+-   Negative Binomial Pseudo Maximum Likelihood (NBPML)
+-   Nonlinear Least Squares (NLS)
 
 Multiplicative models are covered with a log-link and different families
 of distributions. These models are relatively easy to compute.
@@ -144,7 +144,7 @@ From R console:
 install.packages("gravity")
 
 # Install from GitHub
-devtools::install_github("pachamaltese/gravity")
+devtools::install_github("pachadotdev/gravity")
 ```
 
 ## Community guidelines
@@ -161,9 +161,9 @@ probably more users have the same questions as you.
 
 ## References
 
-<div id="refs" class="references">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-Egger2003">
+<div id="ref-Egger2003" class="csl-entry">
 
 Egger, Peter, and Michael Pfaffermayr. 2003. “The Proper Panel
 Econometric Specification of the Gravity Equation: A Three-Way Model
@@ -172,7 +172,7 @@ with Bilateral Interaction Effects.” *Empirical Economics* 28 (3):
 
 </div>
 
-<div id="ref-Gomez-Herrera2013">
+<div id="ref-Gomez-Herrera2013" class="csl-entry">
 
 Gómez-Herrera, Estrella. 2013. “Comparing Alternative Methods to
 Estimate Gravity Models of Bilateral Trade.” *Empirical Economics* 44
@@ -180,17 +180,17 @@ Estimate Gravity Models of Bilateral Trade.” *Empirical Economics* 44
 
 </div>
 
-<div id="ref-Head2014">
+<div id="ref-Head2014" class="csl-entry">
 
 Head, Keith, and Thierry Mayer. 2014. “Chapter 3 - Gravity Equations:
-Workhorse,Toolkit, and Cookbook.” In *Handbook of International
+Workhorse,toolkit, and Cookbook.” In *Handbook of International
 Economics*, edited by Gita Gopinath, Elhanan Helpman, and Kenneth
 Rogoff, 4:131–95. Handbook of International Economics. Elsevier.
 <https://doi.org/10.1016/B978-0-444-54314-1.00003-3>.
 
 </div>
 
-<div id="ref-Head2010">
+<div id="ref-Head2010" class="csl-entry">
 
 Head, Keith, Thierry Mayer, and John Ries. 2010. “The Erosion of
 Colonial Trade Linkages After Independence.” *Journal of International
@@ -199,10 +199,10 @@ Economics* 81 (1): 1–14.
 
 </div>
 
-<div id="ref-WoelwerBressleinBurgard2018">
+<div id="ref-WoelwerBressleinBurgard2018" class="csl-entry">
 
 Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018.
-“Gravity Models in R.” *Austrian Journal of Statistics* 47 (4): 16–35.
+“Gravity Models in r.” *Austrian Journal of Statistics* 47 (4): 16–35.
 <https://doi.org/10.17713/ajs.v47i4.688>.
 
 </div>

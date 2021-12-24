@@ -7,14 +7,14 @@ bibliography: inst/REFERENCES.bib
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# gravity <img src="https://pachamaltese.github.io/gravity/hexicon.svg" width=150 align="right" alt="sticker"/>
+# gravity
 
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![GH-actions Windows](https://github.com/pachamaltese/gravity/workflows/check-windows/badge.svg)](https://github.com/pachamaltese/gravity/actions)
-[![GH-actions Linux](https://github.com/pachamaltese/gravity/workflows/check-linux/badge.svg)](https://github.com/pachamaltese/gravity/actions)
+[![GH-actions Windows](https://github.com/pachadotdev/gravity/workflows/check-windows/badge.svg)](https://github.com/pachadotdev/gravity/actions)
+[![GH-actions Linux](https://github.com/pachadotdev/gravity/workflows/check-linux/badge.svg)](https://github.com/pachadotdev/gravity/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/gravity)](https://cran.r-project.org/package=gravity)
-[![Coverage status](https://codecov.io/gh/pachamaltese/gravity/branch/master/graph/badge.svg)](https://codecov.io/github/pachamaltese/gravity?branch=master)
+[![Coverage status](https://codecov.io/gh/pachadotdev/gravity/branch/master/graph/badge.svg)](https://codecov.io/github/pachadotdev/gravity?branch=master)
 [![JOSS](http://joss.theoj.org/papers/10.21105/joss.01038/status.svg)](https://doi.org/10.21105/joss.01038)
 [![Austrian Journal of Statistics](https://zenodo.org/badge/doi/10.17713/ajs.v47i4.688.svg)](https://doi.org/10.17713/ajs.v47i4.688)
 
@@ -78,7 +78,7 @@ From R console:
 install.packages("gravity")
 
 # Install from GitHub
-devtools::install_github("pachamaltese/gravity")
+devtools::install_github("pachadotdev/gravity")
 ```
 
 ## Community guidelines

@@ -25,7 +25,6 @@
   }
 }
 \source{
-  \url{http://econ.sciences-po.fr/node/131}
   \url{https://sites.google.com/site/hiegravity/data-sources}
 }
 \references{

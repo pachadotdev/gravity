@@ -1,38 +1,35 @@
 Package: gravity
 Type: Package
 Title: Estimation Methods for Gravity Models
-Version: 0.9.9
+Version: 1.0
 Authors@R: c(
   person("Anna-Lena", "Woelwer",
-    role = c("aut", "cph"),
-    email = "woelwer@uni-trier.de"),
+    role = c("aut", "cph")),
   person("Jan Pablo", "Burgard",
-    role = c("aut", "cph"),
-    email = "burgardj@uni-trier.de"),
-  person("Joshua", "Kunst", 
-    role = c("aut", "cph"),
-    email = "jbkunst@gmail.com"),
-  person("Mauricio", "Vargas", 
+    role = c("aut", "cph")),
+  person("Joshua", "Kunst",
+    role = c("aut", "cph")),
+  person("Mauricio", "Vargas",
     role = c("aut","cre","cph"), 
-    email = "mvargas@dcc.uchile.cl", 
+    email = "mv.sepulveda@mail.utoronto.ca", 
     comment = c(ORCID = "0000-0003-1017-7574")),
   person("Romain", "Francois", 
-    role = "ctb", 
-    email = "romain@purrple.cat",
+    role = "ctb",
     comment = "adapted parts of the code to use dplyr 0.8.0"),
-  person("Lionel", "Henry", 
-    role = c("ctb"), 
-    email = "lionel@rstudio.com",
+  person("Lionel", "Henry",
+    role = c("ctb"),
     comment = "simplified parts of the code"),
-  person("Hrisyana", "Doytchinova", 
-    role = c("rev"), 
-    email = "hrisyana.doytchinova@un.org",
+  person("Sarah", "Johnson",
+    role = c("ctb"),
+    comment = "improved the double demeaning function"),
+  person("Hrisyana", "Doytchinova",
+    role = c("rev"),
     comment = "sent us different suggestions and bug reports")
   )
 Description: A wrapper of different standard estimation methods for gravity models. 
   This package provides estimation methods for log-log models and multiplicative models.
-URL: http://pachamaltese.github.io/gravity
-BugReports: https://github.com/pachamaltese/gravity/issues
+URL: http://pacha.dev/gravity
+BugReports: https://github.com/pachadotdev/gravity/issues
 Imports: 
     lmtest,
     sandwich,
@@ -52,10 +49,10 @@ Imports:
     utils
 RdMacros: Rdpack
 Depends: R(>= 3.4.0)
-License: GPL-3
+License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests: knitr,
   rmarkdown,
   testthat,

@@ -28,8 +28,8 @@ Authors@R: c(
   )
 Description: A wrapper of different standard estimation methods for gravity models. 
   This package provides estimation methods for log-log models and multiplicative models.
-URL: http://pacha.dev/gravity
-BugReports: https://github.com/pachadotdev/gravity/issues
+URL: http://pacha.dev/gravity/
+BugReports: https://github.com/pachadotdev/gravity/issues/
 Imports: 
     lmtest,
     sandwich,

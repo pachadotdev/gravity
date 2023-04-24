@@ -94,11 +94,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 3 countries for testing
 #' countries_chosen <- c("AUS", "GBR", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- nbpml(
 #'   dependent_variable = "flow",
 #'   distance = "distw",

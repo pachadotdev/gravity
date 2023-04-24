@@ -117,13 +117,13 @@ An example of how to apply the function ddm to an example dataset in gravity and
 library(gravity)
 
 fit <- ddm(
-    dependent_variable = "flow",
-    distance = "distw",
-    additional_regressors = c("rta", "comcur", "contig"),
-    code_origin = "iso_o",
-    code_destination = "iso_d",
-    data = gravity_no_zeros
-  )
+  dependent_variable = "flow",
+  distance = "distw",
+  additional_regressors = c("rta", "comcur", "contig"),
+  code_origin = "iso_o",
+  code_destination = "iso_d",
+  data = gravity_no_zeros
+)
 
 summary(fit)
 ```
@@ -153,30 +153,30 @@ An example of how to apply the functions `bvu` and `bvw` to an example dataset i
 
 ```{r bvu}
 fit2 <- bvu(
-    dependent_variable = "flow",
-    distance = "distw",
-    additional_regressors = c("rta", "contig", "comcur"),
-    income_origin = "gdp_o",
-    income_destination = "gdp_d",
-    code_origin = "iso_o",
-    code_destination = "iso_d",
-    data = gravity_no_zeros
-  )
+  dependent_variable = "flow",
+  distance = "distw",
+  additional_regressors = c("rta", "contig", "comcur"),
+  income_origin = "gdp_o",
+  income_destination = "gdp_d",
+  code_origin = "iso_o",
+  code_destination = "iso_d",
+  data = gravity_no_zeros
+)
 
 summary(fit2)
 ```
 
 ```{r bvw}
 fit3 <- bvw(
-    dependent_variable = "flow",
-    distance = "distw",
-    additional_regressors = c("rta", "comcur", "contig"),
-    income_origin = "gdp_o",
-    income_destination = "gdp_d",
-    code_origin = "iso_o",
-    code_destination = "iso_d",
-    data = gravity_no_zeros
-  )
+  dependent_variable = "flow",
+  distance = "distw",
+  additional_regressors = c("rta", "comcur", "contig"),
+  income_origin = "gdp_o",
+  income_destination = "gdp_d",
+  code_origin = "iso_o",
+  code_destination = "iso_d",
+  data = gravity_no_zeros
+)
 
 summary(fit3)
 ```
@@ -188,11 +188,11 @@ An example of how to apply the function `ppml` to an example dataset in gravity 
 
 ```{r ppml}
 fit4 <- ppml(
-    dependent_variable = "flow",
-    distance = "distw",
-    additional_regressors = c("rta", "comcur", "contig"),
-    data = gravity_no_zeros
-  )
+  dependent_variable = "flow",
+  distance = "distw",
+  additional_regressors = c("rta", "comcur", "contig"),
+  data = gravity_no_zeros
+)
 
 summary(fit4)
 ```
@@ -201,12 +201,12 @@ In order to obtain robust standard errors (i.e. in a similar way to `vce(robust)
 
 ```{r ppmlr}
 fit4r <- ppml(
-    dependent_variable = "flow",
-    distance = "distw",
-    additional_regressors = c("rta", "comcur", "contig"),
-    robust = TRUE,
-    data = gravity_no_zeros
-  )
+  dependent_variable = "flow",
+  distance = "distw",
+  additional_regressors = c("rta", "comcur", "contig"),
+  robust = TRUE,
+  data = gravity_no_zeros
+)
 
 summary(fit4r)
 ```

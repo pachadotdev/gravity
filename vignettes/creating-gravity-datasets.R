@@ -4,7 +4,10 @@ knitr::opts_chunk$set(eval = FALSE)
 ## ----gravity_no_zeros---------------------------------------------------------
 #  # 1: Import and read the dataset
 #  
-#  url <- "http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"
+#  # As of 2022-09-25 the original link from Sciences Po is broken
+#  # I kept the zip on GitHub back in 2017, fortunately
+#  # url <- "http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"
+#  url <- "https://github.com/pachadotdev/gravity/blob/master/vignettes/col_regfile09.zip?raw=true"
 #  zip <- "col_regfile09.zip"
 #  
 #  if (!file.exists(zip)) { try(download.file(url, zip)) }

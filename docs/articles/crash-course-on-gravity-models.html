@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -82,9 +82,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>A crash course on gravity models</h1>
-                        <h4 data-toc-skip class="author">Mauricio Vargas</h4>
+                        <h4 data-toc-skip class="author">Mauricio
+Vargas</h4>
             
-            <h4 data-toc-skip class="date">2022-01-04</h4>
+            <h4 data-toc-skip class="date">2023-04-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pachadotdev/gravity/blob/HEAD/vignettes/crash-course-on-gravity-models.Rmd" class="external-link"><code>vignettes/crash-course-on-gravity-models.Rmd</code></a></small>
       <div class="hidden name"><code>crash-course-on-gravity-models.Rmd</code></div>
@@ -93,20 +94,30 @@
 
     
     
-<div class="section level1">
-<h1 id="basic-model">Basic model<a class="anchor" aria-label="anchor" href="#basic-model"></a>
-</h1>
-<p>Gravity models in their traditional form are inspired by Newton law of gravitation:</p>
+<div class="section level2">
+<h2 id="basic-model">Basic model<a class="anchor" aria-label="anchor" href="#basic-model"></a>
+</h2>
+<p>Gravity models in their traditional form are inspired by Newton law
+of gravitation:</p>
 <p><span class="math display">\[
 F_{ij}=G\frac{M_{i}M_{j}}{D^{2}_{ij}}.
 \]</span></p>
-<p>The force <span class="math inline">\(F\)</span> between two bodies <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> with <span class="math inline">\(i \neq j\)</span> is proportional to the masses <span class="math inline">\(M\)</span> of these bodies and inversely proportional to the square of their geographical distance <span class="math inline">\(D\)</span>. <span class="math inline">\(G\)</span> is a constant and as such of no major concern.</p>
-<p>The underlying idea of a traditional gravity model, shown for international trade, is equally simple:</p>
+<p>The force <span class="math inline">\(F\)</span> between two bodies
+<span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> with <span class="math inline">\(i \neq
+j\)</span> is proportional to the masses <span class="math inline">\(M\)</span> of these bodies and inversely
+proportional to the square of their geographical distance <span class="math inline">\(D\)</span>. <span class="math inline">\(G\)</span>
+is a constant and as such of no major concern.</p>
+<p>The underlying idea of a traditional gravity model, shown for
+international trade, is equally simple:</p>
 <p><span class="math display">\[
 X_{ij}=G\frac{Y_{i}^{\beta_{1}}Y_{j}^{\beta_{2}}}{D_{ij}^{\beta_{3}}}.
 \]</span></p>
-<p>The trade flow <span class="math inline">\(X\)</span> is explained by <span class="math inline">\(Y_{i}\)</span> and <span class="math inline">\(Y_{j}\)</span> that are the masses of the exporting and importing country (e.g. the GDP) and <span class="math inline">\(D_{ij}\)</span> that is the distance between the countries.</p>
-<p>Dummy variables such as common borders <span class="math inline">\(contig\)</span> or regional trade agreements <span class="math inline">\(rta\)</span> can be added to the model. Let <span class="math inline">\(t_{ij}\)</span> be the transaction cost defined as:</p>
+<p>The trade flow <span class="math inline">\(X\)</span> is explained by
+<span class="math inline">\(Y_{i}\)</span> and <span class="math inline">\(Y_{j}\)</span> that are the masses of the
+exporting and importing country (e.g. the GDP) and <span class="math inline">\(D_{ij}\)</span> that is the distance between the
+countries.</p>
+<p>Dummy variables such as common borders <span class="math inline">\(contig\)</span> or regional trade agreements <span class="math inline">\(rta\)</span> can be added to the model. Let <span class="math inline">\(t_{ij}\)</span> be the transaction cost defined
+as:</p>
 <p><span class="math display">\[
 t_{ij}= D_{ij} \exp(contig_{ij} + rta_{ij})
 \]</span></p>
@@ -114,15 +125,18 @@ t_{ij}= D_{ij} \exp(contig_{ij} + rta_{ij})
 <p><span class="math display">\[
 X_{ij}=G\frac{Y_{i}^{\beta_{1}}Y_{j}^{\beta_{2}}}{t_{ij}^{\beta_{3}}}.
 \]</span></p>
-<p>A logarithmic operator can be applied to form a log-linear model and use a standard estimation methods such as OLS:</p>
+<p>A logarithmic operator can be applied to form a log-linear model and
+use a standard estimation methods such as OLS:</p>
 <p><span class="math display">\[
-\log X_{ij}=\beta_{0}\log G +\beta_{1}\log Y_{i}+\beta_{2}\log Y_{j}+\beta_{3}\log D_{ij}+\beta_{4}contig_{ij}+\beta_{5}rta_{ij}
+\log X_{ij}=\beta_{0}\log G +\beta_{1}\log Y_{i}+\beta_{2}\log
+Y_{j}+\beta_{3}\log D_{ij}+\beta_{4}contig_{ij}+\beta_{5}rta_{ij}
 \]</span></p>
 </div>
-<div class="section level1">
-<h1 id="trade-barriers-model">Trade barriers model<a class="anchor" aria-label="anchor" href="#trade-barriers-model"></a>
-</h1>
-<p>Provided trade barriers exists, the econometric literature proposes the Multilateral Resistance model defined by the equations:</p>
+<div class="section level2">
+<h2 id="trade-barriers-model">Trade barriers model<a class="anchor" aria-label="anchor" href="#trade-barriers-model"></a>
+</h2>
+<p>Provided trade barriers exists, the econometric literature proposes
+the Multilateral Resistance model defined by the equations:</p>
 <p><span class="math display">\[
 X_{ij}=\frac{Y_{i}Y_{j}}{Y}\frac{t_{ij}^{1-\sigma}}{P_{j}^{1-\sigma}\Pi_{i}^{1-\sigma}}
 \]</span> with <span class="math display">\[
@@ -130,362 +144,488 @@ P_{i}^{1-\sigma}=\sum_{j}\frac{t_{ij}^{1-\sigma}}{\Pi_{j}^{1-\sigma}}\frac{Y_{j}
 \]</span> and <span class="math display">\[
 \Pi_{j}^{1-\sigma}=\sum_{i}\frac{t_{ij}^{1-\sigma}}{P_{i}^{1-\sigma}}\frac{Y_{i}}{Y}
 \]</span></p>
-<p>Basically the model proposes that the exports <span class="math inline">\(X_{ij}\)</span> from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> are determined by the supply factors in <span class="math inline">\(i\)</span>, <span class="math inline">\(Y_{i}\)</span>, and the demand factors in <span class="math inline">\(j\)</span>, <span class="math inline">\(Y_{j}\)</span>, as well as the transaction costs <span class="math inline">\(t_{ij}\)</span>.</p>
-<p>Next to information on bilateral partners <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, information on the rest of the world is included in the gravity model with <span class="math inline">\(Y=\sum_{i} Y_{i}= \sum_{j} Y_{j}\)</span> that represents the worldwide sum of incomes (e.g. the world’s GDP).</p>
-<p>In this model <span class="math inline">\(\sigma\)</span> represents the elasticity of substitution between all goods. A key assumption is to take a fixed value <span class="math inline">\(\sigma &gt; 1\)</span> in order to account for the preference for a variation of goods (e.g. in this model goods can be replaced for other similar goods).</p>
-<p>The Multilateral Resistance terms are included via the terms <span class="math inline">\(P\)</span>, Inward Multilateral Resistance, and <span class="math inline">\(\Pi\)</span>, Outward Multilateral Resistance. The Inward Multilateral Resistance <span class="math inline">\(P_i\)</span> is a function of the transaction costs of <span class="math inline">\(i\)</span> to all trade partners <span class="math inline">\(j\)</span>. The Outward Multilateral Resistance <span class="math inline">\(\Pi_{j}\)</span> is a function of the transaction costs of <span class="math inline">\(j\)</span> to all trade partners <span class="math inline">\(i\)</span> and their demand.</p>
-<p>The Multilateral Resistance terms dependent on each other. Hence, the estimation of structural gravity models becomes complex.</p>
+<p>Basically the model proposes that the exports <span class="math inline">\(X_{ij}\)</span> from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> are determined by the supply factors in
+<span class="math inline">\(i\)</span>, <span class="math inline">\(Y_{i}\)</span>, and the demand factors in <span class="math inline">\(j\)</span>, <span class="math inline">\(Y_{j}\)</span>, as well as the transaction costs
+<span class="math inline">\(t_{ij}\)</span>.</p>
+<p>Next to information on bilateral partners <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>, information on the rest of the world
+is included in the gravity model with <span class="math inline">\(Y=\sum_{i} Y_{i}= \sum_{j} Y_{j}\)</span> that
+represents the worldwide sum of incomes (e.g. the world’s GDP).</p>
+<p>In this model <span class="math inline">\(\sigma\)</span> represents
+the elasticity of substitution between all goods. A key assumption is to
+take a fixed value <span class="math inline">\(\sigma &gt; 1\)</span> in
+order to account for the preference for a variation of goods (e.g. in
+this model goods can be replaced for other similar goods).</p>
+<p>The Multilateral Resistance terms are included via the terms <span class="math inline">\(P\)</span>, Inward Multilateral Resistance, and
+<span class="math inline">\(\Pi\)</span>, Outward Multilateral
+Resistance. The Inward Multilateral Resistance <span class="math inline">\(P_i\)</span> is a function of the transaction
+costs of <span class="math inline">\(i\)</span> to all trade partners
+<span class="math inline">\(j\)</span>. The Outward Multilateral
+Resistance <span class="math inline">\(\Pi_{j}\)</span> is a function of
+the transaction costs of <span class="math inline">\(j\)</span> to all
+trade partners <span class="math inline">\(i\)</span> and their
+demand.</p>
+<p>The Multilateral Resistance terms dependent on each other. Hence, the
+estimation of structural gravity models becomes complex.</p>
 </div>
-<div class="section level1">
-<h1 id="model-estimation">Model estimation<a class="anchor" aria-label="anchor" href="#model-estimation"></a>
-</h1>
-<p>To estimate gravity equations you need a square dataset including bilateral flows defined by the argument dependent_variable, a distance measure defined by the argument distance that is the key regressor, and other potential influences (e.g. contiguity and common currency) given as a vector in additional_regressors are required.</p>
-<p>Some estimation methods require ISO codes or similar of type character variables to compute particular country effects. Make sure the origin and destination codes are of type “character.”</p>
-<p>The rule of thumb for regressors or independent variables consists in:</p>
+<div class="section level2">
+<h2 id="model-estimation">Model estimation<a class="anchor" aria-label="anchor" href="#model-estimation"></a>
+</h2>
+<p>To estimate gravity equations you need a square dataset including
+bilateral flows defined by the argument dependent_variable, a distance
+measure defined by the argument distance that is the key regressor, and
+other potential influences (e.g. contiguity and common currency) given
+as a vector in additional_regressors are required.</p>
+<p>Some estimation methods require ISO codes or similar of type
+character variables to compute particular country effects. Make sure the
+origin and destination codes are of type “character”.</p>
+<p>The rule of thumb for regressors or independent variables consists
+in:</p>
 <ul>
 <li>All dummy variables should be of type numeric (0/1).</li>
-<li>If an independent variable is defined as a ratio, it should be logged.</li>
+<li>If an independent variable is defined as a ratio, it should be
+logged.</li>
 </ul>
-<p>The user should perform some data cleaning beforehand to remove observations that contain entries that can distort estimates, notwithstanding the functions provided within this package will remove zero flows and distances.</p>
-<p>See  for gravity datasets and Stata code for estimating gravity models.</p>
+<p>The user should perform some data cleaning beforehand to remove
+observations that contain entries that can distort estimates,
+notwithstanding the functions provided within this package will remove
+zero flows and distances.</p>
+<p>See for gravity datasets and Stata code for estimating gravity
+models.</p>
 </div>
-<div class="section level1">
-<h1 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h1>
-<p>All the examples here are adapted from <span class="citation">Wölwer, Breßlein, and Burgard (2018)</span>. We included some examples that require further explanation as they perform some data transforming and therefore the functions provide a simplification for the end user.</p>
 <div class="section level2">
-<h2 id="double-demeaning">Double Demeaning<a class="anchor" aria-label="anchor" href="#double-demeaning"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<p>Double Demeaning, as introduced by <span class="citation">Head and Mayer (2014)</span>, subtracts importer and exporter averages on the left and right hand side of the respective gravity equation, and all unilateral influences including the Multilateral Resistance terms vanish. Therefore, no unilateral variables may be added as independent variables for the estimation.</p>
-<p>Our ddm function first logs the dependent variable and the distance variable. Afterwards, the dependent and independent variables are transformed in the following way (exemplary shown for trade flows, <span class="math inline">\(X_{ij}\)</span>):</p>
+<p>All the examples here are adapted from <span class="citation">Wölwer,
+Breßlein, and Burgard (2018)</span>. We included some examples that
+require further explanation as they perform some data transforming and
+therefore the functions provide a simplification for the end user.</p>
+<div class="section level3">
+<h3 id="double-demeaning">Double Demeaning<a class="anchor" aria-label="anchor" href="#double-demeaning"></a>
+</h3>
+<p>Double Demeaning, as introduced by <span class="citation">Head and
+Mayer (2014)</span>, subtracts importer and exporter averages on the
+left and right hand side of the respective gravity equation, and all
+unilateral influences including the Multilateral Resistance terms
+vanish. Therefore, no unilateral variables may be added as independent
+variables for the estimation.</p>
+<p>Our ddm function first logs the dependent variable and the distance
+variable. Afterwards, the dependent and independent variables are
+transformed in the following way (exemplary shown for trade flows, <span class="math inline">\(X_{ij}\)</span>):</p>
 <p><span class="math display">\[
-(\log X_{ij})_{\text{DDM}} = (\log X_{ij}) - (\log X_{ij})_{\text{Origin Mean}} \\- (\log X_{ij})_{\text{Destination Mean}} + (\log X_{ij})_{\text{Mean}}.
+(\log X_{ij})_{\text{DDM}} = (\log X_{ij}) - (\log X_{ij})_{\text{Origin
+Mean}} \\- (\log X_{ij})_{\text{Destination Mean}} + (\log
+X_{ij})_{\text{Mean}}.
 \]</span></p>
-<p>One subtracts the mean value for the origin country and the mean value for the destination country and adds the overall mean value to the logged trade flows. This procedure is repeated for all dependent and independent variables. The transformed variables are then used for the estimation.</p>
-<p>DDM is easily applied, but, as shown in , its very sensitive to missing data.</p>
-<p>An example of how to apply the function ddm to an example dataset in gravity and the resulting output is shown in the following:</p>
+<p>One subtracts the mean value for the origin country and the mean
+value for the destination country and adds the overall mean value to the
+logged trade flows. This procedure is repeated for all dependent and
+independent variables. The transformed variables are then used for the
+estimation.</p>
+<p>DDM is easily applied, but, as shown in , its very sensitive to
+missing data.</p>
+<p>An example of how to apply the function ddm to an example dataset in
+gravity and the resulting output is shown in the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://pacha.dev/gravity/" class="external-link">gravity</a></span><span class="op">)</span>
-
-<span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ddm.html">ddm</a></span><span class="op">(</span>
-    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-    distance <span class="op">=</span> <span class="st">"distw"</span>,
-    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,
-    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,
-    data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_log_ddm ~ dist_log_ddm + rta_ddm + comcur_ddm + contig_ddm + </span>
-<span class="co">##     0</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -20.9411  -1.2268   0.3032   1.5195   8.4538 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## dist_log_ddm -1.60334    0.03312 -48.407   &lt;2e-16 ***</span>
-<span class="co">## rta_ddm       0.79727    0.07004  11.383   &lt;2e-16 ***</span>
-<span class="co">## comcur_ddm    0.17376    0.14613   1.189    0.234    </span>
-<span class="co">## contig_ddm    1.00184    0.11981   8.362   &lt;2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 2.318 on 17084 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.2541, Adjusted R-squared:  0.254 </span>
-<span class="co">## F-statistic:  1455 on 4 and 17084 DF,  p-value: &lt; 2.2e-16</span></code></pre>
-<p>The package returns lm or glm objects instead of summaries. Doing that allows to use our functions in conjunction with broom or other packages.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://pacha.dev/gravity/" class="external-link">gravity</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ddm.html">ddm</a></span><span class="op">(</span></span>
+<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_log_ddm ~ dist_log_ddm + rta_ddm + comcur_ddm + contig_ddm + </span></span>
+<span><span class="co">##     0</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -20.9411  -1.2268   0.3032   1.5195   8.4538 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## dist_log_ddm -1.60334    0.03312 -48.407   &lt;2e-16 ***</span></span>
+<span><span class="co">## rta_ddm       0.79727    0.07004  11.383   &lt;2e-16 ***</span></span>
+<span><span class="co">## comcur_ddm    0.17376    0.14613   1.189    0.234    </span></span>
+<span><span class="co">## contig_ddm    1.00184    0.11981   8.362   &lt;2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 2.318 on 17084 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.2541, Adjusted R-squared:  0.254 </span></span>
+<span><span class="co">## F-statistic:  1455 on 4 and 17084 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
+<p>The package returns lm or glm objects instead of summaries. Doing
+that allows to use our functions in conjunction with broom or other
+packages.</p>
 </div>
-<div class="section level2">
-<h2 id="bonus-vetus">Bonus Vetus<a class="anchor" aria-label="anchor" href="#bonus-vetus"></a>
-</h2>
-<p><span class="citation">S. L. Baier and Bergstrand (2010)</span> suggests a modification of the simple OLS that is easily implemented, allows for comparative statics and yields results close to those of NLS, called Bonus vetus OLS (BVU and BVW). They estimate gravity models in their additive form.</p>
-<p>As unilateral income elasticities are assumed, flows are divided by the product of unilateral incomes. The dependent variable for the estimation is therefore <span class="math display">\[\log\left(\frac{y}{inc_{o} \: inc_{d}}\right).\]</span></p>
-<p>By applying a Taylor-series expansion and the assumption of symmetrical, bilateral trade costs, they develop a reduced gravity model in which multilateral and worldwide resistance enter exogenously.</p>
-<p><span class="citation">S. L. Baier and Bergstrand (2010)</span> distinguishes two types of Bonus vetus estimations depending on how the Taylor-series is centered. One method, called BVU, uses simple averages while the other, called BVW, uses GDP weights. Depending on which method is used, the transaction costs are weighted differently. For advantages and disadvantages of both methods see <span class="citation">Scott L. Baier and Bergstrand (2009)</span> and <span class="citation">S. L. Baier and Bergstrand (2010)</span>.</p>
-<p>To give an example with simple averages (BVU), distance would be transformed to Multilateral and World Resistance in the following way: <span class="math display">\[
-MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij} \right)+\frac{1}{N}\left(\sum_{j=1}^{N}\log D_{ij} \right)-\frac{1}{N^{2}}\left(\sum_{i=1}^{N}\sum_{j=1}^{N}\log D_{ij} \right)
-\]</span> with <span class="math inline">\(D_{ij}\)</span> denoting the bilateral distance, <span class="math inline">\(N\)</span> the number of countries and <span class="math inline">\((MWR)_{D_{ij}}\)</span> the transformed variable adjusted for multilateral resistances.</p>
-<p>When using weighted averages (BVW), the simple averages are replaced by GDP weights. The transformed variables are included as independent variables in the estimation. The resulting equation can be estimated by simple OLS.</p>
-<p>An example of how to apply the functions <code>bvu</code> and <code>bvw</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
+<div class="section level3">
+<h3 id="bonus-vetus">Bonus Vetus<a class="anchor" aria-label="anchor" href="#bonus-vetus"></a>
+</h3>
+<p><span class="citation">S. L. Baier and Bergstrand (2010)</span>
+suggests a modification of the simple OLS that is easily implemented,
+allows for comparative statics and yields results close to those of NLS,
+called Bonus vetus OLS (BVU and BVW). They estimate gravity models in
+their additive form.</p>
+<p>As unilateral income elasticities are assumed, flows are divided by
+the product of unilateral incomes. The dependent variable for the
+estimation is therefore <span class="math display">\[\log\left(\frac{y}{inc_{o} \:
+inc_{d}}\right).\]</span></p>
+<p>By applying a Taylor-series expansion and the assumption of
+symmetrical, bilateral trade costs, they develop a reduced gravity model
+in which multilateral and worldwide resistance enter exogenously.</p>
+<p><span class="citation">S. L. Baier and Bergstrand (2010)</span>
+distinguishes two types of Bonus vetus estimations depending on how the
+Taylor-series is centered. One method, called BVU, uses simple averages
+while the other, called BVW, uses GDP weights. Depending on which method
+is used, the transaction costs are weighted differently. For advantages
+and disadvantages of both methods see <span class="citation">Scott L.
+Baier and Bergstrand (2009)</span> and <span class="citation">S. L.
+Baier and Bergstrand (2010)</span>.</p>
+<p>To give an example with simple averages (BVU), distance would be
+transformed to Multilateral and World Resistance in the following way:
+<span class="math display">\[
+MWR_{ij} = \frac{1}{N}\left(\sum_{i=1}^{N}\log D_{ij}
+\right)+\frac{1}{N}\left(\sum_{j=1}^{N}\log D_{ij}
+\right)-\frac{1}{N^{2}}\left(\sum_{i=1}^{N}\sum_{j=1}^{N}\log D_{ij}
+\right)
+\]</span> with <span class="math inline">\(D_{ij}\)</span> denoting the
+bilateral distance, <span class="math inline">\(N\)</span> the number of
+countries and <span class="math inline">\((MWR)_{D_{ij}}\)</span> the
+transformed variable adjusted for multilateral resistances.</p>
+<p>When using weighted averages (BVW), the simple averages are replaced
+by GDP weights. The transformed variables are included as independent
+variables in the estimation. The resulting equation can be estimated by
+simple OLS.</p>
+<p>An example of how to apply the functions <code>bvu</code> and
+<code>bvw</code> to an example dataset in gravity and the resulting
+output is shown in the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span><span class="op">(</span>
-    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-    distance <span class="op">=</span> <span class="st">"distw"</span>,
-    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,
-    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,
-    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,
-    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,
-    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,
-    data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_log_bvu ~ dist_log_mr + rta_mr + contig_mr + comcur_mr</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -20.0642  -1.2305   0.2932   1.5810   9.6659 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##              Estimate Std. Error   t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept) -20.15771    0.01919 -1050.573  &lt; 2e-16 ***</span>
-<span class="co">## dist_log_mr  -1.68697    0.03586   -47.048  &lt; 2e-16 ***</span>
-<span class="co">## rta_mr        0.58230    0.07926     7.347 2.12e-13 ***</span>
-<span class="co">## contig_mr     1.00135    0.13148     7.616 2.75e-14 ***</span>
-<span class="co">## comcur_mr     0.19102    0.16727     1.142    0.253    </span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 2.508 on 17083 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.2294, Adjusted R-squared:  0.2292 </span>
-<span class="co">## F-statistic:  1271 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<code class="sourceCode R"><span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span><span class="op">(</span></span>
+<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,</span>
+<span>    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
+<span>    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
+<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_log_bvu ~ dist_log_mr + rta_mr + contig_mr + comcur_mr</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -20.0642  -1.2305   0.2932   1.5810   9.6659 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error   t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept) -20.15771    0.01919 -1050.573  &lt; 2e-16 ***</span></span>
+<span><span class="co">## dist_log_mr  -1.68697    0.03586   -47.048  &lt; 2e-16 ***</span></span>
+<span><span class="co">## rta_mr        0.58230    0.07926     7.347 2.12e-13 ***</span></span>
+<span><span class="co">## contig_mr     1.00135    0.13148     7.616 2.75e-14 ***</span></span>
+<span><span class="co">## comcur_mr     0.19102    0.16727     1.142    0.253    </span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 2.508 on 17083 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.2294, Adjusted R-squared:  0.2292 </span></span>
+<span><span class="co">## F-statistic:  1271 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span><span class="op">(</span>
-    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-    distance <span class="op">=</span> <span class="st">"distw"</span>,
-    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,
-    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,
-    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,
-    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,
-    data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit3</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_log_bvw ~ dist_log_mr + rta_mr + comcur_mr + contig_mr</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -19.1204  -1.3366   0.4068   1.7068  10.6927 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept) -20.37260    0.05458 -373.27  &lt; 2e-16 ***</span>
-<span class="co">## dist_log_mr  -0.63445    0.02566  -24.73  &lt; 2e-16 ***</span>
-<span class="co">## rta_mr        1.30989    0.06703   19.54  &lt; 2e-16 ***</span>
-<span class="co">## comcur_mr    -0.89609    0.14201   -6.31 2.86e-10 ***</span>
-<span class="co">## contig_mr     1.37696    0.12606   10.92  &lt; 2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 2.683 on 17083 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.1185, Adjusted R-squared:  0.1183 </span>
-<span class="co">## F-statistic:   574 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</span></code></pre>
+<code class="sourceCode R"><span><span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span><span class="op">(</span></span>
+<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
+<span>    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
+<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_log_bvw ~ dist_log_mr + rta_mr + comcur_mr + contig_mr</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -19.1204  -1.3366   0.4068   1.7068  10.6927 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept) -20.37260    0.05458 -373.27  &lt; 2e-16 ***</span></span>
+<span><span class="co">## dist_log_mr  -0.63445    0.02566  -24.73  &lt; 2e-16 ***</span></span>
+<span><span class="co">## rta_mr        1.30989    0.06703   19.54  &lt; 2e-16 ***</span></span>
+<span><span class="co">## comcur_mr    -0.89609    0.14201   -6.31 2.86e-10 ***</span></span>
+<span><span class="co">## contig_mr     1.37696    0.12606   10.92  &lt; 2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 2.683 on 17083 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.1185, Adjusted R-squared:  0.1183 </span></span>
+<span><span class="co">## F-statistic:   574 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="poisson-pseudo-maximum-likelihood-ppml">Poisson Pseudo Maximum Likelihood (PPML)<a class="anchor" aria-label="anchor" href="#poisson-pseudo-maximum-likelihood-ppml"></a>
-</h2>
-<p><span class="citation">Silva and Tenreyro (2006)</span> argue that estimating gravity equations in their additive form by OLS leads to inconsistency in the presence of heteroscedasticity and advice to estimate gravity models in their multiplicative form. An example of how to apply the function <code>ppml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
+<div class="section level3">
+<h3 id="poisson-pseudo-maximum-likelihood-ppml">Poisson Pseudo Maximum Likelihood (PPML)<a class="anchor" aria-label="anchor" href="#poisson-pseudo-maximum-likelihood-ppml"></a>
+</h3>
+<p><span class="citation">Silva and Tenreyro (2006)</span> argue that
+estimating gravity equations in their additive form by OLS leads to
+inconsistency in the presence of heteroscedasticity and advice to
+estimate gravity models in their multiplicative form. An example of how
+to apply the function <code>ppml</code> to an example dataset in gravity
+and the resulting output is shown in the following:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span>
-    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-    distance <span class="op">=</span> <span class="st">"distw"</span>,
-    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-    data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_ppml ~ dist_log + rta + comcur + contig</span>
-<span class="co">## </span>
-<span class="co">## Deviance Residuals: </span>
-<span class="co">##     Min       1Q   Median       3Q      Max  </span>
-<span class="co">## -217.03   -28.10   -27.59   -23.42  1857.77  </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  5.76232    0.77160   7.468 8.54e-14 ***</span>
-<span class="co">## dist_log     0.02428    0.08728   0.278    0.781    </span>
-<span class="co">## rta          1.26582    0.16972   7.458 9.20e-14 ***</span>
-<span class="co">## comcur       1.10604    0.17982   6.151 7.89e-10 ***</span>
-<span class="co">## contig       1.75821    0.18141   9.692  &lt; 2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## (Dispersion parameter for quasipoisson family taken to be 42366.31)</span>
-<span class="co">## </span>
-<span class="co">##     Null deviance: 78081855  on 17087  degrees of freedom</span>
-<span class="co">## Residual deviance: 61989121  on 17083  degrees of freedom</span>
-<span class="co">## AIC: NA</span>
-<span class="co">## </span>
-<span class="co">## Number of Fisher Scoring iterations: 8</span></code></pre>
-<p>In order to obtain robust standard errors (i.e. in a similar way to <code>vce(robust)</code> in <em>Stata</em>) you can include <code>robust = T</code> to the arguments:</p>
+<code class="sourceCode R"><span><span class="va">fit4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span></span>
+<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_ppml ~ dist_log + rta + comcur + contig</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Deviance Residuals: </span></span>
+<span><span class="co">##     Min       1Q   Median       3Q      Max  </span></span>
+<span><span class="co">## -217.03   -28.10   -27.59   -23.42  1857.77  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)  5.76232    0.77160   7.468 8.54e-14 ***</span></span>
+<span><span class="co">## dist_log     0.02428    0.08728   0.278    0.781    </span></span>
+<span><span class="co">## rta          1.26582    0.16972   7.458 9.20e-14 ***</span></span>
+<span><span class="co">## comcur       1.10604    0.17982   6.151 7.89e-10 ***</span></span>
+<span><span class="co">## contig       1.75821    0.18141   9.692  &lt; 2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## (Dispersion parameter for quasipoisson family taken to be 42366.31)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     Null deviance: 78081855  on 17087  degrees of freedom</span></span>
+<span><span class="co">## Residual deviance: 61989121  on 17083  degrees of freedom</span></span>
+<span><span class="co">## AIC: NA</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Number of Fisher Scoring iterations: 8</span></span></code></pre>
+<p>In order to obtain robust standard errors (i.e. in a similar way to
+<code>vce(robust)</code> in <em>Stata</em>) you can include
+<code>robust = T</code> to the arguments:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit4r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span>
-    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-    distance <span class="op">=</span> <span class="st">"distw"</span>,
-    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-    robust <span class="op">=</span> <span class="cn">TRUE</span>,
-    data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-  <span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4r</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_ppml ~ dist_log + rta + comcur + contig</span>
-<span class="co">## </span>
-<span class="co">## Deviance Residuals: </span>
-<span class="co">##     Min       1Q   Median       3Q      Max  </span>
-<span class="co">## -217.03   -28.10   -27.59   -23.42  1857.77  </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##      Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## [1,]  5.76232    0.77160   7.468 8.54e-14 ***</span>
-<span class="co">## [2,]  0.02428    0.08728   0.278    0.781    </span>
-<span class="co">## [3,]  1.26582    0.16972   7.458 9.20e-14 ***</span>
-<span class="co">## [4,]  1.10604    0.17982   6.151 7.89e-10 ***</span>
-<span class="co">## [5,]  1.75821    0.18141   9.692  &lt; 2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## (Dispersion parameter for quasipoisson family taken to be 42366.31)</span>
-<span class="co">## </span>
-<span class="co">##     Null deviance: 78081855  on 17087  degrees of freedom</span>
-<span class="co">## Residual deviance: 61989121  on 17083  degrees of freedom</span>
-<span class="co">## AIC: NA</span>
-<span class="co">## </span>
-<span class="co">## Number of Fisher Scoring iterations: 8</span></code></pre>
+<code class="sourceCode R"><span><span class="va">fit4r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span></span>
+<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>    robust <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4r</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_ppml ~ dist_log + rta + comcur + contig</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Deviance Residuals: </span></span>
+<span><span class="co">##     Min       1Q   Median       3Q      Max  </span></span>
+<span><span class="co">## -217.03   -28.10   -27.59   -23.42  1857.77  </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##      Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## [1,]  5.76232    0.77160   7.468 8.54e-14 ***</span></span>
+<span><span class="co">## [2,]  0.02428    0.08728   0.278    0.781    </span></span>
+<span><span class="co">## [3,]  1.26582    0.16972   7.458 9.20e-14 ***</span></span>
+<span><span class="co">## [4,]  1.10604    0.17982   6.151 7.89e-10 ***</span></span>
+<span><span class="co">## [5,]  1.75821    0.18141   9.692  &lt; 2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## (Dispersion parameter for quasipoisson family taken to be 42366.31)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##     Null deviance: 78081855  on 17087  degrees of freedom</span></span>
+<span><span class="co">## Residual deviance: 61989121  on 17083  degrees of freedom</span></span>
+<span><span class="co">## AIC: NA</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Number of Fisher Scoring iterations: 8</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="gamma-pseudo-maximum-likelihood-gpml">Gamma Pseudo Maximum Likelihood (GPML)<a class="anchor" aria-label="anchor" href="#gamma-pseudo-maximum-likelihood-gpml"></a>
-</h2>
-<p>The estimation method is similar to PPML, but utilizes the gamma instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
-<p><span class="citation">Silva and Tenreyro (2006)</span> argue in favor of PPML instead of GPML, especially in case of heteroscedasticity, <span class="citation">Head and Mayer (2014)</span> highlight that depending on data structure there exist cases where GPML is preferable to PPML.</p>
-<p>An example of how to apply the function <code>gpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
+<div class="section level3">
+<h3 id="gamma-pseudo-maximum-likelihood-gpml">Gamma Pseudo Maximum Likelihood (GPML)<a class="anchor" aria-label="anchor" href="#gamma-pseudo-maximum-likelihood-gpml"></a>
+</h3>
+<p>The estimation method is similar to PPML, but utilizes the gamma
+instead of the poisson distribution, thereby implies different
+assumptions to the data structure and does not allow for zero trade
+values.</p>
+<p><span class="citation">Silva and Tenreyro (2006)</span> argue in
+favor of PPML instead of GPML, especially in case of heteroscedasticity,
+<span class="citation">Head and Mayer (2014)</span> highlight that
+depending on data structure there exist cases where GPML is preferable
+to PPML.</p>
+<p>An example of how to apply the function <code>gpml</code> to an
+example dataset in gravity and the resulting output is shown in the
+following:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gpml.html">gpml</a></span><span class="op">(</span>
-  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-  distance <span class="op">=</span> <span class="st">"distw"</span>,
-  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-  robust <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit5</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     Estimate         Std. Error        z value          Pr(&gt;|z|)        </span>
-<span class="co">##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  </span>
-<span class="co">##  1st Qu.: 0.7833   1st Qu.:0.1603   1st Qu.: 4.279   1st Qu.:0.000e+00  </span>
-<span class="co">##  Median : 1.0295   Median :0.1831   Median : 5.740   Median :1.000e-08  </span>
-<span class="co">##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.453e-02  </span>
-<span class="co">##  3rd Qu.: 1.7065   3rd Qu.:0.2973   3rd Qu.: 6.424   3rd Qu.:1.879e-05  </span>
-<span class="co">##  Max.   : 7.3963   Max.   :1.0266   Max.   : 7.205   Max.   :1.726e-01</span></code></pre>
+<code class="sourceCode R"><span><span class="va">fit5</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gpml.html">gpml</a></span><span class="op">(</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  robust <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit5</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     Estimate         Std. Error        z value          Pr(&gt;|z|)        </span></span>
+<span><span class="co">##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  </span></span>
+<span><span class="co">##  1st Qu.: 0.7833   1st Qu.:0.1603   1st Qu.: 4.279   1st Qu.:0.000e+00  </span></span>
+<span><span class="co">##  Median : 1.0295   Median :0.1831   Median : 5.740   Median :1.000e-08  </span></span>
+<span><span class="co">##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.453e-02  </span></span>
+<span><span class="co">##  3rd Qu.: 1.7065   3rd Qu.:0.2973   3rd Qu.: 6.424   3rd Qu.:1.879e-05  </span></span>
+<span><span class="co">##  Max.   : 7.3963   Max.   :1.0266   Max.   : 7.205   Max.   :1.726e-01</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="negative-binomial-pseudo-maximum-likelihood-nbpml">Negative Binomial Pseudo Maximum Likelihood (NBPML)<a class="anchor" aria-label="anchor" href="#negative-binomial-pseudo-maximum-likelihood-nbpml"></a>
-</h2>
-<p>The estimation method is similar to PPML, but utilizes the negative binomial instead of the poisson distribution, thereby implies different assumptions to the data structure and does not allow for zero trade values.</p>
-<p>An example of how to apply the function <code>nbpml</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
+<div class="section level3">
+<h3 id="negative-binomial-pseudo-maximum-likelihood-nbpml">Negative Binomial Pseudo Maximum Likelihood (NBPML)<a class="anchor" aria-label="anchor" href="#negative-binomial-pseudo-maximum-likelihood-nbpml"></a>
+</h3>
+<p>The estimation method is similar to PPML, but utilizes the negative
+binomial instead of the poisson distribution, thereby implies different
+assumptions to the data structure and does not allow for zero trade
+values.</p>
+<p>An example of how to apply the function <code>nbpml</code> to an
+example dataset in gravity and the resulting output is shown in the
+following:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nbpml.html">nbpml</a></span><span class="op">(</span>
-  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-  distance <span class="op">=</span> <span class="st">"distw"</span>,
-  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,
-  robust <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit6</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     Estimate         Std. Error        z value          Pr(&gt;|z|)        </span>
-<span class="co">##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  </span>
-<span class="co">##  1st Qu.: 0.7831   1st Qu.:0.1603   1st Qu.: 4.277   1st Qu.:0.000e+00  </span>
-<span class="co">##  Median : 1.0297   Median :0.1831   Median : 5.739   Median :1.000e-08  </span>
-<span class="co">##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.454e-02  </span>
-<span class="co">##  3rd Qu.: 1.7064   3rd Qu.:0.2973   3rd Qu.: 6.425   3rd Qu.:1.893e-05  </span>
-<span class="co">##  Max.   : 7.3961   Max.   :1.0266   Max.   : 7.205   Max.   :1.727e-01</span></code></pre>
+<code class="sourceCode R"><span><span class="va">fit6</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nbpml.html">nbpml</a></span><span class="op">(</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  robust <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit6</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     Estimate         Std. Error        z value          Pr(&gt;|z|)        </span></span>
+<span><span class="co">##  Min.   :-0.1613   Min.   :0.1183   Min.   :-1.364   Min.   :0.000e+00  </span></span>
+<span><span class="co">##  1st Qu.: 0.7831   1st Qu.:0.1603   1st Qu.: 4.277   1st Qu.:0.000e+00  </span></span>
+<span><span class="co">##  Median : 1.0297   Median :0.1831   Median : 5.739   Median :1.000e-08  </span></span>
+<span><span class="co">##  Mean   : 2.1508   Mean   :0.3571   Mean   : 4.457   Mean   :3.454e-02  </span></span>
+<span><span class="co">##  3rd Qu.: 1.7064   3rd Qu.:0.2973   3rd Qu.: 6.425   3rd Qu.:1.893e-05  </span></span>
+<span><span class="co">##  Max.   : 7.3961   Max.   :1.0266   Max.   : 7.205   Max.   :1.727e-01</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="tetrads">Tetrads<a class="anchor" aria-label="anchor" href="#tetrads"></a>
+</h3>
+<p>In order to use the fixed effects method with panel data, a huge
+number of dummy variables has to be included into the estimation. Thus,
+estimating these models can lead to significant computational
+difficulties.</p>
+<p><span class="citation">Head, Mayer, and Ries (2010)</span> present
+Tetrads as an estimation method circumventing this problem. They exploit
+the multiplicative form of the gravity equation to form the ratio of
+ratios. In doing so, both MR terms drop out of the equation.</p>
+<p>An example of how to apply the function <code>tetrads</code> to an
+example dataset in gravity and the resulting output is shown in the
+following:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit8</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span><span class="op">(</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="st">"rta"</span>,</span>
+<span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>  filter_origin <span class="op">=</span> <span class="st">"CHN"</span>,</span>
+<span>  filter_destination <span class="op">=</span> <span class="st">"USA"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit8</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## y_log_rat ~ dist_log_rat + rta_rat</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">## -21.3989  -1.2542   0.3247   1.5871  10.3864 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)  -0.39969    0.02162  -18.49   &lt;2e-16 ***</span></span>
+<span><span class="co">## dist_log_rat -1.32417    0.02307  -57.40   &lt;2e-16 ***</span></span>
+<span><span class="co">## rta_rat       0.88305    0.05566   15.87   &lt;2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 2.77 on 16710 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.2537, Adjusted R-squared:  0.2536 </span></span>
+<span><span class="co">## F-statistic:  2840 on 2 and 16710 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
+<p>In addition to robust standard errors as in the previous examples, in
+the case of <code>tetrads</code> you can also be interested in computing
+multiway variance-covariance, an it can be done by adding
+<code>multiway = T</code> to the arguments:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit8</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span><span class="op">(</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="st">"rta"</span>,</span>
+<span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>  filter_origin <span class="op">=</span> <span class="st">"CHN"</span>,</span>
+<span>  filter_destination <span class="op">=</span> <span class="st">"USA"</span>,</span>
+<span>  multiway <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit8</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##     Estimate         Std. Error         t value            Pr(&gt;|t|)        </span></span>
+<span><span class="co">##  Min.   :-1.3242   Min.   :0.02152   Min.   :-53.6833   Min.   :0.000e+00  </span></span>
+<span><span class="co">##  1st Qu.:-0.8619   1st Qu.:0.02309   1st Qu.:-36.1287   1st Qu.:1.525e-76  </span></span>
+<span><span class="co">##  Median :-0.3997   Median :0.02467   Median :-18.5741   Median :3.049e-76  </span></span>
+<span><span class="co">##  Mean   :-0.2803   Mean   :0.03164   Mean   :-18.0460   Mean   :3.701e-73  </span></span>
+<span><span class="co">##  3rd Qu.: 0.2417   3rd Qu.:0.03670   3rd Qu.: -0.2273   3rd Qu.:5.552e-73  </span></span>
+<span><span class="co">##  Max.   : 0.8830   Max.   :0.04873   Max.   : 18.1195   Max.   :1.110e-72</span></span></code></pre>
+</div>
 </div>
 <div class="section level2">
-<h2 id="tetrads">Tetrads<a class="anchor" aria-label="anchor" href="#tetrads"></a>
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<p>In order to use the fixed effects method with panel data, a huge number of dummy variables has to be included into the estimation. Thus, estimating these models can lead to significant computational difficulties.</p>
-<p><span class="citation">Head, Mayer, and Ries (2010)</span> present Tetrads as an estimation method circumventing this problem. They exploit the multiplicative form of the gravity equation to form the ratio of ratios. In doing so, both MR terms drop out of the equation.</p>
-<p>An example of how to apply the function <code>tetrads</code> to an example dataset in gravity and the resulting output is shown in the following:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit8</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span><span class="op">(</span>
-  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-  distance <span class="op">=</span> <span class="st">"distw"</span>,
-  additional_regressors <span class="op">=</span> <span class="st">"rta"</span>,
-  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,
-  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,
-  filter_origin <span class="op">=</span> <span class="st">"CHN"</span>,
-  filter_destination <span class="op">=</span> <span class="st">"USA"</span>,
-  data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit8</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Call:</span>
-<span class="co">## y_log_rat ~ dist_log_rat + rta_rat</span>
-<span class="co">## </span>
-<span class="co">## Residuals:</span>
-<span class="co">##      Min       1Q   Median       3Q      Max </span>
-<span class="co">## -21.3989  -1.2542   0.3247   1.5871  10.3864 </span>
-<span class="co">## </span>
-<span class="co">## Coefficients:</span>
-<span class="co">##              Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">## (Intercept)  -0.39969    0.02162  -18.49   &lt;2e-16 ***</span>
-<span class="co">## dist_log_rat -1.32417    0.02307  -57.40   &lt;2e-16 ***</span>
-<span class="co">## rta_rat       0.88305    0.05566   15.87   &lt;2e-16 ***</span>
-<span class="co">## ---</span>
-<span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
-<span class="co">## </span>
-<span class="co">## Residual standard error: 2.77 on 16710 degrees of freedom</span>
-<span class="co">## Multiple R-squared:  0.2537, Adjusted R-squared:  0.2536 </span>
-<span class="co">## F-statistic:  2840 on 2 and 16710 DF,  p-value: &lt; 2.2e-16</span></code></pre>
-<p>In addition to robust standard errors as in the previous examples, in the case of <code>tetrads</code> you can also be interested in computing multiway variance-covariance, an it can be done by adding <code>multiway = T</code> to the arguments:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fit8</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tetrads.html">tetrads</a></span><span class="op">(</span>
-  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,
-  distance <span class="op">=</span> <span class="st">"distw"</span>,
-  additional_regressors <span class="op">=</span> <span class="st">"rta"</span>,
-  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,
-  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,
-  filter_origin <span class="op">=</span> <span class="st">"CHN"</span>,
-  filter_destination <span class="op">=</span> <span class="st">"USA"</span>,
-  multiway <span class="op">=</span> <span class="cn">TRUE</span>,
-  data <span class="op">=</span> <span class="va">gravity_no_zeros</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit8</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##     Estimate         Std. Error         t value            Pr(&gt;|t|)        </span>
-<span class="co">##  Min.   :-1.3242   Min.   :0.02152   Min.   :-53.6833   Min.   :0.000e+00  </span>
-<span class="co">##  1st Qu.:-0.8619   1st Qu.:0.02309   1st Qu.:-36.1287   1st Qu.:1.525e-76  </span>
-<span class="co">##  Median :-0.3997   Median :0.02467   Median :-18.5741   Median :3.049e-76  </span>
-<span class="co">##  Mean   :-0.2803   Mean   :0.03164   Mean   :-18.0460   Mean   :3.701e-73  </span>
-<span class="co">##  3rd Qu.: 0.2417   3rd Qu.:0.03670   3rd Qu.: -0.2273   3rd Qu.:5.552e-73  </span>
-<span class="co">##  Max.   : 0.8830   Max.   :0.04873   Max.   : 18.1195   Max.   :1.110e-72</span></code></pre>
-</div>
-</div>
-<div class="section level1">
-<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Baier2010" class="csl-entry">
-Baier, S. L., and J. H. Bergstrand. 2010. <span>“The Gravity Model in International Trade: Advances and Applications.”</span> In, edited by Peter A. G. van Bergeijk and StevenEditors Brakman. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511762109" class="external-link">https://doi.org/10.1017/CBO9780511762109</a>.
+Baier, S. L., and J. H. Bergstrand. 2010. <span>“The Gravity Model in
+International Trade: Advances and Applications.”</span> In, edited by
+Peter A. G. van Bergeijk and StevenEditors Brakman. Cambridge University
+Press. <a href="https://doi.org/10.1017/CBO9780511762109" class="external-link">https://doi.org/10.1017/CBO9780511762109</a>.
 </div>
 <div id="ref-Baier2009" class="csl-entry">
-Baier, Scott L., and Jeffrey H. Bergstrand. 2009. <span>“Bonus Vetus OLS: A Simple Method for Approximating International Trade-Cost Effects Using the Gravity Equation.”</span> <em>Journal of International Economics</em> 77 (1): 77–85. <a href="https://doi.org/10.1016/j.jinteco.2008.10.004" class="external-link">https://doi.org/10.1016/j.jinteco.2008.10.004</a>.
+Baier, Scott L., and Jeffrey H. Bergstrand. 2009. <span>“Bonus Vetus
+OLS: A Simple Method for Approximating International Trade-Cost Effects
+Using the Gravity Equation.”</span> <em>Journal of International
+Economics</em> 77 (1): 77–85. <a href="https://doi.org/10.1016/j.jinteco.2008.10.004" class="external-link">https://doi.org/10.1016/j.jinteco.2008.10.004</a>.
 </div>
 <div id="ref-Head2014" class="csl-entry">
-Head, Keith, and Thierry Mayer. 2014. <span>“Chapter 3 - Gravity Equations: Workhorse,toolkit, and Cookbook.”</span> In <em>Handbook of International Economics</em>, edited by Gita Gopinath, Elhanan Helpman, and Kenneth Rogoff, 4:131–95. Handbook of International Economics. Elsevier. <a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="external-link">https://doi.org/10.1016/B978-0-444-54314-1.00003-3</a>.
+Head, Keith, and Thierry Mayer. 2014. <span>“Chapter 3 - Gravity
+Equations: Workhorse,toolkit, and Cookbook.”</span> In <em>Handbook of
+International Economics</em>, edited by Gita Gopinath, Elhanan Helpman,
+and Kenneth Rogoff, 4:131–95. Handbook of International Economics.
+Elsevier. <a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="external-link">https://doi.org/10.1016/B978-0-444-54314-1.00003-3</a>.
 </div>
 <div id="ref-Head2010" class="csl-entry">
-Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of Colonial Trade Linkages After Independence.”</span> <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
+Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of
+Colonial Trade Linkages After Independence.”</span> <em>Journal of
+International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
 </div>
 <div id="ref-Santos2006" class="csl-entry">
-Silva, J. M. C. Santos, and Silvana Tenreyro. 2006. <span>“The Log of Gravity.”</span> <em>The Review of Economics and Statistics</em> 88 (4): 641–58. <a href="https://doi.org/10.1162/rest.88.4.641" class="external-link">https://doi.org/10.1162/rest.88.4.641</a>.
+Silva, J. M. C. Santos, and Silvana Tenreyro. 2006. <span>“The Log of
+Gravity.”</span> <em>The Review of Economics and Statistics</em> 88 (4):
+641–58. <a href="https://doi.org/10.1162/rest.88.4.641" class="external-link">https://doi.org/10.1162/rest.88.4.641</a>.
 </div>
 <div id="ref-WoelwerBressleinBurgard2018" class="csl-entry">
-Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018. <span>“Gravity Models in r.”</span> <em>Austrian Journal of Statistics</em> 47 (4): 16–35. <a href="https://doi.org/10.17713/ajs.v47i4.688" class="external-link">https://doi.org/10.17713/ajs.v47i4.688</a>.
+Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018.
+<span>“Gravity Models in r.”</span> <em>Austrian Journal of
+Statistics</em> 47 (4): 16–35. <a href="https://doi.org/10.17713/ajs.v47i4.688" class="external-link">https://doi.org/10.17713/ajs.v47i4.688</a>.
 </div>
 </div>
 </div>
@@ -508,7 +648,7 @@ Wölwer, Anna-Lena, Martin Breßlein, and Jan Pablo Burgard. 2018. <span>“Grav
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

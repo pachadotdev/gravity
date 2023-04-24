@@ -97,11 +97,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- ppml(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -158,13 +158,13 @@ ppml <- function(dependent_variable,
 
   if (robust == TRUE) {
     model_ppml_robust <- model_ppml
-    
+
     robust_coefficients <- lmtest::coeftest(
       model_ppml,
       vcov = sandwich::vcovHC(model_ppml, type = "HC1", ...)
     )
-    
-    model_ppml_robust$coefficients <- robust_coefficients[1:length(rownames(robust_coefficients)),]
+
+    model_ppml_robust$coefficients <- robust_coefficients[seq_len(length(rownames(robust_coefficients))), ]
   }
 
   if (robust == FALSE) {

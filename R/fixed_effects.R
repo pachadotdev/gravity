@@ -114,11 +114,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- fixed_effects(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -156,8 +156,14 @@ fixed_effects <- function(dependent_variable,
     stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
   }
 
-  valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
-  valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
+  valid_origin <- data %>%
+    select(code_origin) %>%
+    distinct() %>%
+    as_vector()
+  valid_destination <- data %>%
+    select(code_destination) %>%
+    distinct() %>%
+    as_vector()
 
   stopifnot(is.character(code_origin), code_origin %in% colnames(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)

@@ -20,7 +20,7 @@ as the censoring value."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ as the censoring value."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,14 +72,14 @@ as the censoring value.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tobit</span><span class="op">(</span>
-  <span class="va">dependent_variable</span>,
-  <span class="va">distance</span>,
-  additional_regressors <span class="op">=</span> <span class="cn">NULL</span>,
-  added_constant <span class="op">=</span> <span class="fl">1</span>,
-  <span class="va">data</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tobit</span><span class="op">(</span></span>
+<span>  <span class="va">dependent_variable</span>,</span>
+<span>  <span class="va">distance</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  added_constant <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,28 +89,41 @@ as the censoring value.</p>
 transformed variable is logged and taken as the dependent variable in the tobit estimation with lower bound
 equal to <code>0</code> as <code>log(1) = 0</code> represents the smallest flows
 in the transformed variable.</p></dd>
+
+
 <dt>distance</dt>
 <dd><p>(Type: character) name of the distance variable that should be taken as the key independent variable
 in the estimation. The distance is logged automatically when the function is executed.</p></dd>
+
+
 <dt>additional_regressors</dt>
 <dd><p>(Type: character) names of the additional regressors to include in the model (e.g. a dummy
 variable to indicate contiguity). Unilateral metric variables such as GDP should be inserted via the arguments
 <code>income_origin</code> and <code>income_destination</code>.</p>
 <p>Write this argument as <code>c(contiguity, common currency, ...)</code>. By default this is set to <code>NULL</code>.</p></dd>
+
+
 <dt>added_constant</dt>
 <dd><p>(Type: numeric) the constant to be added to the dependent variable. The default value
 is <code>1</code>. The minimum of <code>log(y + added_constant)</code> is taken as the
 left boundary in the Tobit model.</p>
 <p>In the often used case of <code>added_constant = 1</code>, the dependent variable is left-censored at value <code>0</code>
 as <code>log(1) = 0</code>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>(Type: data.frame) the dataset to be used.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments to be passed to the function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The function returns the summary of the estimated gravity model as a
+    
+
+<p>The function returns the summary of the estimated gravity model as a
 <code><a href="https://rdrr.io/pkg/censReg/man/censReg.html" class="external-link">censReg</a></code>-object.</p>
     </div>
     <div id="details">
@@ -141,7 +154,7 @@ but can be easily extended to panel data using the
 <code><a href="https://rdrr.io/pkg/censReg/man/censReg.html" class="external-link">censReg</a></code> function.</p>
 <p>A robust estimations is not implemented to the present
 as the <code><a href="https://rdrr.io/pkg/censReg/man/censReg.html" class="external-link">censReg</a></code> function is not
-compatible with the <code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovHC.html" class="external-link">vcovHC</a></code> function.</p>
+compatible with the <code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovHC.html" class="external-link">vcovHC</a></code> function.</p>
 <p>For a more elaborate Tobit function, see <code><a href="ek_tobit.html">ek_tobit</a></code>
 for the Eaton and Kortum (2001) Tobit model where each zero trade volume
 is assigned a country specific interval with the upper
@@ -159,23 +172,23 @@ ISSN 00028282.</p>
 <p>Anderson JE, van Wincoop E (2001).
 “Gravity with Gravitas: A Solution to the Border Puzzle.”
 Working Paper 8079, National Bureau of Economic Research.
-doi: <a href="https://doi.org/10.3386/w8079" class="external-link">10.3386/w8079</a>
+<a href="https://doi.org/10.3386/w8079" class="external-link">doi:10.3386/w8079</a>
 .</p>
 <p>Anderson JE (2010).
 “The Gravity Model.”
 Working Paper 16576, National Bureau of Economic Research.
-doi: <a href="https://doi.org/10.3386/w16576" class="external-link">10.3386/w16576</a>
+<a href="https://doi.org/10.3386/w16576" class="external-link">doi:10.3386/w16576</a>
 .</p>
 <p>Baier SL, Bergstrand JH (2009).
 “Bonus vetus OLS: A simple method for approximating international trade-cost effects using the gravity equation.”
 <em>Journal of International Economics</em>, <b>77</b>(1), 77 - 85.
-ISSN 0022-1996, doi: <a href="https://doi.org/10.1016/j.jinteco.2008.10.004" class="external-link">10.1016/j.jinteco.2008.10.004</a>
+ISSN 0022-1996, <a href="https://doi.org/10.1016/j.jinteco.2008.10.004" class="external-link">doi:10.1016/j.jinteco.2008.10.004</a>
 .</p>
 <p>Baier SL, Bergstrand JH (2010).
 “The Gravity Model in International Trade: Advances and Applications.”
 In van Bergeijk PAG, Brakman S (eds.), chapter 4.
 Cambridge University Press.
-doi: <a href="https://doi.org/10.1017/CBO9780511762109" class="external-link">10.1017/CBO9780511762109</a>
+<a href="https://doi.org/10.1017/CBO9780511762109" class="external-link">doi:10.1017/CBO9780511762109</a>
 .</p>
 <p>Feenstra RC (2002).
 “Border effects and the gravity equation: consistent methods for estimation.”
@@ -183,18 +196,18 @@ doi: <a href="https://doi.org/10.1017/CBO9780511762109" class="external-link">10
 <p>Head K, Mayer T, Ries J (2010).
 “The erosion of colonial trade linkages after independence.”
 <em>Journal of International Economics</em>, <b>81</b>(1), 1 - 14.
-ISSN 0022-1996, doi: <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">10.1016/j.jinteco.2010.01.002</a>
+ISSN 0022-1996, <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">doi:10.1016/j.jinteco.2010.01.002</a>
 .</p>
 <p>Head K, Mayer T (2014).
 “Chapter 3 - Gravity Equations: Workhorse,Toolkit, and Cookbook.”
 In Gopinath G, Helpman E, Rogoff K (eds.), <em>Handbook of International Economics</em>, volume 4 of <em>Handbook of International Economics</em>, 131 - 195.
 Elsevier.
-doi: <a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="external-link">10.1016/B978-0-444-54314-1.00003-3</a>
+<a href="https://doi.org/10.1016/B978-0-444-54314-1.00003-3" class="external-link">doi:10.1016/B978-0-444-54314-1.00003-3</a>
 .</p>
 <p>Silva JMCS, Tenreyro S (2006).
 “The Log of Gravity.”
 <em>The Review of Economics and Statistics</em>, <b>88</b>(4), 641-658.
-doi: <a href="https://doi.org/10.1162/rest.88.4.641" class="external-link">10.1162/rest.88.4.641</a>
+<a href="https://doi.org/10.1162/rest.88.4.641" class="external-link">doi:10.1162/rest.88.4.641</a>
 .</p>
 <p>and the citations therein.</p>
 <p>See <a href="https://sites.google.com/site/hiegravity/" class="external-link">Gravity Equations: Workhorse, Toolkit, and Cookbook</a> for gravity datasets and Stata code for estimating gravity models.</p>
@@ -202,12 +215,12 @@ doi: <a href="https://doi.org/10.1162/rest.88.4.641" class="external-link">10.11
 <p>Egger P, Pfaffermayr M (2003).
 “The proper panel econometric specification of the gravity equation: A three-way model with bilateral interaction effects.”
 <em>Empirical Economics</em>, <b>28</b>(3), 571--580.
-ISSN 1435-8921, doi: <a href="https://doi.org/10.1007/s001810200146" class="external-link">10.1007/s001810200146</a>
+ISSN 1435-8921, <a href="https://doi.org/10.1007/s001810200146" class="external-link">doi:10.1007/s001810200146</a>
 .</p>
 <p>Gómez-Herrera E (2013).
 “Comparing alternative methods to estimate gravity models of bilateral trade.”
 <em>Empirical Economics</em>, <b>44</b>(3), 1087--1111.
-ISSN 1435-8921, doi: <a href="https://doi.org/10.1007/s00181-012-0576-2" class="external-link">10.1007/s00181-012-0576-2</a>
+ISSN 1435-8921, <a href="https://doi.org/10.1007/s00181-012-0576-2" class="external-link">doi:10.1007/s00181-012-0576-2</a>
 .</p>
 <p>and the references therein.</p>
     </div>
@@ -218,28 +231,28 @@ ISSN 1435-8921, doi: <a href="https://doi.org/10.1007/s00181-012-0576-2" class="
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example for CRAN checks:</span></span>
-<span class="r-in"><span class="co"># Executable in &lt; 5 sec</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"gravity_no_zeros"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Choose 5 countries for testing</span></span>
-<span class="r-in"><span class="va">countries_chosen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"CHN"</span>, <span class="st">"GBR"</span>, <span class="st">"BRA"</span>, <span class="st">"CAN"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, <span class="va">iso_o</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">countries_chosen</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="va">grav_small</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span class="r-in">    lgdp_o <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">gdp_o</span><span class="op">)</span>,</span>
-<span class="r-in">    lgdp_d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">gdp_d</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">tobit</span><span class="op">(</span></span>
-<span class="r-in">  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span class="r-in">  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"lgdp_o"</span>, <span class="st">"lgdp_d"</span><span class="op">)</span>,</span>
-<span class="r-in">  added_constant <span class="op">=</span> <span class="fl">1</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">grav_small</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example for CRAN checks:</span></span></span>
+<span class="r-in"><span><span class="co"># Executable in &lt; 5 sec</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"gravity_no_zeros"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Choose 5 countries for testing</span></span></span>
+<span class="r-in"><span><span class="va">countries_chosen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"CHN"</span>, <span class="st">"GBR"</span>, <span class="st">"BRA"</span>, <span class="st">"CAN"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, <span class="va">iso_o</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">countries_chosen</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="va">grav_small</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    lgdp_o <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">gdp_o</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    lgdp_d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">gdp_d</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">tobit</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span></span>
+<span class="r-in"><span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"lgdp_o"</span>, <span class="st">"lgdp_d"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  added_constant <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">grav_small</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -254,7 +267,7 @@ ISSN 1435-8921, doi: <a href="https://doi.org/10.1007/s00181-012-0576-2" class="
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

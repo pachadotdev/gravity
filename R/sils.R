@@ -99,11 +99,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' fit <- sils(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -155,8 +155,14 @@ sils <- function(dependent_variable,
   stopifnot(is.character(income_origin), income_origin %in% colnames(data), length(income_origin) == 1)
   stopifnot(is.character(income_destination), income_destination %in% colnames(data), length(income_destination) == 1)
 
-  valid_origin <- data %>% select(code_origin) %>% distinct() %>% as_vector()
-  valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
+  valid_origin <- data %>%
+    select(code_origin) %>%
+    distinct() %>%
+    as_vector()
+  valid_destination <- data %>%
+    select(code_destination) %>%
+    distinct() %>%
+    as_vector()
 
   stopifnot(is.character(code_origin), code_origin %in% colnames(data), length(code_origin) == 1)
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
@@ -187,14 +193,14 @@ sils <- function(dependent_variable,
   beta <- vector(length = length(additional_regressors))
   names(beta) <- additional_regressors
 
-  for (j in 1:length(additional_regressors)) {
+  for (j in seq_len(length(additional_regressors))) {
     beta[j] <- 1
   }
 
   beta_old <- vector(length = length(additional_regressors))
   names(beta_old) <- additional_regressors
 
-  for (j in 1:length(additional_regressors)) {
+  for (j in seq_len(length(additional_regressors))) {
     beta_old[j] <- 0
   }
 
@@ -206,16 +212,15 @@ sils <- function(dependent_variable,
   while (loop <= maxloop &
     abs(beta_distance - beta_distance_old) > dec_point &
     prod(abs(beta - beta_old) > dec_point) == 1) {
-
     # Updating betas -----------------------------------------------------------
     beta_distance_old <- beta_distance
-    for (j in 1:length(additional_regressors)) {
+    for (j in seq_len(length(additional_regressors))) {
       beta_old[j] <- beta[j]
     }
 
     # Updating transaction costs -----------------------------------------------
     costs <- data.frame(matrix(nrow = nrow(d), ncol = length(additional_regressors)))
-    for (j in 1:length(additional_regressors)) {
+    for (j in seq_len(length(additional_regressors))) {
       costs[, j] <- beta[j] * d[additional_regressors[j]][, 1]
     }
     costs <- apply(X = costs, MARGIN = 1, FUN = sum)
@@ -290,14 +295,14 @@ sils <- function(dependent_variable,
 
     # Updating coefficients ----------------------------------------------------
     beta_distance <- stats::coef(model_sils)[2]
-    for (j in 1:length(additional_regressors)) {
+    for (j in seq_len(length(additional_regressors))) {
       beta[j] <- stats::coef(model_sils)[j + 2]
     }
 
     coef_dist <- c(coef_dist, beta_distance)
     coef_additional_regressors <- rbind(coef_additional_regressors, rep(0, times = length(additional_regressors)))
 
-    for (j in 1:length(additional_regressors)) {
+    for (j in seq_len(length(additional_regressors))) {
       coef_additional_regressors[additional_regressors[j]][loop + 2, ] <- beta[j]
     }
 

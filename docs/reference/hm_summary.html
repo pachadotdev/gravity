@@ -20,7 +20,7 @@ Isidore Beautrelet."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -29,7 +29,7 @@ Isidore Beautrelet."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -72,7 +72,7 @@ consistent with the Stata methods used in Head and Mayer (2014)
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hm_summary</span><span class="op">(</span><span class="va">model</span>, robust <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hm_summary</span><span class="op">(</span><span class="va">model</span>, robust <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,6 +82,8 @@ consistent with the Stata methods used in Head and Mayer (2014)
 or a generic method such as <code>lm</code> or <code>glm</code>.
 Some particular classes (<code>gpml</code>, <code>nbpml</code>, <code>negbin</code> and <code>nls</code>) don't return R squared and
 F statistic.</p></dd>
+
+
 <dt>robust</dt>
 <dd><p>(Type: logical) Determines whether a robust
 variance-covariance matrix should be used. By default is set to <code>FALSE</code>.</p>
@@ -89,40 +91,45 @@ variance-covariance matrix should be used. By default is set to <code>FALSE</cod
 Stata code provided at the website
 <a href="https://sites.google.com/site/hiegravity/" class="external-link">Gravity Equations: Workhorse, Toolkit, and Cookbook</a>
 when choosing robust estimation.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments to be passed to <code>tobit</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Summary <code>lm</code> object.</p>
+    
+
+<p>Summary <code>lm</code> object.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Example for CRAN checks:</span></span>
-<span class="r-in"><span class="co"># Executable in &lt; 5 sec</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"gravity_no_zeros"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Choose 5 countries for testing</span></span>
-<span class="r-in"><span class="va">countries_chosen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"CHN"</span>, <span class="st">"GBR"</span>, <span class="st">"BRA"</span>, <span class="st">"CAN"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, <span class="va">iso_o</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">countries_chosen</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Using OLS for testing</span></span>
-<span class="r-in"><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ols.html">ols</a></span><span class="op">(</span></span>
-<span class="r-in">  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span class="r-in">  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span class="r-in">  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,</span>
-<span class="r-in">  income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
-<span class="r-in">  income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
-<span class="r-in">  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
-<span class="r-in">  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
-<span class="r-in">  uie <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  robust <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span class="r-in">  data <span class="op">=</span> <span class="va">grav_small</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu">hm_summary</span><span class="op">(</span><span class="va">fit</span>, robust <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example for CRAN checks:</span></span></span>
+<span class="r-in"><span><span class="co"># Executable in &lt; 5 sec</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"gravity_no_zeros"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Choose 5 countries for testing</span></span></span>
+<span class="r-in"><span><span class="va">countries_chosen</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AUS"</span>, <span class="st">"CHN"</span>, <span class="st">"GBR"</span>, <span class="st">"BRA"</span>, <span class="st">"CAN"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">grav_small</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, <span class="va">iso_o</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">countries_chosen</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Using OLS for testing</span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="ols.html">ols</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span></span>
+<span class="r-in"><span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span></span>
+<span class="r-in"><span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span></span>
+<span class="r-in"><span>  income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span></span>
+<span class="r-in"><span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span></span>
+<span class="r-in"><span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span></span>
+<span class="r-in"><span>  uie <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  robust <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
+<span class="r-in"><span>  data <span class="op">=</span> <span class="va">grav_small</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu">hm_summary</span><span class="op">(</span><span class="va">fit</span>, robust <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -137,7 +144,7 @@ when choosing robust estimation.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

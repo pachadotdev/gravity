@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -43,7 +43,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -82,9 +82,10 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Creating gravity datasets</h1>
-                        <h4 data-toc-skip class="author">Mauricio Vargas</h4>
+                        <h4 data-toc-skip class="author">Mauricio
+Vargas</h4>
             
-            <h4 data-toc-skip class="date">2022-01-04</h4>
+            <h4 data-toc-skip class="date">2023-04-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/pachadotdev/gravity/blob/HEAD/vignettes/creating-gravity-datasets.Rmd" class="external-link"><code>vignettes/creating-gravity-datasets.Rmd</code></a></small>
       <div class="hidden name"><code>creating-gravity-datasets.Rmd</code></div>
@@ -93,63 +94,78 @@
 
     
     
-<div class="section level1">
-<h1 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
-</h1>
-<p>Gravity dataset with zero trade flows is an edited version of the full gravity dataset that is used in <span class="citation">Head, Mayer, and Ries (2010)</span>.</p>
-<p>Dataset <code>gravity_no_zeros</code> corresponds to the dataset without zero trade flows, <code>gravity_zeros</code>, on the other hand, includes zero trade flows.</p>
+<div class="section level2">
+<h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+</h2>
+<p>Gravity dataset with zero trade flows is an edited version of the
+full gravity dataset that is used in <span class="citation">Head, Mayer,
+and Ries (2010)</span>.</p>
+<p>Dataset <code>gravity_no_zeros</code> corresponds to the dataset
+without zero trade flows, <code>gravity_zeros</code>, on the other hand,
+includes zero trade flows.</p>
 </div>
-<div class="section level1">
-<h1 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
-</h1>
-<p>In order to have a dataset suited for all functions, a cross-sectional dataset is chosen. All incomplete rows and observations with missing trade flows are therefore excluded from the dataset.</p>
-<p>As some of the functions in the package are capable of handling zero values in trade flows and some are not, two datasets, <code>gravity_zeros</code> and <code>gravity_no_zeros</code>, are provided.</p>
-<p>The original dataset was downloaded from SciencesPo but the original link is not available anymore. It was edited in the following way:</p>
+<div class="section level2">
+<h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a>
+</h2>
+<p>In order to have a dataset suited for all functions, a
+cross-sectional dataset is chosen. All incomplete rows and observations
+with missing trade flows are therefore excluded from the dataset.</p>
+<p>As some of the functions in the package are capable of handling zero
+values in trade flows and some are not, two datasets,
+<code>gravity_zeros</code> and <code>gravity_no_zeros</code>, are
+provided.</p>
+<p>The original dataset was downloaded from SciencesPo but the original
+link is not available anymore. It was edited in the following way:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 1: Import and read the dataset</span>
-
-<span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"</span>
-<span class="va">zip</span> <span class="op">&lt;-</span> <span class="st">"col_regfile09.zip"</span>
-
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span>
-<span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"7z e -aos col_regfile09.zip"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span>
-<span class="va">col_regfile09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span><span class="op">(</span><span class="st">"col_regfile09.dta"</span><span class="op">)</span>
-
-<span class="co"># 2: Isolation of one year</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-<span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">col_regfile09</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2006</span><span class="op">)</span>
-
-<span class="co"># 3: Choosing variables</span>
-
-<span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">iso_o</span>, <span class="va">iso_d</span>, <span class="va">distw</span>, <span class="va">gdp_o</span>, <span class="va">gdp_d</span>, <span class="va">rta</span>, <span class="va">flow</span>, <span class="va">contig</span>, <span class="va">comlang_off</span>, <span class="va">comcur</span><span class="op">)</span>
-
-<span class="co"># 4: Isolation of complete cases</span>
-
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
-<span class="va">gravity_zeros</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># 5: Exclusion of trade flows equal to 0</span>
-
-<span class="va">gravity_no_zeros</span> <span class="op">&lt;-</span> <span class="va">gravity_zeros</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">flow</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="co"># 6: Export the data</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_no_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 1: Import and read the dataset</span></span>
+<span></span>
+<span><span class="co"># As of 2022-09-25 the original link from Sciences Po is broken</span></span>
+<span><span class="co"># I kept the zip on GitHub back in 2017, fortunately</span></span>
+<span><span class="co"># url &lt;- "http://econ.sciences-po.fr/sites/default/files/file/tmayer/data/col_regfile09.zip"</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/pachadotdev/gravity/blob/master/vignettes/col_regfile09.zip?raw=true"</span></span>
+<span><span class="va">zip</span> <span class="op">&lt;-</span> <span class="st">"col_regfile09.zip"</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"7z e -aos col_regfile09.zip"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span></span>
+<span><span class="va">col_regfile09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://haven.tidyverse.org/reference/read_dta.html" class="external-link">read_dta</a></span><span class="op">(</span><span class="st">"col_regfile09.dta"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2: Isolation of one year</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">col_regfile09</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2006</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3: Choosing variables</span></span>
+<span></span>
+<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">iso_o</span>, <span class="va">iso_d</span>, <span class="va">distw</span>, <span class="va">gdp_o</span>, <span class="va">gdp_d</span>, <span class="va">rta</span>, <span class="va">flow</span>, <span class="va">contig</span>, <span class="va">comlang_off</span>, <span class="va">comcur</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4: Isolation of complete cases</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="va">gravity_zeros</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 5: Exclusion of trade flows equal to 0</span></span>
+<span></span>
+<span><span class="va">gravity_no_zeros</span> <span class="op">&lt;-</span> <span class="va">gravity_zeros</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">flow</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 6: Export the data</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/save.html" class="external-link">save</a></span><span class="op">(</span><span class="va">gravity_no_zeros</span>, file <span class="op">=</span> <span class="st">"gravity_no_zeros.rdata"</span>, compress <span class="op">=</span> <span class="st">"xz"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level1 unnumbered">
-<h1 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h1>
+<div class="section level2">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Head2010" class="csl-entry">
-Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of Colonial Trade Linkages After Independence.”</span> <em>Journal of International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
+Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of
+Colonial Trade Linkages After Independence.”</span> <em>Journal of
+International Economics</em> 81 (1): 1–14. <a href="https://doi.org/10.1016/j.jinteco.2010.01.002" class="external-link">https://doi.org/10.1016/j.jinteco.2010.01.002</a>.
 </div>
 </div>
 </div>
@@ -172,7 +188,7 @@ Head, Keith, Thierry Mayer, and John Ries. 2010. <span>“The Erosion of Colonia
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -24,11 +24,11 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' # Using OLS for testing
 #' fit <- ols(
 #'   dependent_variable = "flow",
@@ -42,7 +42,7 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
-#' 
+#'
 #' fit2 <- hm_summary(fit, robust = FALSE)
 #' @return Summary \code{lm} object.
 #'
@@ -52,7 +52,7 @@ hm_summary <- function(model, robust = FALSE, ...) {
   # Check -------------------------------------------------------------------
   qr_lm <- function(x, ...) {
     if (is.null(r <- x$qr)) {
-      stop("lm object does not have a proper 'qr' component.\n 
+      stop("lm object does not have a proper 'qr' component.\n
            Rank zero or should not have used lm(..., qr = FALSE).")
     }
     r
@@ -90,8 +90,7 @@ hm_summary <- function(model, robust = FALSE, ...) {
     w <- z$weights
     if (is.null(w)) {
       rss <- sum(r^2)
-    }
-    else {
+    } else {
       rss <- sum(w * r^2)
       r <- sqrt(w) * r
     }
@@ -139,13 +138,11 @@ hm_summary <- function(model, robust = FALSE, ...) {
       sum(f^2)
     }
     rss <- sum(r^2)
-  }
-  else {
+  } else {
     mss <- if (attr(z$terms, "intercept")) {
       m <- sum(w * f / sum(w))
       sum(w * (f - m)^2)
-    }
-    else {
+    } else {
       sum(w * f^2)
     }
     rss <- sum(w * r^2)
@@ -192,7 +189,7 @@ hm_summary <- function(model, robust = FALSE, ...) {
     )
     if (robust == TRUE) {
       if (df.int == 0) {
-        pos_coef <- 1:length(z$coefficients)
+        pos_coef <- seq_len(length(z$coefficients))
       } else {
         pos_coef <- match(
           names(z$coefficients)[-match(
@@ -217,8 +214,7 @@ hm_summary <- function(model, robust = FALSE, ...) {
         numdf = p - df.int, dendf = rdf
       )
     }
-  }
-  else {
+  } else {
     ans$r.squared <- 0
     ans$adj.r.squared <- 0
   }

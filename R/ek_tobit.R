@@ -92,18 +92,18 @@
 #' # Executable in < 5 sec
 #' library(dplyr)
 #' data("gravity_no_zeros")
-#' 
+#'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
 #' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
-#' 
+#'
 #' grav_small <- grav_small %>%
 #'   mutate(
 #'     flow = ifelse(flow < 5, 0, flow), # cutoff for testing purposes
 #'     lgdp_o = log(gdp_o),
 #'     lgdp_d = log(gdp_d)
 #'   )
-#' 
+#'
 #' fit <- ek_tobit(
 #'   dependent_variable = "flow",
 #'   distance = "distw",
@@ -138,7 +138,10 @@ ek_tobit <- function(dependent_variable,
     stopifnot(is.character(additional_regressors), all(additional_regressors %in% colnames(data)))
   }
 
-  valid_destination <- data %>% select(code_destination) %>% distinct() %>% as_vector()
+  valid_destination <- data %>%
+    select(code_destination) %>%
+    distinct() %>%
+    as_vector()
 
   stopifnot(is.character(code_destination), code_destination %in% colnames(data), length(code_destination) == 1)
 
@@ -175,8 +178,12 @@ ek_tobit <- function(dependent_variable,
     ungroup()
 
   # Response variable -------------------------------------------------------
-  f1 <- d %>% select(!!sym("flows_ek1")) %>% as_vector()
-  f2 <- d %>% select(!!sym("flows_ek2")) %>% as_vector()
+  f1 <- d %>%
+    select(!!sym("flows_ek1")) %>%
+    as_vector()
+  f2 <- d %>%
+    select(!!sym("flows_ek2")) %>%
+    as_vector()
 
   y_cens_log_ek <- survival::Surv(f1, f2, type = "interval2") %>% as_vector()
 

@@ -21,7 +21,7 @@ observations when required and it is not requiered to be run before fitting a mo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gravity</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1</span>
       </span>
     </div>
 
@@ -30,7 +30,7 @@ observations when required and it is not requiered to be run before fitting a mo
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,31 +74,36 @@ observations when required and it is not requiered to be run before fitting a mo
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">data</span>, <span class="va">columns</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">data</span>, <span class="va">columns</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>(Type: data.frame) the dataset to be used.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>The columns to be cleaned (e.g. <code>c("flow", "distw"))</code> in
 the case of <code>ddm</code> when used with the example dataset <code>gravity_zeros</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The function returns the summary of the estimated gravity model as an
+    
+
+<p>The function returns the summary of the estimated gravity model as an
 <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></code>-object.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></code>, <code><a href="https://rdrr.io/pkg/lmtest/man/coeftest.html" class="external-link">coeftest</a></code>,
-<code><a href="https://sandwich.R-Forge.R-project.org//reference/vcovHC.html" class="external-link">vcovHC</a></code></p></div>
+<code><a href="https://sandwich.R-Forge.R-project.org/reference/vcovHC.html" class="external-link">vcovHC</a></code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">gravity_zeros</span>, <span class="st">"flow"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">gravity_zeros</span>, <span class="st">"flow"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17,088 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iso_o iso_d  distw gdp_o   gdp_d   rta      flow contig comlang_off comcur</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -112,8 +117,8 @@ the case of <code>ddm</code> when used with the example dataset <code>gravity_ze
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AFG   BGR    <span style="text-decoration: underline;">3</span>819. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">31</span>483      0 0.019<span style="text-decoration: underline;">7</span>         0           0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AFG   BLR    <span style="text-decoration: underline;">3</span>766. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">36</span>945.     0 1.43           0           0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AFG   BOL   <span style="text-decoration: underline;">15</span>101. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">11</span>163.     0 0.000<span style="text-decoration: underline;">083</span>7      0           0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 17,078 more rows</span></span>
-<span class="r-in"><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">gravity_zeros</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"flow"</span>, <span class="st">"distw"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17,078 more rows</span></span>
+<span class="r-in"><span><span class="fu">discard_unusable</span><span class="op">(</span><span class="va">gravity_zeros</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"flow"</span>, <span class="st">"distw"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 17,088 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    iso_o iso_d  distw gdp_o   gdp_d   rta      flow contig comlang_off comcur</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -127,7 +132,7 @@ the case of <code>ddm</code> when used with the example dataset <code>gravity_ze
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> AFG   BGR    <span style="text-decoration: underline;">3</span>819. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">31</span>483      0 0.019<span style="text-decoration: underline;">7</span>         0           0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AFG   BLR    <span style="text-decoration: underline;">3</span>766. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">36</span>945.     0 1.43           0           0      0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AFG   BOL   <span style="text-decoration: underline;">15</span>101. <span style="text-decoration: underline;">8</span>399.  <span style="text-decoration: underline;">11</span>163.     0 0.000<span style="text-decoration: underline;">083</span>7      0           0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 17,078 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17,078 more rows</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -142,7 +147,7 @@ the case of <code>ddm</code> when used with the example dataset <code>gravity_ze
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

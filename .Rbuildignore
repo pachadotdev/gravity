@@ -14,3 +14,4 @@ LICENSE
 ^codemeta\.json$
 ^\.github$
 ^LICENSE\.md$
+^CRAN-SUBMISSION$

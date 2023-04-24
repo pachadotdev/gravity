@@ -125,7 +125,9 @@ link is not available anymore. It was edited in the following way:</p>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://github.com/pachadotdev/gravity/blob/master/vignettes/col_regfile09.zip?raw=true"</span></span>
 <span><span class="va">zip</span> <span class="op">&lt;-</span> <span class="st">"col_regfile09.zip"</span></span>
 <span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.exists</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, <span class="va">zip</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"7z e -aos col_regfile09.zip"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://haven.tidyverse.org" class="external-link">haven</a></span><span class="op">)</span></span>
@@ -134,23 +136,23 @@ link is not available anymore. It was edited in the following way:</p>
 <span><span class="co"># 2: Isolation of one year</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">col_regfile09</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">col_regfile09</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2006</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 3: Choosing variables</span></span>
 <span></span>
-<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">data06</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">iso_o</span>, <span class="va">iso_d</span>, <span class="va">distw</span>, <span class="va">gdp_o</span>, <span class="va">gdp_d</span>, <span class="va">rta</span>, <span class="va">flow</span>, <span class="va">contig</span>, <span class="va">comlang_off</span>, <span class="va">comcur</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 4: Isolation of complete cases</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
-<span><span class="va">gravity_zeros</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">gravity_zeros</span> <span class="op">&lt;-</span> <span class="va">data06</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 5: Exclusion of trade flows equal to 0</span></span>
 <span></span>
-<span><span class="va">gravity_no_zeros</span> <span class="op">&lt;-</span> <span class="va">gravity_zeros</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span><span class="va">gravity_no_zeros</span> <span class="op">&lt;-</span> <span class="va">gravity_zeros</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">flow</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 6: Export the data</span></span>

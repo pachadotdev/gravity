@@ -229,13 +229,13 @@ gravity and the resulting output is shown in the following:</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://pacha.dev/gravity/" class="external-link">gravity</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ddm.html">ddm</a></span><span class="op">(</span></span>
-<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
-<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
-<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
-<span>  <span class="op">)</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -306,15 +306,15 @@ simple OLS.</p>
 output is shown in the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvu.html">bvu</a></span><span class="op">(</span></span>
-<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,</span>
-<span>    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
-<span>    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
-<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
-<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
-<span>  <span class="op">)</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"contig"</span>, <span class="st">"comcur"</span><span class="op">)</span>,</span>
+<span>  income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
+<span>  income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
+<span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -340,15 +340,15 @@ output is shown in the following:</p>
 <span><span class="co">## F-statistic:  1271 on 4 and 17083 DF,  p-value: &lt; 2.2e-16</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/bvw.html">bvw</a></span><span class="op">(</span></span>
-<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
-<span>    income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
-<span>    income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
-<span>    code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
-<span>    code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
-<span>  <span class="op">)</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  income_origin <span class="op">=</span> <span class="st">"gdp_o"</span>,</span>
+<span>  income_destination <span class="op">=</span> <span class="st">"gdp_d"</span>,</span>
+<span>  code_origin <span class="op">=</span> <span class="st">"iso_o"</span>,</span>
+<span>  code_destination <span class="op">=</span> <span class="st">"iso_d"</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -384,11 +384,11 @@ to apply the function <code>ppml</code> to an example dataset in gravity
 and the resulting output is shown in the following:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span></span>
-<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
-<span>  <span class="op">)</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -421,12 +421,12 @@ and the resulting output is shown in the following:</p>
 <code>robust = T</code> to the arguments:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit4r</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ppml.html">ppml</a></span><span class="op">(</span></span>
-<span>    dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
-<span>    distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
-<span>    additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
-<span>    robust <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
-<span>  <span class="op">)</span></span>
+<span>  dependent_variable <span class="op">=</span> <span class="st">"flow"</span>,</span>
+<span>  distance <span class="op">=</span> <span class="st">"distw"</span>,</span>
+<span>  additional_regressors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rta"</span>, <span class="st">"comcur"</span>, <span class="st">"contig"</span><span class="op">)</span>,</span>
+<span>  robust <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">gravity_no_zeros</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit4r</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>

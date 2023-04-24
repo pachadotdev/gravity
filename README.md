@@ -6,10 +6,7 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![GH-actions
-Windows](https://github.com/pachadotdev/gravity/workflows/check-windows/badge.svg)](https://github.com/pachadotdev/gravity/actions)
-[![GH-actions
-Linux](https://github.com/pachadotdev/gravity/workflows/check-linux/badge.svg)](https://github.com/pachadotdev/gravity/actions)
+[![R-CMD-check](https://github.com/pachadotdev/gravity/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pachadotdev/gravity/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/gravity)](https://cran.r-project.org/package=gravity)
 [![Coverage
@@ -45,14 +42,13 @@ multiplicative models.
 
 Log-log estimation covers:
 
--   Ordinary Least Squares (OLS)
--   Fixed Effects
--   Double Demeaning (DDM)
--   Bonus vetus OLS with simple averages (BVU) and with GDP-weights
-    (BVW)
--   Structural Iterated Least Squares (SILS)
--   Tetrads
--   Different Tobit models (Tobit, ET-Tobit, EK-Tobit)
+- Ordinary Least Squares (OLS)
+- Fixed Effects
+- Double Demeaning (DDM)
+- Bonus vetus OLS with simple averages (BVU) and with GDP-weights (BVW)
+- Structural Iterated Least Squares (SILS)
+- Tetrads
+- Different Tobit models (Tobit, ET-Tobit, EK-Tobit)
 
 Log-log models are partly complex to understand and program and thus a
 comparison of them is not straightforward, wherefore the package aims at
@@ -61,10 +57,10 @@ application.
 
 Multiplicative estimation covers:
 
--   Poisson Pseudo Maximum Likelihood (PPML)
--   Gamma Pseudo Maximum Likelihood (GPML)
--   Negative Binomial Pseudo Maximum Likelihood (NBPML)
--   Nonlinear Least Squares (NLS)
+- Poisson Pseudo Maximum Likelihood (PPML)
+- Gamma Pseudo Maximum Likelihood (GPML)
+- Negative Binomial Pseudo Maximum Likelihood (NBPML)
+- Nonlinear Least Squares (NLS)
 
 Multiplicative models are covered with a log-link and different families
 of distributions. These models are relatively easy to compute.

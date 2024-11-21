@@ -1,7 +1,7 @@
 Package: gravity
 Type: Package
 Title: Estimation Methods for Gravity Models
-Version: 1.1
+Version: 1.2
 Authors@R: c(
   person("Anna-Lena", "Woelwer",
     role = c("aut", "cph")),
@@ -52,7 +52,7 @@ Depends: R(>= 3.4.0)
 License: Apache License (>= 2)
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: knitr,
   rmarkdown,
   testthat,

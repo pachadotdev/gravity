@@ -103,12 +103,12 @@
 #' @examples
 #' # Example for CRAN checks:
 #' # Executable in < 5 sec
-#' library(dplyr)
+#'
 #' data("gravity_no_zeros")
 #'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-#' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
+#' grav_small <- subset(gravity_no_zeros, iso_o %in% countries_chosen)
 #'
 #' fit <- tetrads(
 #'   dependent_variable = "flow",
@@ -120,6 +120,7 @@
 #'   filter_destination = countries_chosen[2],
 #'   data = grav_small
 #' )
+#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.
@@ -130,7 +131,7 @@
 
 tetrads <- function(dependent_variable,
                     distance,
-                    additional_regressors,
+                    additional_regressors = NULL,
                     code_origin,
                     code_destination,
                     filter_origin = NULL,

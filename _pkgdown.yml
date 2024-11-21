@@ -1,3 +1,2 @@
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5

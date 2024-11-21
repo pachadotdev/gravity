@@ -87,12 +87,12 @@
 #' @examples
 #' # Example for CRAN checks:
 #' # Executable in < 5 sec
-#' library(dplyr)
+#'
 #' data("gravity_no_zeros")
 #'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-#' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
+#' grav_small <- subset(gravity_no_zeros, iso_o %in% countries_chosen)
 #'
 #' fit <- bvw(
 #'   dependent_variable = "flow",
@@ -105,6 +105,7 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
+#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{lm}}-object.

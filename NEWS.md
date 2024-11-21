@@ -1,3 +1,7 @@
+# gravity 1.2
+
+* Sets NULL as the default argument for additional regressors (#23, @MatthieuStigler)
+
 # gravity 1.1
 
 * Updated maintainer's email

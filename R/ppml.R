@@ -95,12 +95,12 @@
 #' @examples
 #' # Example for CRAN checks:
 #' # Executable in < 5 sec
-#' library(dplyr)
+#'
 #' data("gravity_no_zeros")
 #'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-#' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
+#' grav_small <- subset(gravity_no_zeros, iso_o %in% countries_chosen)
 #'
 #' fit <- ppml(
 #'   dependent_variable = "flow",
@@ -108,6 +108,7 @@
 #'   additional_regressors = c("rta", "iso_o", "iso_d"),
 #'   data = grav_small
 #' )
+#'
 #' @return
 #' The function returns the summary of the estimated gravity model as an
 #' \code{\link[stats]{glm}}-object.
@@ -119,7 +120,7 @@
 
 ppml <- function(dependent_variable,
                  distance,
-                 additional_regressors,
+                 additional_regressors = NULL,
                  robust = FALSE,
                  data, ...) {
   # Checks ------------------------------------------------------------------

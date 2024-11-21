@@ -1,93 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/crash-course-on-gravity-models.html</loc>
-  </url>
-  <url>
-    <loc>/articles/creating-gravity-datasets.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bvu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bvw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ddm.html</loc>
-  </url>
-  <url>
-    <loc>/reference/discard_unusable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ek_tobit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/et_tobit.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fixed_effects.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gpml.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gravity-exports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gravity_no_zeros.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gravity_zeros.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hm_summary.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/log_distance.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nbpml.html</loc>
-  </url>
-  <url>
-    <loc>/reference/nls.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ols.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ppml.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sils.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tetrads.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tobit.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/crash-course-on-gravity-models.html</loc></url>
+<url><loc>/articles/creating-gravity-datasets.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/bvu.html</loc></url>
+<url><loc>/reference/bvw.html</loc></url>
+<url><loc>/reference/ddm.html</loc></url>
+<url><loc>/reference/discard_unusable.html</loc></url>
+<url><loc>/reference/ek_tobit.html</loc></url>
+<url><loc>/reference/et_tobit.html</loc></url>
+<url><loc>/reference/fixed_effects.html</loc></url>
+<url><loc>/reference/gpml.html</loc></url>
+<url><loc>/reference/gravity-exports.html</loc></url>
+<url><loc>/reference/gravity_no_zeros.html</loc></url>
+<url><loc>/reference/gravity_zeros.html</loc></url>
+<url><loc>/reference/hm_summary.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/log_distance.html</loc></url>
+<url><loc>/reference/nbpml.html</loc></url>
+<url><loc>/reference/nls.html</loc></url>
+<url><loc>/reference/ols.html</loc></url>
+<url><loc>/reference/ppml.html</loc></url>
+<url><loc>/reference/sils.html</loc></url>
+<url><loc>/reference/tetrads.html</loc></url>
+<url><loc>/reference/tobit.html</loc></url>
 </urlset>
+

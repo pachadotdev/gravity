@@ -7,7 +7,7 @@
 ppml(
   dependent_variable,
   distance,
-  additional_regressors,
+  additional_regressors = NULL,
   robust = FALSE,
   data,
   ...
@@ -81,12 +81,12 @@ see \insertCite{Egger2003;textual}{gravity}, \insertCite{Gomez-Herrera2013;textu
 \examples{
 # Example for CRAN checks:
 # Executable in < 5 sec
-library(dplyr)
+
 data("gravity_no_zeros")
 
 # Choose 5 countries for testing
 countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
+grav_small <- subset(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 fit <- ppml(
   dependent_variable = "flow",
@@ -94,6 +94,7 @@ fit <- ppml(
   additional_regressors = c("rta", "iso_o", "iso_d"),
   data = grav_small
 )
+
 }
 \references{
 For more information on gravity models, theoretical foundations and

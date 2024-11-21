@@ -33,12 +33,12 @@ consistent with the Stata methods used in \insertCite{Head2014;textual}{gravity}
 \examples{
 # Example for CRAN checks:
 # Executable in < 5 sec
-library(dplyr)
+
 data("gravity_no_zeros")
 
 # Choose 5 countries for testing
 countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
+grav_small <- subset(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 # Using OLS for testing
 fit <- ols(
@@ -55,4 +55,5 @@ fit <- ols(
 )
 
 fit2 <- hm_summary(fit, robust = FALSE)
+
 }

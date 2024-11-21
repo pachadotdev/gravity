@@ -7,7 +7,7 @@
 gpml(
   dependent_variable,
   distance,
-  additional_regressors,
+  additional_regressors = NULL,
   robust = FALSE,
   data,
   ...
@@ -78,18 +78,15 @@ see \insertCite{Egger2003;textual}{gravity}, \insertCite{Gomez-Herrera2013;textu
 \examples{
 # Example for CRAN checks:
 # Executable in < 5 sec
-library(dplyr)
+
 data("gravity_no_zeros")
 
 # Choose 5 countries for testing
 countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
+grav_small <- subset(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
-grav_small <- grav_small \%>\%
-  mutate(
-    lgdp_o = log(gdp_o),
-    lgdp_d = log(gdp_d)
-  )
+grav_small$lgdp_o <- log(grav_small$gdp_o)
+grav_small$lgdp_d <- log(grav_small$gdp_d)
 
 fit <- gpml(
   dependent_variable = "flow",
@@ -97,6 +94,7 @@ fit <- gpml(
   additional_regressors = c("rta", "iso_o", "iso_d"),
   data = grav_small
 )
+
 }
 \references{
 For more information on gravity models, theoretical foundations and

@@ -7,7 +7,7 @@
 tetrads(
   dependent_variable,
   distance,
-  additional_regressors,
+  additional_regressors = NULL,
   code_origin,
   code_destination,
   filter_origin = NULL,
@@ -93,12 +93,12 @@ For applying \code{tetrads} to panel data see \insertCite{Head2010;textual}{grav
 \examples{
 # Example for CRAN checks:
 # Executable in < 5 sec
-library(dplyr)
+
 data("gravity_no_zeros")
 
 # Choose 5 countries for testing
 countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
+grav_small <- subset(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 fit <- tetrads(
   dependent_variable = "flow",
@@ -110,6 +110,7 @@ fit <- tetrads(
   filter_destination = countries_chosen[2],
   data = grav_small
 )
+
 }
 \references{
 For more information on gravity models, theoretical foundations and

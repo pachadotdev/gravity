@@ -90,19 +90,16 @@
 #' @examples
 #' # Example for CRAN checks:
 #' # Executable in < 5 sec
-#' library(dplyr)
+#'
 #' data("gravity_no_zeros")
 #'
 #' # Choose 5 countries for testing
 #' countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-#' grav_small <- filter(gravity_no_zeros, iso_o %in% countries_chosen)
+#' grav_small <- subset(gravity_no_zeros, iso_o %in% countries_chosen)
 #'
-#' grav_small <- grav_small %>%
-#'   mutate(
-#'     flow = ifelse(flow < 5, 0, flow), # cutoff for testing purposes
-#'     lgdp_o = log(gdp_o),
-#'     lgdp_d = log(gdp_d)
-#'   )
+#' grav_small$flow <- ifelse(grav_small$flow < 5, 0, grav_small$flow)
+#' grav_small$lgdp_o <- log(grav_small$gdp_o)
+#' grav_small$lgdp_d <- log(grav_small$gdp_d)
 #'
 #' fit <- ek_tobit(
 #'   dependent_variable = "flow",
@@ -112,6 +109,7 @@
 #'   robust = FALSE,
 #'   data = grav_small
 #' )
+#'
 #' @return
 #' The function returns the summary of the estimated gravity model as a
 #' \code{\link[survival]{survreg}}-object.

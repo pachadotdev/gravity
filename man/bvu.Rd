@@ -75,12 +75,12 @@ we do not recommend to apply this method in this case.
 \examples{
 # Example for CRAN checks:
 # Executable in < 5 sec
-library(dplyr)
+
 data("gravity_no_zeros")
 
 # Choose 5 countries for testing
 countries_chosen <- c("AUS", "CHN", "GBR", "BRA", "CAN")
-grav_small <- filter(gravity_no_zeros, iso_o \%in\% countries_chosen)
+grav_small <- subset(gravity_no_zeros, iso_o \%in\% countries_chosen)
 
 fit <- bvu(
   dependent_variable = "flow",
@@ -93,6 +93,7 @@ fit <- bvu(
   robust = FALSE,
   data = grav_small
 )
+
 }
 \references{
 For more information on gravity models, theoretical foundations and
